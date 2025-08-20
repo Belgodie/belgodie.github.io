@@ -1,13 +1,12 @@
 ---
-title: "Paper Title Number 5, with math $$E=mc^2$$"
+title: "Microfabricated sensors for non-invasive, real-time monitoring of organoids"
 collection: publications
 category: conferences
-permalink: /publication/2024-02-17-paper-title-number-4
-excerpt: 'This paper is about a famous math equation, $$E=mc^2$$'
-date: 2024-02-17
-venue: 'GitHub Journal of Bugs'
+permalink: https://doi.org/10.1186/s40486-024-00216-y
+excerpt: 'Review on recent advances in real-time, in situ biosensing technologies, including microelectrode arrays for electrophysiological recordings, chemical sensors for biochemical detection, and strain sensors for monitoring mechanical properties'
+date: 2024-12-04
+venue: 'Micro and Nano Systems Letters'
 paperurl: 'http://academicpages.github.io/files/paper3.pdf'
-citation: 'Your Name, You. (2024). &quot;Paper Title Number 3.&quot; <i>GitHub Journal of Bugs</i>. 1(3).'
+citation: 'Kim, Y., Chica-Carrillo, E.C. & Lee, H.J. Microfabricated sensors for non-invasive, real-time monitoring of organoids. Micro and Nano Syst Lett 12, 26 (2024).'
 ---
 
-Using [MathJax](https://www.mathjax.org/) in the description is supported - $$E=mc^2$$ - however, the use must be mindful that the default delimiters are `$$...$$` and `\\[...\\]` which differs from the `$...$` that is typically expected.
