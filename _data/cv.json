@@ -37,31 +37,31 @@
       "area": "Ph.D in Version Control Theory",
       "studyType": "",
       "startDate": "",
-      "endDate": "2018",
+      "endDate": "2028",
       "gpa": null,
       "courses": []
     },
     {
-      "institution": "GitHub University",
-      "area": "M.S. in Jekyll",
+      "institution": "Korea Advanced Institute of Science and Technology",
+      "area": "M.S. in Electrical Engineering",
       "studyType": "",
       "startDate": "",
-      "endDate": "2014",
+      "endDate": "2025",
       "gpa": null,
       "courses": []
     },
     {
-      "institution": "GitHub University",
-      "area": "B.S. in GitHub",
+      "institution": "Korea University",
+      "area": "B.Eng. in Electrical Engineering",
       "studyType": "",
       "startDate": "",
-      "endDate": "2012",
+      "endDate": "2022",
       "gpa": null,
       "courses": []
     }
   ],
   "skills": [],
-  "languages": [],
+  "languages": ["English", "Spanish", "Korean", "Danish"],
   "interests": [],
   "references": [],
   "publications": [
