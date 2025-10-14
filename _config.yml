@@ -9,7 +9,7 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default" # Currently available options are "default", "air"
-title                    : "Erick Chica / Biotech Researcher"
+title                    : "Erick Chica / Electrical Engineer • Biotechnologist"
 title_separator          : "-"
 name                     : &name "Erick Chica"
 description              : &description "personal description"
@@ -25,7 +25,7 @@ author:
   avatar           : "profile.png"
   name             : "Erick Chica"
   pronouns         : # example: "she/her"  
-  bio              : "Electrical Engineer with interest in Micro Electromechanical Systems."
+  bio              : "Electrical Engineer with interest in Nanotechnology."
   location         : "Daejeon, South Korea"
   employer         : "KAIST"
   uri              : # URL
