@@ -1,11 +1,14 @@
 ---
 permalink: /
-title: "About"
+title: "Erick Chica"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
+
+About
+------
 
 Erick is a **PhD candidate at the Technical University of Denmark** and a member of the **Intelli-Ingest consortium**, a **Marie Sklodowska Curie Doctoral Network** funded by the European Union through Horizon Europe. His current work focuses on the design and manufacture of API loaded microparticles and microneedles for oral delivery, including formulation selection, in vitro release profiling, and integration into ingestible capsules. The network brings together researchers across Europe and advances minimally invasive oral devices for diagnostics and therapy.
 

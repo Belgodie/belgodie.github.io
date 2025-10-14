@@ -9,7 +9,7 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default" # Currently available options are "default", "air"
-title                    : "Erick Chica / Electrical Engineer • Biotechnologist"
+title                    : "Erick Chica "
 title_separator          : "-"
 name                     : &name "Erick Chica"
 description              : &description "personal description"
