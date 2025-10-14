@@ -11,9 +11,9 @@ redirect_from:
 
 Education
 ======
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
-* M.S. in Jekyll, GitHub University, 2014
-* B.S. in GitHub, GitHub University, 2012
+* Ph.D in Health Technology, Technical University of Denmark, 2028 (expected)
+* M.S. in Electrical Engineering, Korea Advanced Institute of Science and Technology, 2025
+* B.Eng. in Electrical Engineering, Korea University 2022
 
 Work experience
 ======
@@ -59,6 +59,3 @@ Teaching
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
   
-Service and leadership
-======
-* Currently signed in to 43 different slack teams
