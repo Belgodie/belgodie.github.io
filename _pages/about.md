@@ -7,10 +7,13 @@ redirect_from:
   - /about.html
 ---
 
-Erick is a PhD Candidate at the Technical University of Denmark, where he conducts interdisciplinary research as part of the INTELLI-INGEST Doctoral Network for the development of minimally invasive, orally delivered miniaturized devices, aligned with the goals of the Marie Skłodowska-Curie Doctoral Networks. He collaborates with 13 researchers to locate ingestible devices inside the gastrointestinal (GI) tract and enable them to interact with tissues using new actuation systems. 
+Erick is a **PhD candidate at the Technical University of Denmark** and a member of the *Intelli-Ingest consortium*, a **Marie Sklodowska Curie Doctoral Network** funded by the European Union through Horizon Europe. His current work focuses on the design and manufacture of API loaded microparticles and microneedles for oral delivery, including formulation selection, in vitro release profiling, and integration into ingestible capsules. The network brings together researchers across Europe and advances minimally invasive oral devices for diagnostics and therapy.
 
-Born and raised in Quito, Ecuador, Erick earned his Engineering Degree in Electrical Engineering from Korea University in 2018 awarded the prestigious Korean Government Scholarship Program (now known as the Global Korea Scholarship). He then obtained a Master of Science in Electrical Engineering from the Korea Advanced Institute of Science and Technology (KAIST) in 2025, under the mentorship of Prof. Hyunjoo Jenny Lee, which had him work on the development of a microfluidic platform for enhanced organoid development and analysis. 
+Born in Quito, Ecuador, Erick earned an engineering degree in Electrical Engineering from Korea University in 2018 as a recipient of the Korean Government Scholarship Program, now called the Global Korea Scholarship. He completed a Master of Science in Electrical Engineering at the Korea Advanced Institute of Science and Technology in 2025 under Professor Hyunjoo Jenny Lee, where he developed a microfluidic platform that improves organoid maturation and enables integrated analysis.
 
-For more info
+Research Interests
 ------
-More info about configuring Academic Pages can be found in [the guide](https://academicpages.github.io/markdown/), the [growing wiki](https://github.com/academicpages/academicpages.github.io/wiki), and you can always [ask a question on GitHub](https://github.com/academicpages/academicpages.github.io/discussions). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful.
+Bioelectronics for the gastrointestinal tract
+Microfluidics for biological interfacing
+Actuation and localization strategies for ingestible devices
+Organoid platforms for mechanism-driven validation
