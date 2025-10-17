@@ -1,0 +1,16 @@
+{% assign items = site.teaching | sort: "date" | reverse %}
+<ul class="teaching-bullets">
+  {% for item in items %}
+  <li>
+    <strong>{{ item.title }}</strong><br/>
+    <em>
+      {% if item.type %}{{ item.type }}{% endif %}
+      {% if item.venue %}{% if item.type %}, {% endif %}{{ item.venue }}{% endif %}
+      {% if item.date %}, {{ item.date | date: "%Y" }}{% endif %}
+    </em>
+    {% if item.excerpt %}
+      <br/>{{ item.excerpt | markdownify | strip_html }}
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>

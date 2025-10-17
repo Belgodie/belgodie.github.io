@@ -1,8 +1,10 @@
 ---
 permalink: /
-title: ""
+layout: single
+title: null
 author_profile: true
-redirect_from: 
+classes: home-compact
+redirect_from:
   - /about/
   - /about.html
 ---

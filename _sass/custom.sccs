@@ -1,0 +1,8 @@
+.teaching-bullets { margin-left: 1.25rem; }
+.teaching-bullets li { margin-bottom: 1rem; }
+.teaching-bullets em { opacity: 0.8; } 
+
+/* Home page with no title */
+.home-compact .page__inner-wrap > header { display: none !important; }
+.home-compact .page__content { margin-top: 0 !important; padding-top: 0 !important; }
+.home-compact .page__content > :first-child { margin-top: 0 !important; }
