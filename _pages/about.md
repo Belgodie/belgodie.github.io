@@ -1,9 +1,7 @@
 ---
 permalink: /
-layout: single
 title: null
 author_profile: true
-classes: home-compact
 redirect_from:
   - /about/
   - /about.html
