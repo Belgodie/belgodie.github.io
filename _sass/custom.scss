@@ -1,0 +1,65 @@
+/* Teaching bullets */
+.teaching-bullets { margin-left: 1.25rem; }
+.teaching-bullets li { margin-bottom: 1rem; line-height: 1.4; }
+.teaching-bullets em { opacity: 0.8; }
+
+/* Reduce gap after hr on publications page */
+hr + h2 {
+  margin-top: 1rem !important;
+}
+
+/* ===== Projects grid ===== */
+:root {
+  --card-min: 320px;
+  --card-gap: 1.25rem;
+  --teaser-h: 200px;
+  --card-radius: 12px;
+  --img-radius: 10px;
+}
+
+section.page__content div.projects-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-min), 1fr)) !important;
+  gap: var(--card-gap) !important;
+  align-items: stretch !important;
+  margin-right: -210.844px !important;
+  padding-right: 52.703px !important;
+}
+
+.projects-grid > article.project-card.project-card {
+  display: flex !important;
+  flex-direction: column !important;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--card-radius) !important;
+  padding: 0.9rem !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+}
+
+html[data-theme="dark"] .projects-grid article.project-card {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.projects-grid .project-teaser { 
+  margin-bottom: 0.75rem;
+  border-radius: var(--img-radius);
+  overflow: hidden;
+  outline: 1.5px solid rgba(0, 0, 0, 0.3) !important;
+  outline-offset: 0px !important;
+}
+
+html[data-theme="dark"] .projects-grid .project-teaser {
+  box-shadow: inset 0 0 0 5px #ffffff !important;
+}
+
+.projects-grid .project-teaser img { 
+  width: 100% !important;
+  height: var(--teaser-h) !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.project-title { margin: 0 0 0.35rem 0; }
+.project-excerpt { margin: 0; opacity: 0.9; }

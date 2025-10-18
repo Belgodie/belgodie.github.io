@@ -1,0 +1,161 @@
+/* ==========================================================================
+   Erick theme — single mode
+   ========================================================================== */
+
+/* Color palette */
+$federal-blue               : #03045E;  /* body text and strong elements */
+$honolulu-blue              : #0077B6;  /* links */
+$pacific-cyan               : #00B4D8;  /* hovers and actives */
+$non-photo-blue             : #90E0EF;  /* borders and table headers */
+$light-cyan                 : #CAF0F8;  /* masthead and footer background */
+
+/* Neutrals */
+$gray                       : #7a8288;
+$dark-gray                  : mix(#000, $gray, 40%);
+$darker-gray                : mix(#000, $gray, 60%);
+$light-gray                 : mix(#fff, $gray, 50%);
+$lighter-gray               : mix(#fff, $gray, 90%);
+
+/* Role colors */
+$danger-color               : #ee5f5b;
+$info-color                 : $pacific-cyan;
+$notice-color               : $non-photo-blue;
+$success-color              : #62c462;
+$warning-color              : #f89406;
+
+/* Layout tokens */
+$border-radius              : 4px;
+$box-shadow                 : 0 2px 4px rgba(0, 180, 216, 0.15);
+$global-transition          : all 0.2s ease-in-out;
+$masthead-height            : 70px;
+$navicon-width              : 28px;
+$navicon-height             : 4px;
+$sidebar-link-max-width     : 250px;
+$sidebar-screen-min-width   : 1024px;
+
+/* CSS custom properties */
+:root {
+  --global-base-color                 : #{$honolulu-blue};
+  --global-bg-color                   : #ffffff;
+  --global-masthead-bg-color          : #{$light-cyan};
+  --global-footer-bg-color            : #{$light-cyan};
+  --global-border-color               : #{$non-photo-blue};
+  --global-dark-border-color          : #{$pacific-cyan};
+  --global-code-background-color      : #{$light-cyan};
+  --global-code-text-color            : #{$federal-blue};
+  --global-fig-caption-color          : #{$honolulu-blue};
+  --global-link-color                 : #{$honolulu-blue};
+  --global-link-color-hover           : #{$pacific-cyan};
+  --global-link-color-visited         : #{$federal-blue};
+  --global-masthead-link-color        : #{$federal-blue};
+  --global-masthead-link-color-hover  : #{$pacific-cyan};
+  --global-text-color                 : #{$federal-blue};
+  --global-text-color-light           : #{$honolulu-blue};
+  --global-thead-color                : #{$non-photo-blue};
+  --box-pad: 1.25rem;
+
+  /* Single mode surfaces */
+  --page-bg                           : #f7f7f8;   /* outer background */
+  --content-bg                        : #ffffff;   /* inner content box */
+  --content-border                    : #{$non-photo-blue};
+}
+
+/* Masthead */
+.masthead,
+.masthead__inner-wrap,
+.masthead__menu,
+.masthead__menu-item,
+.greedy-nav,
+.visible-links {
+  background: #{$light-cyan} !important;
+}
+.masthead {
+  border-bottom: 1px solid #{$non-photo-blue};
+  height: $masthead-height;
+}
+.masthead,
+.masthead a,
+.masthead__menu-item a,
+.greedy-nav a,
+.visible-links a {
+  color: #{$federal-blue} !important;
+}
+.masthead a:hover,
+.masthead__menu-item a:hover,
+.greedy-nav a:hover,
+.visible-links a:hover {
+  color: #{$pacific-cyan} !important;
+}
+
+/* Footer */
+.page__footer {
+  background: #{$light-cyan};
+  color: #{$federal-blue};
+  border-top: 1px solid #{$non-photo-blue};
+}
+.page__footer a {
+  color: #{$federal-blue};
+}
+.page__footer a:hover {
+  color: #{$pacific-cyan};
+}
+
+/* Single theme content format */
+body {
+  background: var(--page-bg);
+}
+
+/* Default wrapper used by AcademicPages and Minimal Mistakes */
+.page__inner-wrap {
+  background: var(--content-bg);
+  border: 1px solid var(--content-border);
+  border-radius: 12px;
+  padding: var(--box-pad);
+  box-shadow: $box-shadow;
+}
+
+/* Wide screens */
+@media (min-width: 1200px) {
+  .page__inner-wrap {
+    padding: 1.5rem;
+    border-radius: 14px;
+  }
+}
+
+/* Universal content box for all layouts */
+#main > .page,
+#main > .archive {
+  background: var(--content-bg);
+  border: 1px solid var(--content-border);
+  border-radius: 12px;
+  padding: var(--box-pad);
+  box-shadow: $box-shadow;
+}
+
+/* Prevent double box on pages that also have an inner wrap */
+#main > .page .page__inner-wrap {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+/* Make section rules inside archives match the box styling */
+.archive hr,
+.archive .page__content hr {
+  border-color: var(--content-border);
+}
+
+
+/* Normalize interior spacing for all layouts */
+#main > .page  .page__title,
+#main > .archive .page__title { margin-top: 0; }
+
+#main > .page  .page__content > *:first-child,
+#main > .archive .page__content > *:first-child { margin-top: 0; }
+
+#main > .page  .page__content > *:last-child,
+#main > .archive .page__content > *:last-child { margin-bottom: 0; }
+
+/* Consistent small gap under the masthead */
+#main { margin-top: 0.75rem; }   /* adjust to 0.75–1.25rem to taste */
