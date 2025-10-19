@@ -1,0 +1,60 @@
+{% assign items = site.teaching | sort: "date" | reverse %}
+
+<ul class="teaching-bullets">
+{% for item in items %}
+  {% comment %} Resolve fields {% endcomment %}
+  {% assign course = item.course | default: item.title | default: item.name %}
+  {% assign role = item.role | default: item.position | default: item.type %}
+
+  {% comment %} Build "University Department" using common keys, fall back to venue {% endcomment %}
+  {% assign uni_dept = "" %}
+  {% if item.institution %}{% assign uni_dept = item.institution %}{% endif %}
+  {% if uni_dept == "" and item.university %}{% assign uni_dept = item.university %}{% endif %}
+  {% if uni_dept == "" and item.school %}{% assign uni_dept = item.school %}{% endif %}
+  {% if item.department %}
+    {% if uni_dept != "" %}{% assign uni_dept = uni_dept | append: " " %}{% endif %}
+    {% assign uni_dept = uni_dept | append: item.department %}
+  {% endif %}
+  {% if item.faculty %}
+    {% if uni_dept != "" %}{% assign uni_dept = uni_dept | append: " " %}{% endif %}
+    {% assign uni_dept = uni_dept | append: item.faculty %}
+  {% endif %}
+  {% if uni_dept == "" and item.venue %}
+    {% assign uni_dept = item.venue %}
+  {% endif %}
+
+  {% comment %} Years string as YYYY or YYYY to YYYY or present {% endcomment %}
+  {% capture years %}
+    {% if item.start and item.end %}
+      {{ item.start | date: "%Y" }} to {{ item.end | date: "%Y" }}
+    {% elsif item.start and item.end == nil %}
+      {{ item.start | date: "%Y" }} to present
+    {% elsif item.start_year and item.end_year %}
+      {{ item.start_year }} to {{ item.end_year }}
+    {% elsif item.start_year and item.end_year == nil %}
+      {{ item.start_year }} to present
+    {% elsif item.date %}
+      {{ item.date | date: "%Y" }}
+    {% endif %}
+  {% endcapture %}
+  {% assign years_str = years | strip %}
+
+  {% comment %} Assemble the line in the format: Course, University Department, Role, Years {% endcomment %}
+  {% assign line = "" %}
+  {% if course %}{% assign line = "<strong>" | append: course | append: "</strong>" %}{% endif %}
+  {% if uni_dept != "" %}
+    {% if line != "" %}{% assign line = line | append: ", " %}{% endif %}
+    {% assign line = line | append: uni_dept %}
+  {% endif %}
+  {% if role %}
+    {% if line != "" %}{% assign line = line | append: ", " %}{% endif %}
+    {% assign line = line | append: role %}
+  {% endif %}
+  {% if years_str != "" %}
+    {% if line != "" %}{% assign line = line | append: ", " %}{% endif %}
+    {% assign line = line | append: years_str %}
+  {% endif %}
+
+  <li>{{ line }}</li>
+{% endfor %}
+</ul>

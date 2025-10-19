@@ -1,0 +1,38 @@
+{% assign items = site.education | sort: "date" | reverse %}
+
+<ul class="teaching-bullets">
+{% for item in items %}
+  {% assign degree = item.degree %}
+  {% assign field = item.field | default: item.program %}
+  {% assign institution = item.institution | default: item.university | default: item.school | default: item.venue %}
+  {% assign location = item.location %}
+  {% assign title_text = item.title | default: degree %}
+  {% if title_text == degree and field %}
+    {% assign title_text = degree | append: " in " | append: field %}
+  {% endif %}
+
+  {% capture years %}
+    {% if item.start and item.end %}
+      {{ item.start | date: "%Y" }} to {{ item.end | date: "%Y" }}
+    {% elsif item.start and item.end == nil %}
+      {{ item.start | date: "%Y" }} to present
+    {% elsif item.start_year and item.end_year %}
+      {{ item.start_year }} to {{ item.end_year }}
+    {% elsif item.start_year and item.end_year == nil %}
+      {{ item.start_year }} to present
+    {% elsif item.end_year %}
+      {{ item.end_year }}
+    {% elsif item.date %}
+      {{ item.date | date: "%Y" }}
+    {% endif %}
+  {% endcapture %}
+  {% assign years_str = years | strip %}
+
+  <li>
+    <strong>{{ title_text }}</strong>
+    {% if institution %} at <em>{{ institution }}</em>{% endif %}
+    {% if years_str != "" %} ({{ years_str }}{% if item.expected %}, expected{% endif %}){% endif %}
+    {% if location %}, {{ location }}{% endif %}
+  </li>
+{% endfor %}
+</ul>

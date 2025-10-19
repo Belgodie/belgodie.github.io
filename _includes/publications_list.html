@@ -33,10 +33,23 @@
           {% assign initials = initials | append: "*" %}
         {% endif %}
         
+        {% comment %} Check if this author should have co-first marker {% endcomment %}
+        {% assign author_index = forloop.index %}
+        {% assign add_cofirst = false %}
+        {% if item.cofirst == true and item.cofirstnumber %}
+          {% if author_index <= item.cofirstnumber %}
+            {% assign add_cofirst = true %}
+          {% endif %}
+        {% endif %}
+        
         {% if last_name contains my_last_name %}
           {% assign formatted_author = "<strong>" | append: last_name | append: ", " | append: initials | append: "</strong>" %}
         {% else %}
           {% assign formatted_author = last_name | append: ", " | append: initials %}
+        {% endif %}
+        
+        {% if add_cofirst %}
+          {% assign formatted_author = formatted_author | append: "<sup>†</sup>" %}
         {% endif %}
         
         {% if forloop.first %}
@@ -90,10 +103,23 @@
           {% assign initials = initials | append: "*" %}
         {% endif %}
         
+        {% comment %} Check if this author should have co-first marker {% endcomment %}
+        {% assign author_index = forloop.index %}
+        {% assign add_cofirst = false %}
+        {% if item.cofirst == true and item.cofirstnumber %}
+          {% if author_index <= item.cofirstnumber %}
+            {% assign add_cofirst = true %}
+          {% endif %}
+        {% endif %}
+        
         {% if last_name contains my_last_name %}
           {% assign formatted_author = "<strong>" | append: last_name | append: ", " | append: initials | append: "</strong>" %}
         {% else %}
           {% assign formatted_author = last_name | append: ", " | append: initials %}
+        {% endif %}
+        
+        {% if add_cofirst %}
+          {% assign formatted_author = formatted_author | append: "<sup>†</sup>" %}
         {% endif %}
         
         {% if forloop.first %}

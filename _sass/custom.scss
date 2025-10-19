@@ -41,11 +41,6 @@ section.page__content div.projects-grid,
   border: 1px solid rgba(0, 0, 0, 0.3) !important;
 }
 
-html[data-theme="dark"] .projects-grid article.project-card {
-  background: rgba(255, 255, 255, 0.03) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-
 .projects-grid .project-teaser { 
   margin-bottom: 0.75rem;
   border-radius: var(--img-radius);
@@ -54,9 +49,6 @@ html[data-theme="dark"] .projects-grid article.project-card {
   outline-offset: 0px !important;
 }
 
-html[data-theme="dark"] .projects-grid .project-teaser {
-  box-shadow: inset 0 0 0 5px #ffffff !important;
-}
 
 .projects-grid .project-teaser img { 
   width: 100% !important;

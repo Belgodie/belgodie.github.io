@@ -1,0 +1,68 @@
+{% assign items = site.publications | sort: "date" | reverse %}
+{% assign my_last_name = "Chica" %}
+{% assign suppress_links = include.suppress_links | default: false %}
+
+<ol class="teaching-bullets">
+{% for item in items %}
+  <li>
+    {% if item.authors %}
+      {% assign author_list = item.authors | split: " and " %}
+      {% assign formatted_authors = "" %}
+      {% for author in author_list %}
+        {% assign author_trimmed = author | strip %}
+        {% assign name_parts = author_trimmed | split: ", " %}
+        {% assign last_name = name_parts[0] | strip %}
+        {% assign first_names = name_parts[1] | strip | split: " " %}
+
+        {% assign initials = "" %}
+        {% assign has_asterisk = false %}
+
+        {% for name in first_names %}
+          {% if name contains "*" %}
+            {% assign has_asterisk = true %}
+            {% assign name = name | remove: "*" %}
+          {% endif %}
+          {% assign first_char = name | slice: 0 %}
+          {% assign initials = initials | append: first_char | append: "." %}
+        {% endfor %}
+
+        {% if has_asterisk %}
+          {% assign initials = initials | append: "*" %}
+        {% endif %}
+
+        {% comment %} Check if this author should have co-first marker {% endcomment %}
+        {% assign author_index = forloop.index %}
+        {% assign add_cofirst = false %}
+        {% if item.cofirst == true and item.cofirstnumber %}
+          {% if author_index <= item.cofirstnumber %}
+            {% assign add_cofirst = true %}
+          {% endif %}
+        {% endif %}
+
+        {% if last_name contains my_last_name %}
+          {% assign formatted_author = "<strong>" | append: last_name | append: ", " | append: initials | append: "</strong>" %}
+        {% else %}
+          {% assign formatted_author = last_name | append: ", " | append: initials %}
+        {% endif %}
+
+        {% if add_cofirst %}
+          {% assign formatted_author = formatted_author | append: "<sup>†</sup>" %}
+        {% endif %}
+
+        {% if forloop.first %}
+          {% assign formatted_authors = formatted_author %}
+        {% elsif forloop.last %}
+          {% assign formatted_authors = formatted_authors | append: " & " | append: formatted_author %}
+        {% else %}
+          {% assign formatted_authors = formatted_authors | append: ", " | append: formatted_author %}
+        {% endif %}
+      {% endfor %}
+      {{ formatted_authors }}
+    {% endif %}
+    ({{ item.date | date: "%Y" }}).
+    <em>{{ item.title }}</em>.
+    {% if item.venue %}{{ item.venue }}{% endif %}{% if item.volume and item.pages %}, {{ item.volume }}:{{ item.pages }}{% elsif item.volume %}, {{ item.volume }}{% elsif item.pages %}, {{ item.pages }}{% endif %}.
+    {% if item.paperurl and suppress_links != true %}<a href="{{ item.paperurl }}">{{ item.paperurl }}</a>{% endif %}
+  </li>
+{% endfor %}
+</ol>

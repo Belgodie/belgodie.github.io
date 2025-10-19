@@ -232,6 +232,9 @@ collections:
   contact:
     output: true
     permalink: /:collection/:path/
+  education:
+    output: false
+    permalink: /:collection/:path/ 
 
 
 # These settings control how pages and collections are included in the site
@@ -305,7 +308,13 @@ defaults:
     values:
       layout: single
       author_profile: true
-      share: true      
+      share: true    
+  # _education
+  - scope:
+      path: ""
+      type: education
+    values:
+      layout: single 
 
 
 # Sass/SCSS

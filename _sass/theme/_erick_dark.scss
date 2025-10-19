@@ -50,7 +50,7 @@ $sidebar-screen-min-width   : 1024px;
   --global-masthead-link-color        : #{$federal-blue};
   --global-masthead-link-color-hover  : #{$pacific-cyan};
   --global-text-color                 : #{$federal-blue};
-  --global-text-color-light           : #{$honolulu-blue};
+  --global-text-color-light           : #{$federal-blue}; /*footer text*/
   --global-thead-color                : #{$non-photo-blue};
 
   /* Single mode surfaces */
@@ -121,22 +121,16 @@ body {
   }
 }
 
-/* Universal content box for all layouts */
-#main > .page,
-#main > .archive {
+.page__inner-wrap {
   background: var(--content-bg);
   border: 1px solid var(--content-border);
   border-radius: 12px;
   padding: 1.25rem;
   box-shadow: $box-shadow;
-}
-
-/* Prevent double box on pages that also have an inner wrap */
-#main > .page .page__inner-wrap {
-  background: transparent;
-  border: 0;
-  padding: 0;
-  box-shadow: none;
+  width: 100%;           /* ← Take full width available */
+  margin-left: 0;        /* ← Remove any left margin */
+  margin-right: 0;       /* ← Remove any right margin */
+  box-sizing: border-box; /* ← Include padding/border in width calculation */
 }
 
 /* Make section rules inside archives match the box styling */
@@ -148,5 +142,4 @@ body {
 /* Tidy first and last element spacing inside the box */
 .page__content > :first-child { margin-top: 0.25rem; }
 .page__content > :last-child  { margin-bottom: 0.25rem; }
-
 
