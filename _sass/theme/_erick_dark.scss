@@ -52,7 +52,6 @@ $sidebar-screen-min-width   : 1024px;
   --global-text-color                 : #{$federal-blue};
   --global-text-color-light           : #{$honolulu-blue};
   --global-thead-color                : #{$non-photo-blue};
-  --box-pad: 1.25rem;
 
   /* Single mode surfaces */
   --page-bg                           : #f7f7f8;   /* outer background */
@@ -110,7 +109,7 @@ body {
   background: var(--content-bg);
   border: 1px solid var(--content-border);
   border-radius: 12px;
-  padding: var(--box-pad);
+  padding: 1.25rem;
   box-shadow: $box-shadow;
 }
 
@@ -128,7 +127,7 @@ body {
   background: var(--content-bg);
   border: 1px solid var(--content-border);
   border-radius: 12px;
-  padding: var(--box-pad);
+  padding: 1.25rem;
   box-shadow: $box-shadow;
 }
 
@@ -146,16 +145,8 @@ body {
   border-color: var(--content-border);
 }
 
+/* Tidy first and last element spacing inside the box */
+.page__content > :first-child { margin-top: 0.25rem; }
+.page__content > :last-child  { margin-bottom: 0.25rem; }
 
-/* Normalize interior spacing for all layouts */
-#main > .page  .page__title,
-#main > .archive .page__title { margin-top: 0; }
 
-#main > .page  .page__content > *:first-child,
-#main > .archive .page__content > *:first-child { margin-top: 0; }
-
-#main > .page  .page__content > *:last-child,
-#main > .archive .page__content > *:last-child { margin-bottom: 0; }
-
-/* Consistent small gap under the masthead */
-#main { margin-top: 0.75rem; }   /* adjust to 0.75–1.25rem to taste */

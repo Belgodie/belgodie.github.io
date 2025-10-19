@@ -1,6 +1,7 @@
 ---
 permalink: /contact/
 title: "Contact"
+layout: single
 redirect_from:
   - /contact.html
 author_profile: true  

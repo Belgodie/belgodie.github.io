@@ -1,9 +1,9 @@
 ---
 title: "Projects"
-layout: single
+layout: archive
 permalink: /projects/
 ---
-
+<hr>
 <div class="projects-grid">
   {% for item in site.portfolio %}
     <article class="project-card">

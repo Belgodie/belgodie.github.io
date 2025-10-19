@@ -1,10 +1,11 @@
 ---
+layout: landing
 permalink: /
 title: ""
 author_profile: true
-classes: no-top-margin
+classes: [hide-page-title]
 redirect_from:
-  - /about/ 
+  - /about/
   - /about.html
 ---
 

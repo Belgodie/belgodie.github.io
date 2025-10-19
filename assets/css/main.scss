@@ -41,3 +41,18 @@
     "vendor/font-awesome/solid",
     "vendor/font-awesome/brands",
     "custom";
+
+/* Make the first heading sit flush with the card padding on all pages */
+.archive > h1:first-child,
+.archive > h2:first-child,
+.page__content > h1:first-child,
+.page__content > h2:first-child {
+  margin-top: 0;
+}
+
+/* Optional, in case a paragraph is the first element on a page */
+.page__content > p:first-child { 
+  margin-top: 0; 
+}
+
+
