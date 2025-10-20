@@ -85,6 +85,25 @@ $sidebar-screen-min-width   : 1024px;
   margin: 0 !important;
 }
 
+/* Mobile menu - ensure white text is visible */
+.greedy-nav .hidden-links {
+  background: linear-gradient(135deg, 
+    #024589 0%,
+    #{$honolulu-blue} 50%,
+    #{$pacific-cyan} 100%
+  ) !important;
+}
+
+.greedy-nav .hidden-links a {
+  color: #ffffff !important;
+  background: transparent !important;
+}
+
+.greedy-nav .hidden-links a:hover {
+  color: #{$light-cyan} !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
 .masthead {
   border-bottom: 2px solid #{$pacific-cyan};
   height: $masthead-height;
@@ -110,10 +129,26 @@ $sidebar-screen-min-width   : 1024px;
 .masthead a,
 .masthead__menu-item a,
 .greedy-nav a,
-.visible-links a {
+.visible-links a,
+.greedy-nav__toggle,
+.greedy-nav button {
   color: #ffffff !important;
   font-weight: 500;
   transition: $global-transition;
+}
+
+/* Ensure hamburger icon is white */
+.greedy-nav__toggle:before,
+.greedy-nav__toggle:after,
+.greedy-nav button:before,
+.greedy-nav button:after {
+  background: #ffffff !important;
+}
+
+.greedy-nav .navicon,
+.greedy-nav .navicon:before,
+.greedy-nav .navicon:after {
+  background: #ffffff !important;
 }
 
 .masthead a:hover,
