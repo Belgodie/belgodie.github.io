@@ -240,9 +240,11 @@ body {
   }
 }
 
-/* Bold gradient section dividers */
-.archive hr,
-.archive .page__content hr {
+/* Apply gradient to ALL hr elements */
+hr,
+.page__inner-wrap hr,
+.page__content hr,
+.archive hr {
   border: none;
   height: 3px;
   background: linear-gradient(90deg, 
@@ -251,9 +253,18 @@ body {
     #{$pacific-cyan} 50%, 
     #{$honolulu-blue} 90%,
     transparent 100%);
-  margin: 2rem 0;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 180, 216, 0.3);
+}
+
+/* Make h2 borders match the gradient style */
+.page__content h2 {
+  border-image: linear-gradient(90deg, 
+    transparent 0%, 
+    #{$honolulu-blue} 10%,
+    #{$pacific-cyan} 50%, 
+    #{$honolulu-blue} 90%,
+    transparent 100%) 1;
 }
 
 /* Tidy first and last element spacing inside the box */
@@ -374,3 +385,4 @@ thead {
   ) 1;
   transform: translateX(4px);
 }
+
