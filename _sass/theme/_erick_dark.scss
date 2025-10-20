@@ -121,7 +121,7 @@ $sidebar-screen-min-width   : 1024px;
 .greedy-nav a:hover,
 .visible-links a:hover {
   color: #{$light-cyan} !important;
-  text-shadow: 0 0 8px rgba(202, 240, 248, 0.5);
+  opacity: 1 !important;
 }
 
 /* Footer with matching gradient to masthead */
