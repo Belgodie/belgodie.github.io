@@ -8,5 +8,4 @@ date: 2024-09-01
 location: "Daejeon, South Korea"
 ---
 
-Provided supplementary material in the form of academic papers on the topics covered in class, such
-as potentiometric/amperometric sensors, diffusion limits, and microfluidics
+

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Erick theme — single mode
+   Erick theme — single mode with BOLD gradients
    ========================================================================== */
 
 /* Color palette */
@@ -47,70 +47,186 @@ $sidebar-screen-min-width   : 1024px;
   --global-link-color                 : #{$honolulu-blue};
   --global-link-color-hover           : #{$pacific-cyan};
   --global-link-color-visited         : #{$federal-blue};
-  --global-masthead-link-color        : #{$federal-blue};
-  --global-masthead-link-color-hover  : #{$pacific-cyan};
+  --global-masthead-link-color        : #ffffff;
+  --global-masthead-link-color-hover  : #{$light-cyan};
   --global-text-color                 : #{$federal-blue};
   --global-text-color-light           : #{$federal-blue}; /*footer text*/
   --global-thead-color                : #{$non-photo-blue};
 
   /* Single mode surfaces */
-  --page-bg                           : #f7f7f8;   /* outer background */
-  --content-bg                        : #ffffff;   /* inner content box */
+  --page-bg                           : #f7f7f8;
+  --content-bg                        : #ffffff;
   --content-border                    : #{$non-photo-blue};
 }
 
-/* Masthead */
-.masthead,
+/* Masthead with BOLD gradient - unified smooth flow */
+.masthead {
+  background: linear-gradient(90deg, 
+    #024589 0%,           /* Deeper blue-navy */
+    #{$honolulu-blue} 35%,
+    #0096D9 65%,          /* Brighter mid-blue */
+    #{$pacific-cyan} 100%
+  ) !important;
+}
+
 .masthead__inner-wrap,
 .masthead__menu,
 .masthead__menu-item,
 .greedy-nav,
-.visible-links {
-  background: #{$light-cyan} !important;
+.visible-links,
+.greedy-nav__toggle {
+  background: transparent !important;
 }
+
+/* Remove any box styling from nav items */
+.masthead__menu-item {
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
 .masthead {
-  border-bottom: 1px solid #{$non-photo-blue};
+  border-bottom: 2px solid #{$pacific-cyan};
   height: $masthead-height;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 119, 182, 0.25);
 }
+
+.masthead::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    #{$pacific-cyan} 0%, 
+    #ffffff 50%, 
+    #{$pacific-cyan} 100%);
+  opacity: 0.8;
+}
+
 .masthead,
 .masthead a,
 .masthead__menu-item a,
 .greedy-nav a,
 .visible-links a {
-  color: #{$federal-blue} !important;
+  color: #ffffff !important;
+  font-weight: 500;
+  transition: $global-transition;
 }
+
 .masthead a:hover,
 .masthead__menu-item a:hover,
 .greedy-nav a:hover,
 .visible-links a:hover {
-  color: #{$pacific-cyan} !important;
+  color: #{$light-cyan} !important;
+  text-shadow: 0 0 8px rgba(202, 240, 248, 0.5);
 }
 
-/* Footer */
+/* Footer with matching gradient to masthead */
 .page__footer {
-  background: #{$light-cyan};
-  color: #{$federal-blue};
-  border-top: 1px solid #{$non-photo-blue};
+  background: linear-gradient(90deg, 
+    #024589 0%,           /* Deeper blue-navy */
+    #{$honolulu-blue} 35%,
+    #0096D9 65%,          /* Brighter mid-blue */
+    #{$pacific-cyan} 100%
+  );
+  color: #ffffff !important;
+  border-top: 2px solid #{$pacific-cyan};
+  position: relative !important;
+  box-shadow: 0 -4px 12px rgba(0, 119, 182, 0.25);
+  margin-top: 2rem !important;
+  flex-shrink: 0;
+  width: 100%;
 }
+
+.page__footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    #{$pacific-cyan} 0%, 
+    #ffffff 50%, 
+    #{$pacific-cyan} 100%);
+  opacity: 0.8;
+}
+
+.page__footer * {
+  color: #ffffff !important;
+}
+
+.page__footer,
+.page__footer p,
+.page__footer span,
+.page__footer div,
+.page__footer footer,
+.page__footer .page__footer-copyright,
+.page__footer-follow {
+  color: #ffffff !important;
+}
+
 .page__footer a {
-  color: #{$federal-blue};
+  color: #ffffff !important;
+  font-weight: 500;
+  transition: $global-transition;
 }
+
 .page__footer a:hover {
-  color: #{$pacific-cyan};
+  color: #{$light-cyan} !important;
+  text-shadow: 0 0 8px rgba(202, 240, 248, 0.5);
 }
 
-/* Single theme content format */
+/* Body with gradient background - viewport-based approach */
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 body {
-  background: var(--page-bg);
+  background: linear-gradient(135deg, 
+    #e8f4f8 0%,
+    #f0f8fc 50%,
+    #ffffff 100%
+  );
+  background-attachment: fixed;
+  min-height: 100vh;
+  padding-bottom: 0 !important;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* Default wrapper used by AcademicPages and Minimal Mistakes */
+/* Make #main grow to push footer down */
+#main {
+  width: 100%;
+}
+
+/* Reduce excessive spacing on wrapper elements */
+.initial-content,
+.layout {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Content box - clean white with no visible border */
 .page__inner-wrap {
-  background: var(--content-bg);
-  border: 1px solid var(--content-border);
+  background: #ffffff;
+  border: none;
   border-radius: 12px;
   padding: 1.25rem;
-  box-shadow: $box-shadow;
+  box-shadow: 0 8px 24px rgba(0, 119, 182, 0.12), 
+              0 4px 8px rgba(0, 180, 216, 0.08);
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  box-sizing: border-box;
+  position: relative;
 }
 
 /* Wide screens */
@@ -119,27 +235,142 @@ body {
     padding: 1.5rem;
     border-radius: 14px;
   }
+  .page__inner-wrap::before {
+    border-radius: 14px;
+  }
 }
 
-.page__inner-wrap {
-  background: var(--content-bg);
-  border: 1px solid var(--content-border);
-  border-radius: 12px;
-  padding: 1.25rem;
-  box-shadow: $box-shadow;
-  width: 100%;           /* ← Take full width available */
-  margin-left: 0;        /* ← Remove any left margin */
-  margin-right: 0;       /* ← Remove any right margin */
-  box-sizing: border-box; /* ← Include padding/border in width calculation */
-}
-
-/* Make section rules inside archives match the box styling */
+/* Bold gradient section dividers */
 .archive hr,
 .archive .page__content hr {
-  border-color: var(--content-border);
+  border: none;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    #{$honolulu-blue} 10%,
+    #{$pacific-cyan} 50%, 
+    #{$honolulu-blue} 90%,
+    transparent 100%);
+  margin: 2rem 0;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 180, 216, 0.3);
 }
 
 /* Tidy first and last element spacing inside the box */
 .page__content > :first-child { margin-top: 0.25rem; }
 .page__content > :last-child  { margin-bottom: 0.25rem; }
 
+/* Bold link hover effects */
+.page__content a {
+  position: relative;
+  color: #{$honolulu-blue};
+  font-weight: 500;
+  transition: $global-transition;
+}
+
+.page__content a:hover {
+  color: #{$pacific-cyan};
+}
+
+.page__content a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    #{$honolulu-blue} 0%, 
+    #{$pacific-cyan} 50%,
+    #{$honolulu-blue} 100%
+  );
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+  opacity: 0;
+  border-radius: 2px;
+}
+
+.page__content a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+  opacity: 1;
+}
+
+/* Code blocks with gradient accent */
+code {
+  background: linear-gradient(135deg, 
+    #{$light-cyan} 0%, 
+    rgba(144, 224, 239, 0.5) 100%
+  ) !important;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  border-left: 3px solid #{$pacific-cyan};
+}
+
+pre {
+  background: linear-gradient(135deg, 
+    #{$light-cyan} 0%, 
+    rgba(144, 224, 239, 0.4) 100%
+  ) !important;
+  border-left: 4px solid transparent;
+  border-image: linear-gradient(180deg, 
+    #{$pacific-cyan} 0%, 
+    #{$honolulu-blue} 100%
+  ) 1;
+  border-radius: 6px;
+  padding: 1em;
+}
+
+/* Button styling with gradients */
+.btn {
+  background: linear-gradient(135deg, 
+    #{$honolulu-blue} 0%, 
+    #{$pacific-cyan} 100%
+  );
+  color: #ffffff !important;
+  border: none;
+  padding: 0.6em 1.2em;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: $global-transition;
+  box-shadow: 0 4px 12px rgba(0, 119, 182, 0.3);
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, 
+    #{$pacific-cyan} 0%, 
+    #0096D9 100%
+  );
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 180, 216, 0.4);
+}
+
+/* Table headers with gradient */
+thead {
+  background: linear-gradient(135deg, 
+    #{$non-photo-blue} 0%, 
+    #{$pacific-cyan} 100%
+  );
+  color: #{$federal-blue};
+  font-weight: 600;
+}
+
+/* Archive item styling */
+.archive__item {
+  border-left: 4px solid transparent;
+  border-image: linear-gradient(180deg, 
+    #{$pacific-cyan} 0%, 
+    #{$non-photo-blue} 100%
+  ) 1;
+  padding-left: 1rem;
+  transition: $global-transition;
+}
+
+.archive__item:hover {
+  border-image: linear-gradient(180deg, 
+    #{$honolulu-blue} 0%, 
+    #{$pacific-cyan} 100%
+  ) 1;
+  transform: translateX(4px);
+}
