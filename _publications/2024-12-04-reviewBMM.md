@@ -7,7 +7,7 @@ category: reviews
 permalink: /publication/2025-06-08-reviewBMM-1
 #excerpt: 'Review on recent advances in real-time, in situ biosensing technologies, including microelectrode arrays for electrophysiological recordings, chemical sensors for biochemical detection, and strain sensors for monitoring mechanical properties'
 date: 2024-12-04
-venue: 'Micro and Nano Systems Letters'
+venue: 'Micro and Nano Syst Lett'
 paperurl: https://doi.org/10.1186/s40486-024-00216-y
 volume: '12'
 issue: '1'
