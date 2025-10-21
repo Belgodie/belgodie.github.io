@@ -1,7 +1,7 @@
 ---
 title: "Contact"
 venue: "DTU"
-location: "Kongens Lyngby, Denmark"
+location: "Ørsteds Plads, DK-2800 Kgs. Lyngby"
 ---
 
 Talk description goes here
