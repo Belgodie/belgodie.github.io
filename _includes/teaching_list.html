@@ -4,10 +4,14 @@
   <li>
     <strong>{{ item.title }}</strong><br/>
     <em>
-      {% if item.type %}{{ item.type }}{% endif %}
-      {% if item.venue %}{% if item.type %}, {% endif %}{{ item.venue }}{% endif %}
-      {% if item.date %}, {{ item.date | date: "%Y" }}{% endif %}
+      {% if item.role %}{{ item.role }}{% endif %}
+      {% if item.type %}{% if item.role %}, {% endif %}{{ item.type }}{% endif %}
     </em>
+    {% if item.venue or item.date %}
+      —
+      {% if item.venue %}{{ item.venue }}{% endif %}
+      {% if item.date %}{% if item.venue %}, {% endif %}{{ item.date | date: "%Y" }}{% endif %}
+    {% endif %}
     {% if item.excerpt %}
       <br/>{{ item.excerpt | markdownify | strip_html }}
     {% endif %}

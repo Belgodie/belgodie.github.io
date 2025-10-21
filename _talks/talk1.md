@@ -1,7 +1,7 @@
 ---
-title: "My Amazing Talk"
-venue: "Conference Center"
-location: "Berkeley, California"
+title: "Contact"
+venue: "DTU"
+location: "Kongens Lyngby, Denmark"
 ---
 
 Talk description goes here

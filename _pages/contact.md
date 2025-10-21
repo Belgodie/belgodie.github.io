@@ -14,3 +14,4 @@ For collaborations, media or general enquiries, email works best.
 erickchica[at]kaist.ac.kr
 
 ## Location
+<iframe src="/talkmap/map.html" width="100%" height="300px" style="border:1px solid #ccc; border-radius: 5px;"></iframe>

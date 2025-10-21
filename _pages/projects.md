@@ -26,7 +26,7 @@ permalink: /projects/
   </div>
 </div>
 
-<div class="archive" style="margin-top: 0rem;">
+<div class="archive" style="margin-top: 0rem;" id="publications">
   <div class="page__inner-wrap">
     <h1 class="page__title">Publications</h1>
     {% if site.author.googlescholar %}
