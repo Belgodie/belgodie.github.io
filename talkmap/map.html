@@ -34,8 +34,9 @@
         function initMap() {
             // Create map centered at initial position
             var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 2,
+                zoom: 15,
                 center: {lat: 30, lng: 10},
+				mapTypeId: 'roadmap',  // Options are satellite, hybrid, roadmap (default), terrain
                 mapTypeControl: true,
                 streetViewControl: false,
                 fullscreenControl: true
@@ -73,10 +74,17 @@
                 bounds.extend(marker.position);
             }
 
-            // Fit map to show all markers
-            if (markers.length > 0) {
-                map.fitBounds(bounds);
-            }
+			// Fit map to show all markers
+			if (markers.length > 0) {
+				map.fitBounds(bounds);
+				
+				// Prevent zooming out too far - set a maximum zoom level
+				google.maps.event.addListenerOnce(map, 'bounds_changed', function() {
+					if (map.getZoom() > 17) {
+						map.setZoom(17); // Keeps it zoomed in like your second image
+					}
+				});
+			}
 
             // Optional: Add marker clustering
             // Uncomment this if you want clustering (requires markerclusterer library)

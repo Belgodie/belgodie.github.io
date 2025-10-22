@@ -1,12 +1,12 @@
 ---
-title: "Projects & Publications"
+title: "Research"
 layout: multi-section
-permalink: /projects/
+permalink: /research/
 ---
 
 <div class="archive">
   <div class="page__inner-wrap">
-    <h1 class="page__title">Projects</h1>
+    <h1 class="page__title">Research</h1>
     <hr>
     <div class="projects-grid">
       {% for item in site.portfolio %}

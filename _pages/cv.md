@@ -15,7 +15,7 @@ Education
 ======
 {% include education_list.html %}
 
-Publications
+Publications and Presentations
 ======
 {% include publications_list_flat.html suppress_links=true %}
 
