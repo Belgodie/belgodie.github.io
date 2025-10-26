@@ -226,6 +226,9 @@ collections:
   projects:
     output: true
     permalink: /:collection/:path/
+  news:              
+    output: false    
+    sort_by: date
   portfolio:
     output: true
     permalink: /:collection/:path/
