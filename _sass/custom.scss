@@ -3,23 +3,141 @@
 .teaching-bullets li { margin-bottom: 1rem; line-height: 1.4; }
 .teaching-bullets em { opacity: 0.8; }
 
+/* ==========================================================================
+   Shared content width
+   ========================================================================== */
+:root {
+  --card-gap: 1.0rem;
+  --teaser-h: 200px;
+  --card-radius: 12px;
+  --img-radius: 10px;
+  --content-max-width: 1200px;
+  --content-side-padding: clamp(1.25rem, 2vw + 1rem, 2.5rem);
+  --content-block-padding: clamp(1.5rem, 1.75vw + 1.25rem, 2.5rem);
+}
+
+#main {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 1.25rem auto 0;
+  padding-left: var(--content-side-padding);
+  padding-right: var(--content-side-padding);
+  box-sizing: border-box;
+}
+
+.page,
+.archive,
+.page__related {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
+}
+
+.page .page__inner-wrap,
+.archive .page__inner-wrap {
+  max-width: 100%;
+  padding: var(--content-block-padding);
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  #main {
+    margin-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .page .page__inner-wrap,
+  .archive .page__inner-wrap {
+    padding: 1.25rem;
+  }
+}
+
 /* ===== Fix single layout height collapse ===== */
 article.page {
   @include clearfix();
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  float: none;
+}
+
+article.page > .page__inner-wrap {
+  padding: var(--content-block-padding);
+  box-sizing: border-box;
 }
 
 .page__inner-wrap {
   @include clearfix();
 }
 
-/* ===== Projects grid ===== */
-:root {
-  --card-gap: 1.0rem;
-  --teaser-h: 200px;
-  --card-radius: 12px;
-  --img-radius: 10px;
+.page__inner-wrap > header,
+.page__inner-wrap > .page__title {
+  margin-top: 0;
+  margin-bottom: clamp(0.75rem, calc(0.5rem + 1vw), 1.5rem);
+  padding: 0;
 }
 
+.page__inner-wrap > header .page__title,
+.page__inner-wrap > .page__title {
+  margin: 0;
+  line-height: 1.2;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.page__inner-wrap > header .page__title::after,
+.page__inner-wrap > .page__title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #024589 10%,
+    rgba(0, 180, 216, 0.85) 50%,
+    #024589 90%,
+    transparent 100%
+  );
+  box-shadow: 0 1px 6px rgba(0, 180, 216, 0.25);
+}
+
+.page__inner-wrap > header + .page__content > *:first-child,
+.page__inner-wrap > .page__title + * {
+  margin-top: 0;
+}
+
+.page__inner-wrap hr.section-divider {
+  border: none;
+  height: 2px;
+  margin: clamp(1rem, calc(1rem + 1vw), 2.5rem) 0;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #024589 20%,
+    rgba(0, 180, 216, 0.9) 50%,
+    #024589 80%,
+    transparent 100%
+  );
+  box-shadow: 0 1px 5px rgba(0, 180, 216, 0.2);
+}
+
+.archive + .archive {
+  margin-top: calc(var(--content-block-padding) * 1.5);
+}
+
+/* ===== Projects grid ===== */
 section.page__content div.projects-grid,
 .archive div.projects-grid {
   display: grid !important;
@@ -66,3 +184,11 @@ section.page__content div.projects-grid,
 
 .project-title { margin: 0 0 0.35rem 0; }
 .project-excerpt { margin: 0; opacity: 0.9; }
+.archive .page__inner-wrap > header + .wordwrap {
+  margin-top: clamp(0.75rem, calc(0.5rem + 1vw), 1.5rem);
+}
+
+#publications .page__title::after {
+  display: none;
+}
+

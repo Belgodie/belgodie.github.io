@@ -1,0 +1,22 @@
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var navList = document.getElementById('hero-nav-list');
+  var navToggle = document.getElementById('hero-nav-toggle');
+
+  if (!navList || !navToggle) {
+    return;
+  }
+
+  navToggle.addEventListener('click', function () {
+    navToggle.classList.toggle('active');
+    navList.classList.toggle('active');
+  });
+
+  navList.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      navToggle.classList.remove('active');
+      navList.classList.remove('active');
+    });
+  });
+});
+</script>

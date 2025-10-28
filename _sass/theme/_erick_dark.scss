@@ -1,3 +1,4 @@
+@import "hero";
 /* ==========================================================================
    Erick theme — single mode with BOLD gradients
    ========================================================================== */
@@ -57,6 +58,9 @@ $sidebar-screen-min-width   : 1024px;
   --page-bg                           : #f7f7f8;
   --content-bg                        : #ffffff;
   --content-border                    : #{$non-photo-blue};
+  --content-max-width                 : 1200px;
+  --content-side-padding              : 1.5rem;
+  --hero-sticky-top                   : 1.25rem;
 }
 
 /* Masthead with BOLD gradient - unified smooth flow */
@@ -301,6 +305,10 @@ hr,
     #{$pacific-cyan} 50%, 
     #{$honolulu-blue} 90%,
     transparent 100%) 1;
+}
+
+.page__content > hr:first-child {
+  margin-top: 1.25rem;
 }
 
 /* Tidy first and last element spacing inside the box */

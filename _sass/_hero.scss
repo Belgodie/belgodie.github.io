@@ -1,0 +1,356 @@
+.hero-frame {
+  background: linear-gradient(90deg, 
+    #024589 0%,
+    #0077B6 35%,
+    #0096D9 65%,
+    #00B4D8 100%
+  );
+  padding: 1.5rem 1rem 0.25rem 1rem;
+  margin: 0;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 119, 182, 0.25);
+  border-bottom: none;
+  width: 100%;
+  transition: padding 0.25s ease, box-shadow 0.25s ease;
+  
+  @media (max-width: 768px) {
+    padding: 1.25rem 1rem 0.5rem 1rem;
+  }
+}
+
+/* ===================================================================
+   HERO SECTION - Fully Responsive
+   =================================================================== */
+
+.hero-section {
+  padding: 0;
+
+  .hero-content {
+    max-width: var(--content-max-width, 1200px);
+    margin: 0 auto;
+    padding: 0 var(--content-side-padding, 1.5rem);
+    box-sizing: border-box;
+  }
+  
+  .hero-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+  
+  .hero-avatar {
+    flex-shrink: 0;
+    
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      object-fit: cover;
+      
+      @media (max-width: 768px) {
+        width: 100px;
+        height: 100px;
+      }
+      
+      @media (max-width: 480px) {
+        width: 80px;
+        height: 80px;
+      }
+    }   
+  }
+  
+  .hero-info {
+    color: white;
+  }
+  
+  .hero-name {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: white;
+    
+    @media (max-width: 768px) {
+      font-size: 1.75rem;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 1.5rem;
+    }
+  }
+  
+  .hero-title {
+    font-size: 1.1rem;
+    margin: 0 0 0.25rem 0;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 400;
+    
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 0.9rem;
+    }
+  }
+  
+  .hero-affiliation {
+    font-size: 0.95rem;
+    margin: 0 0 1rem 0;
+    color: rgba(255, 255, 255, 0.85);
+    
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 0.85rem;
+    }
+    
+    .affiliation-main {
+      color: white;
+      font-weight: 500;
+    }
+    
+    .affiliation-secondary {
+      color: rgba(255, 255, 255, 0.75);
+    }
+  }
+  
+  .hero-social {
+    display: flex;
+    gap: 1rem;
+    
+    @media (max-width: 768px) {
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    
+    a {
+      color: white;
+      font-size: 1.3rem;
+      transition: all 0.3s ease;
+      opacity: 0.9;
+      
+      @media (max-width: 480px) {
+        font-size: 1.1rem;
+      }
+      
+      &:hover {
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+/* ===================================================================
+   HERO NAVIGATION - SIMPLE STICKY BAR
+   =================================================================== */
+
+.hero-nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  width: 100%;
+  padding: clamp(0.7rem, 1.2vw, 1rem) 0 clamp(0.9rem, 1.5vw, 1.2rem);
+  background: linear-gradient(90deg, #024589 0%, #0077B6 35%, #0096D9 65%, #00B4D8 100%);
+  box-shadow: 0 6px 18px rgba(0, 119, 182, 0.18);
+  position: sticky;
+  top: 0;
+
+  @media (max-width: 768px) {
+    box-shadow: none;
+  }
+}
+
+.hero-nav-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00B4D8 0%, #ffffff 50%, #00B4D8 100%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.hero-nav {
+  width: 100%;
+}
+
+.hero-nav-inner {
+  position: relative;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(4px);
+  border-radius: 42px;
+  box-sizing: border-box;
+  padding: 0.5rem var(--content-side-padding, 1.5rem);
+  width: 100%;
+  max-width: calc(var(--content-max-width, 1200px) - (2 * var(--content-side-padding, 1.5rem)));
+  margin: 0 auto;
+  box-shadow:
+    0 6px 18px rgba(2, 69, 137, 0.16),
+    0 3px 10px rgba(0, 119, 182, 0.10);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  transition: box-shadow 0.3s ease, transform 0.25s ease;
+  
+  @media (max-width: 768px) {
+    border-radius: 18px;
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: none;
+  }
+}
+
+
+/* Hamburger Menu Toggle (Mobile Only) */
+.hero-nav-toggle {
+  display: none;
+  
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 19px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+    margin: 0 auto;
+  }
+  
+  span {
+    width: 100%;
+    height: 2.5px;
+    background: #024589;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+  
+  &.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  
+  &.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  &.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+
+/* Navigation List */
+.hero-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  
+  @media (max-width: 768px) {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 0.75rem;
+    
+    &.active {
+      display: flex;
+    }
+  }
+  
+  li {
+    margin: 0;
+    
+    @media (max-width: 768px) {
+      width: 100%;
+      text-align: center;
+    }
+    
+    a {
+      display: block;
+      padding: 0.35rem 0.6rem;
+      color: #024589;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 0;
+      transition: color 0.2s ease, transform 0.2s ease;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      
+      @media (max-width: 768px) {
+        padding: 0.6rem 0.8rem;
+        width: 100%;
+        border-radius: 6px;
+      }
+      
+      &:hover,
+      &:focus-visible {
+        color: #013a70;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+/* Add padding when nav is sticky to prevent content jump */
+/* ===================================================================
+   HIDE ORIGINAL MASTHEAD & REMOVE ALL TOP SPACING
+   =================================================================== */
+
+body:has(.hero-frame) .masthead {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  visibility: hidden !important;
+}
+
+body:has(.hero-frame) {
+  padding-top: 0 !important;
+}
+
+body:has(.hero-frame) .initial-content {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Remove ALL top spacing from main content when hero is present */
+body:has(.hero-frame) #main {
+  margin: 1.25rem auto 0 !important;
+  padding-top: 0 !important;
+  animation: none !important;
+}
+
+/* Remove top margin from page elements */
+body:has(.hero-frame) .page {
+  margin-top: 0 !important;
+}
+
+/* Ensure archive pages also have no top spacing */
+body:has(.hero-frame) .archive {
+  padding-top: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}

@@ -40,6 +40,8 @@
     "vendor/font-awesome/fontawesome",
     "vendor/font-awesome/solid",
     "vendor/font-awesome/brands",
+    
+    "hero",    // Import hero styles
     "custom";
 
 /* Make the first heading sit flush with the card padding on all pages */
@@ -54,5 +56,3 @@
 .page__content > p:first-child { 
   margin-top: 0; 
 }
-
-

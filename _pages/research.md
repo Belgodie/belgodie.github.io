@@ -2,12 +2,12 @@
 title: "Research"
 layout: multi-section
 permalink: /research/
+author_profile: true
 ---
 
 <div class="archive">
   <div class="page__inner-wrap">
     <h1 class="page__title">Research</h1>
-    <hr>
     <div class="projects-grid">
       {% for item in site.portfolio %}
         <article class="project-card">
@@ -26,13 +26,13 @@ permalink: /research/
   </div>
 </div>
 
-<div class="archive" style="margin-top: 0rem;" id="publications">
+<div class="archive" id="publications">
   <div class="page__inner-wrap">
     <h1 class="page__title">Publications</h1>
     {% if site.author.googlescholar %}
       <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
     {% endif %}
-    <hr>
+    <hr class="section-divider">
     {% include publications_list.html %}
   </div>
 </div>

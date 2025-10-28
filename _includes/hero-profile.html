@@ -1,0 +1,74 @@
+{% include base_path %}
+
+{% if page.author and site.data.authors[page.author] %}
+  {% assign author = site.data.authors[page.author] %}
+{% else %}
+  {% assign author = site.author %}
+{% endif %}
+
+<div class="hero-frame">
+  <div class="hero-section">
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-avatar">
+          {% if author.avatar contains "://" %}
+            <img src="{{ author.avatar }}" alt="{{ author.name }}" />
+          {% else %}
+            <img src="{{ author.avatar | prepend: "/images/" | prepend: base_path }}" alt="{{ author.name }}" />
+          {% endif %}
+        </div>
+
+        <div class="hero-info">
+          <h1 class="hero-name">{{ author.name }}</h1>
+          <p class="hero-title">PhD Candidate in Biomedical Engineering</p>
+          <p class="hero-affiliation">
+            <span class="affiliation-main">Technical University of Denmark (DTU)</span> |
+            <span class="affiliation-secondary">Intelli-Ingest Consortium</span>
+          </p>
+
+          <div class="hero-social">
+            {% if author.email %}
+              <a href="mailto:{{ author.email }}" title="Email" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            {% endif %}
+            {% if author.googlescholar %}
+              <a href="{{ author.googlescholar }}" title="Google Scholar" aria-label="Google Scholar"><i class="ai ai-google-scholar"></i></a>
+            {% endif %}
+            {% if author.orcid %}
+              <a href="{{ author.orcid }}" title="ORCID" aria-label="ORCID"><i class="ai ai-orcid"></i></a>
+            {% endif %}
+            {% if author.researchgate %}
+              <a href="{{ author.researchgate }}" title="ResearchGate" aria-label="ResearchGate"><i class="fab fa-researchgate"></i></a>
+            {% endif %}
+            {% if author.bluesky %}
+              <a href="https://bsky.app/profile/{{ author.bluesky }}" title="Bluesky" aria-label="Bluesky"><i class="fab fa-bluesky"></i></a>
+            {% endif %}
+            {% if author.github %}
+              <a href="https://github.com/{{ author.github }}" title="GitHub" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hero-nav-bar">
+  <nav class="hero-nav" id="hero-nav" aria-label="Primary">
+    <div class="hero-nav-inner">
+      <button class="hero-nav-toggle" id="hero-nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="hero-nav-list" id="hero-nav-list">
+        <li><a href="{{ base_path }}/">About</a></li>
+        {% for link in site.data.navigation.main %}
+          <li><a href="{{ link.url | prepend: base_path }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </nav>
+</div>
+<div class="hero-breathing-room" aria-hidden="true"></div>
+<div id="hero-release-sentinel" class="hero-release-sentinel" aria-hidden="true"></div>
+<div id="hero-condense-sentinel" class="hero-condense-sentinel" aria-hidden="true"></div>

@@ -14,7 +14,19 @@ layout: compress
   <body{% if page.classes %} class="{{ page.classes }}"{% endif %}>
 
     {% include browser-upgrade.html %}
-    {% include masthead.html %}
+
+    {% assign use_hero = false %}
+    {% if page.author_profile or layout.author_profile or site.author_profile %}
+      {% assign use_hero = true %}
+    {% endif %}
+
+    {% unless page.hide_masthead or use_hero %}
+      {% include masthead.html %}
+    {% endunless %}
+
+    {% if use_hero %}
+      {% include hero-profile.html %}
+    {% endif %}
 
     {{ content }}
 
@@ -26,6 +38,9 @@ layout: compress
     </div>
 
     {% include scripts.html %}
+    {% if use_hero %}
+      {% include hero-sticky-nav.html %}
+    {% endif %}
 
   </body>
 </html>

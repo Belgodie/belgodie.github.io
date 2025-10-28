@@ -7,8 +7,6 @@ redirect_from:
   - /resume
 ---
 
-<hr>
-
 {% include base_path %}
 
 Education
@@ -22,4 +20,3 @@ Publications and Presentations
 Teaching Experience
 ======
 {% include teaching_list_flat.html %}
-
