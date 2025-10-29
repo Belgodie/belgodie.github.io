@@ -1,38 +1,43 @@
 ---
 title: "Research"
-layout: multi-section
+layout: stacked
 permalink: /research/
-author_profile: true
+# Each entry in `sections:` can use the knobs below:
+#   title       → visible heading text
+#   id          → anchor slug and marker used in <!-- section: id -->
+#   collection  → which Jekyll collection to pull items from (portfolio, publications, news, etc.)
+#   filter      → optional boolean flag to include items where that front-matter key is true (e.g., featured)
+#   slugs       → optional ordered list of specific items to show instead of the whole collection
+#   sort        → field used for ordering (defaults to date)
+#   order       → "asc" for ascending; omit for descending
+#   limit       → maximum number of items to display
+#   style       → card layout name (currently "projects" or "publications")
+#   show_meta   → set to false to hide project metadata line
+#   cta_url / cta_label → optional button under publication lists
+#   link_field  → front-matter field to use for the 🔗 icon (set to "url" to use the page URL)
+#   link_url    → constant URL applied to every item (overrides link_field if present)
+#   link_external → true to open the icon link in a new tab
+#   link_label_prefix → optional text prepended to the accessible label for the icon
+# Any Markdown between <!-- section: id --> and <!-- endsection --> renders inside the card before the auto-generated list.
+sections:
+  - title: "Current Projects"
+    id: "projects"
+    collection: "portfolio"
+    filter: "featured"
+    style: "projects"
+    limit: 6
+  - title: "Publications"
+    id: "publications"
+    collection: "publications"
+    style: "publications"
+    limit: 5
+    cta_url: "/publications/"
+    cta_label: "See all publications"
 ---
 
-<div class="archive">
-  <div class="page__inner-wrap">
-    <h1 class="page__title">Research</h1>
-    <div class="projects-grid">
-      {% for item in site.portfolio %}
-        <article class="project-card">
-        {% if item.header and item.header.teaser %}
-            <div class="project-teaser">
-            <img src="{{ item.header.teaser | relative_url }}" alt="{{ item.header.alt | default: item.title }}" loading="lazy">
-            </div>
-        {% endif %}
-        <h3 class="project-title">{{ item.title }}</h3>
-        {% if item.excerpt %}
-            <p class="project-excerpt">{{ item.excerpt | markdownify | strip_html }}</p>
-        {% endif %}
-        </article>
-      {% endfor %}
-    </div>
-  </div>
-</div>
+<!-- section: projects -->
+<!-- endsection -->
 
-<div class="archive" id="publications">
-  <div class="page__inner-wrap">
-    <h1 class="page__title">Publications</h1>
-    {% if site.author.googlescholar %}
-      <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
-    {% endif %}
-    <hr class="section-divider">
-    {% include publications_list.html %}
-  </div>
-</div>
+<!-- section: publications -->
+You can also find my articles on [Google Scholar]({{ site.author.googlescholar }}).
+<!-- endsection -->

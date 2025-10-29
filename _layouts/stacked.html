@@ -1,0 +1,193 @@
+---
+layout: default
+---
+
+{% include base_path %}
+
+{% assign stacked_sections = page.sections | default: site.data.empty_array %}
+{% capture stacked_rendered_body %}{{ content }}{% endcapture %}
+{% assign raw_body_content = stacked_rendered_body | default: '' %}
+
+<div id="main" role="main">
+  <div class="stacked-layout">
+    {% if stacked_sections and stacked_sections.size > 0 %}
+      {% for section in stacked_sections %}
+        {% assign section_id = section.id | default: section.title | slugify %}
+        <section class="stacked-card" id="{{ section_id }}">
+          <article class="page stacked-card__article">
+            <div class="page__inner-wrap">
+              {% assign section_marker = '<!-- section: ' | append: section_id | append: ' -->' %}
+              {% assign section_end_marker = '<!-- endsection -->' %}
+              {% assign section_chunk = '' %}
+              {% if raw_body_content contains section_marker %}
+                {% assign section_tail = raw_body_content | split: section_marker | last %}
+                {% assign section_chunk = section_tail | split: section_end_marker | first | strip %}
+              {% endif %}
+
+              {% assign documents = '' %}
+              {% if section.collection %}
+                {% assign documents = site[section.collection] | default: '' %}
+              {% endif %}
+
+              {% if documents != '' and section.slugs %}
+                {% assign selected = '' | split: '' %}
+                {% for slug in section.slugs %}
+                  {% assign match = documents | where: 'slug', slug | first %}
+                  {% if match %}
+                    {% assign selected = selected | push: match %}
+                  {% endif %}
+                {% endfor %}
+                {% assign documents = selected %}
+              {% endif %}
+
+              {% if documents != '' and section.filter %}
+                {% assign documents = documents | where: section.filter, true %}
+              {% endif %}
+
+              {% assign sort_field = section.sort | default: 'date' %}
+              {% if documents != '' and sort_field %}
+                {% assign documents = documents | sort: sort_field %}
+                {% unless section.order == 'asc' %}
+                  {% assign documents = documents | reverse %}
+                {% endunless %}
+              {% endif %}
+
+              {% if documents != '' and section.limit %}
+                {% assign documents = documents | slice: 0, section.limit %}
+              {% endif %}
+
+              {% if section.title %}
+                <header class="stacked-card__header">
+                  <h2 class="page__title">{{ section.title }}</h2>
+                  {% if section.subtitle %}
+                    <p class="stacked-card__subtitle">{{ section.subtitle }}</p>
+                  {% endif %}
+                </header>
+              {% endif %}
+
+              <section class="stacked-card__body page__content">
+                {% if section.include %}
+                  {% include {{ section.include }} section=section %}
+                {% elsif section.content %}
+                  {{ section.content | markdownify }}
+                {% elsif section_chunk != '' %}
+                  {{ section_chunk }}
+                {% else %}
+                  {{ '' }}
+                {% endif %}
+
+                {% if documents != '' and documents.size > 0 and section.style %}
+                  {% assign card_style = section.style | downcase %}
+                  {% assign link_field = section.link_field | default: '' %}
+                  {% assign base_link_url = section.link_url | default: '' %}
+                  {% assign link_external = section.link_external | default: false %}
+                  {% assign link_label_prefix = section.link_label_prefix | default: '' %}
+                  {% case card_style %}
+                    {% when 'projects' %}
+                      {% assign show_meta = section.show_meta %}
+                      <div class="project-rows">
+                        {% for doc in documents %}
+                          {% assign doc_link = '' %}
+                          {% if base_link_url != '' %}
+                            {% assign doc_link = base_link_url %}
+                          {% elsif link_field != '' %}
+                            {% if link_field == 'url' %}
+                              {% assign doc_link = doc.url | relative_url %}
+                            {% else %}
+                              {% assign doc_link = doc[link_field] | default: '' %}
+                            {% endif %}
+                          {% endif %}
+                          {% assign link_label = link_label_prefix %}
+                          {% if link_label == '' and doc_link != '' %}
+                            {% assign link_label = 'View ' | append: doc.title %}
+                          {% endif %}
+                          {% include cards/project-row.html
+                            item=doc
+                            show_meta=show_meta
+                            link_url=doc_link
+                            link_external=link_external
+                            link_label=link_label %}
+                        {% endfor %}
+                      </div>
+                    {% when 'publications' %}
+                      <ol class="stacked-publications__list">
+                        {% for doc in documents %}
+                          {% assign doc_link = '' %}
+                          {% if base_link_url != '' %}
+                            {% assign doc_link = base_link_url %}
+                          {% elsif link_field != '' %}
+                            {% if link_field == 'url' %}
+                              {% assign doc_link = doc.url | relative_url %}
+                            {% else %}
+                              {% assign doc_link = doc[link_field] | default: '' %}
+                            {% endif %}
+                          {% endif %}
+                          {% assign link_label = link_label_prefix %}
+                          {% if link_label == '' and doc_link != '' %}
+                            {% assign link_label = 'Open ' | append: doc.title %}
+                          {% endif %}
+                          {% include cards/publication-line.html
+                            item=doc
+                            link_url=doc_link
+                            link_external=link_external
+                            link_label=link_label %}
+                        {% endfor %}
+                      </ol>
+                      {% if section.cta_url or section.cta_label %}
+                        <div class="stacked-publications__cta">
+                          <a class="btn btn--light-outline" href="{{ section.cta_url | default: '/publications/' | relative_url }}">
+                            {{ section.cta_label | default: 'See all publications' }}
+                          </a>
+                        </div>
+                      {% endif %}
+                    {% else %}
+                      <div class="project-rows">
+                        {% for doc in documents %}
+                          {% assign doc_link = '' %}
+                          {% if base_link_url != '' %}
+                            {% assign doc_link = base_link_url %}
+                          {% elsif link_field != '' %}
+                            {% if link_field == 'url' %}
+                              {% assign doc_link = doc.url | relative_url %}
+                            {% else %}
+                              {% assign doc_link = doc[link_field] | default: '' %}
+                            {% endif %}
+                          {% endif %}
+                          {% assign link_label = link_label_prefix %}
+                          {% if link_label == '' and doc_link != '' %}
+                            {% assign link_label = 'View ' | append: doc.title %}
+                          {% endif %}
+                          {% include cards/project-row.html
+                            item=doc
+                            show_meta=section.show_meta
+                            link_url=doc_link
+                            link_external=link_external
+                            link_label=link_label %}
+                        {% endfor %}
+                      </div>
+                  {% endcase %}
+                {% endif %}
+              </section>
+
+              {% if section.footer %}
+                <footer class="stacked-card__footer">
+                  {{ section.footer | markdownify }}
+                </footer>
+              {% endif %}
+            </div>
+          </article>
+        </section>
+      {% endfor %}
+    {% else %}
+      <section class="stacked-card">
+        <article class="page stacked-card__article">
+          <div class="page__inner-wrap">
+            <section class="stacked-card__body page__content">
+              {{ stacked_rendered_body }}
+            </section>
+          </div>
+        </article>
+      </section>
+    {% endif %}
+  </div>
+</div>

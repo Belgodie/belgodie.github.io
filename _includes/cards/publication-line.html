@@ -1,0 +1,30 @@
+{% assign publication = include.item %}
+{% assign link_url = include.link_url | default: '' %}
+{% assign default_label = 'Open ' | append: publication.title %}
+{% assign link_label = include.link_label | default: default_label %}
+
+<li class="stacked-publications__item">
+  <span class="stacked-publications__year">{{ publication.date | date: "%Y" }}</span>
+  <div class="stacked-publications__details">
+    <p class="stacked-publications__title">
+      <span class="stacked-publications__title-text">{{ publication.title }}</span>
+      {% if link_url != '' %}
+        <a
+          class="stacked-publications__title-link"
+          href="{{ link_url }}"
+          {% if include.link_external %}target="_blank" rel="noopener"{% endif %}
+          aria-label="{{ link_label }}">
+          🔗
+        </a>
+      {% endif %}
+    </p>
+    {% if publication.venue %}
+      <p class="stacked-publications__venue">
+        {{ publication.venue }}{% if publication.volume %}, {{ publication.volume }}{% endif %}{% if publication.pages %}, {{ publication.pages }}{% endif %}
+      </p>
+    {% endif %}
+    {% if publication.authors %}
+      <p class="stacked-publications__authors">{{ publication.authors }}</p>
+    {% endif %}
+  </div>
+</li>

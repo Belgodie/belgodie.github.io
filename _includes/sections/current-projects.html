@@ -1,0 +1,77 @@
+{% assign limit = 6 %}
+{% assign show_meta = true %}
+{% assign slugs = nil %}
+{% if include.section %}
+  {% assign limit = include.section.limit | default: limit %}
+  {% assign show_meta = include.section.show_meta | default: show_meta %}
+  {% assign slugs = include.section.slugs %}
+{% endif %}
+{% assign limit = include.limit | default: limit %}
+{% assign show_meta = include.show_meta | default: show_meta %}
+{% assign slugs = include.slugs | default: slugs %}
+{% assign portfolio_items = site.portfolio | sort: "date" | reverse %}
+{% assign featured_projects = portfolio_items | where: "featured", true %}
+{% if slugs %}
+  {% assign requested = '' | split: '' %}
+  {% for slug in slugs %}
+    {% assign slug_normalized = slug | strip %}
+    {% assign match = portfolio_items | where: "slug", slug_normalized | first %}
+    {% if match %}
+      {% assign requested = requested | push: match %}
+    {% endif %}
+  {% endfor %}
+  {% assign projects = requested %}
+{% elsif featured_projects and featured_projects.size > 0 %}
+  {% assign projects = featured_projects %}
+{% else %}
+  {% assign projects = portfolio_items %}
+{% endif %}
+{% if limit %}
+  {% assign projects = projects | slice: 0, limit %}
+{% endif %}
+
+<div class="project-rows">
+  {% for project in projects %}
+    <article class="project-row">
+      {% assign teaser_path = project.header.teaser | default: project.teaser %}
+      {% if teaser_path %}
+        <a class="project-row__image" href="{{ project.url | relative_url }}">
+          <img src="{{ teaser_path | relative_url }}" alt="{{ project.header.alt | default: project.title }}" loading="lazy">
+        </a>
+      {% else %}
+        <div class="project-row__image project-row__image--placeholder" aria-hidden="true">
+          <span class="project-row__placeholder-text">No image</span>
+        </div>
+      {% endif %}
+
+      <div class="project-row__content">
+        <h3 class="project-row__title">
+          <a href="{{ project.url | relative_url }}">{{ project.title }}</a>
+        </h3>
+
+        {% assign excerpt_text = project.excerpt | default: project.description %}
+        {% if excerpt_text %}
+          <p class="project-row__excerpt">{{ excerpt_text | markdownify | strip_html | strip }}</p>
+        {% endif %}
+
+        {% if show_meta and project.tags %}
+          <p class="project-row__meta">{{ project.tags | array_to_sentence_string }}</p>
+        {% endif %}
+
+        {% if project.links %}
+          <div class="project-row__links">
+            {% for link in project.links %}
+              <a
+                class="project-row__link"
+                href="{{ link.url }}"
+                {% if link.external or link.url contains 'http' %}target="_blank" rel="noopener"{% endif %}
+              >
+                {{ link.label | default: "Learn more" }}
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </article>
+  {% endfor %}
+</div>

@@ -1,0 +1,38 @@
+{% assign limit = 5 %}
+{% if include.section %}
+  {% assign limit = include.section.limit | default: limit %}
+{% endif %}
+{% assign limit = include.limit | default: limit %}
+{% assign publications = site.publications | sort: "date" | reverse %}
+{% assign publications = publications | slice: 0, limit %}
+
+<ol class="stacked-publications__list">
+  {% for pub in publications %}
+    <li class="stacked-publications__item">
+      <span class="stacked-publications__year">{{ pub.date | date: "%Y" }}</span>
+      <div class="stacked-publications__details">
+        <p class="stacked-publications__title">
+          {% if pub.paperurl %}
+            <a href="{{ pub.paperurl }}" target="_blank" rel="noopener">
+              {{ pub.title }}
+            </a>
+          {% else %}
+            {{ pub.title }}
+          {% endif %}
+        </p>
+        {% if pub.venue %}
+          <p class="stacked-publications__venue">{{ pub.venue }}{% if pub.volume %}, {{ pub.volume }}{% endif %}{% if pub.pages %}, {{ pub.pages }}{% endif %}</p>
+        {% endif %}
+        {% if pub.authors %}
+          <p class="stacked-publications__authors">{{ pub.authors }}</p>
+        {% endif %}
+      </div>
+    </li>
+  {% endfor %}
+</ol>
+
+<div class="stacked-publications__cta">
+  <a class="btn btn--light-outline" href="{{ '/publications/' | relative_url }}">
+    See all publications
+  </a>
+</div>
