@@ -31,6 +31,7 @@
   color: rgba(2, 69, 137, 0.8);
 }
 
+/* Matches single-page titles */
 .stacked-card__header .page__title {
   font-size: $type-size-3;
   font-weight: 700;
@@ -75,8 +76,8 @@
   border-radius: var(--img-radius, 10px);
   overflow: hidden;
   display: block;
-  box-shadow: 0 6px 14px rgba(0, 119, 182, 0.2);
-  background: rgba(240, 248, 255, 0.65);
+  box-shadow: none;
+  background: transparent;
 }
 
 .project-row__image img {
@@ -233,14 +234,32 @@
   font-size: 0.95rem;
   font-weight: 700;
   color: rgba(2, 69, 137, 0.8);
-  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .stacked-publications__details {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.1rem; /* adjust to control vertical spacing between title, venue, authors */
+}
+
+.stacked-publications__details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.stacked-publications__title,
+.stacked-publications__venue,
+.stacked-publications__authors {
+  margin: 0 !important; /* Force no margins */
+}
+
+/* Also target any child elements that might have margins */
+.stacked-publications__title *,
+.stacked-publications__venue *,
+.stacked-publications__authors * {
+  margin: 0;
 }
 
 .stacked-publications__title {
@@ -283,11 +302,19 @@
   transform: translateY(-1px);
 }
 
-.stacked-publications__venue,
+.stacked-publications__venue {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(2, 69, 137, 0.75);
+  line-height: 1.4;
+  font-style: italic; /* Add this */
+}
+
 .stacked-publications__authors {
   margin: 0;
   font-size: 0.95rem;
   color: rgba(2, 69, 137, 0.75);
+  line-height: 1.4;
 }
 
 .stacked-publications__cta {
@@ -296,15 +323,23 @@
 
 .stacked-publications__cta .btn {
   font-size: 0.95rem;
-  border-color: rgba(2, 69, 137, 0.35) !important;
-  color: rgba(2, 69, 137, 0.9) !important;
-  background-color: transparent;
+  padding: 0.5rem 1.35rem;
+  border: none !important;
+  color: #024589 !important;
+  border-radius: 2rem;
+  background: linear-gradient(90deg, #024589 0%, #0077B6 50%, #00B4D8 100%);
+  box-shadow:
+    0 10px 24px rgba(2, 69, 137, 0.18),
+    0 4px 10px rgba(0, 119, 182, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 
   &:hover,
   &:focus {
-    color: #fff !important;
-    background: linear-gradient(135deg, rgba(0, 119, 182, 0.95), rgba(0, 180, 216, 0.95));
-    border-color: transparent !important;
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+    box-shadow:
+      0 14px 28px rgba(2, 69, 137, 0.22),
+      0 6px 14px rgba(0, 119, 182, 0.16);
   }
 }
 
@@ -346,3 +381,4 @@
     padding: 1.15rem;
   }
 }
+
