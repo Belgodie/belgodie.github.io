@@ -127,7 +127,7 @@
 
 .project-row__title-text {
   font-weight: 700;
-  color: rgba(2, 69, 137, 0.98);
+  color: #03045e;
 }
 
 .project-row__title-link,
@@ -233,7 +233,7 @@
 .stacked-publications__year {
   font-size: 0.95rem;
   font-weight: 700;
-  color: rgba(2, 69, 137, 0.8);
+  color: #03045E;
   text-transform: uppercase;
 }
 
@@ -305,7 +305,7 @@
 .stacked-publications__venue {
   margin: 0;
   font-size: 0.95rem;
-  color: rgba(2, 69, 137, 0.75);
+  color: #03045e;
   line-height: 1.4;
   font-style: italic; /* Add this */
 }
@@ -313,25 +313,25 @@
 .stacked-publications__authors {
   margin: 0;
   font-size: 0.95rem;
-  color: rgba(2, 69, 137, 0.75);
+  color: 03045e;
   line-height: 1.4;
 }
 
 .stacked-publications__cta {
   margin-top: clamp(1.25rem, calc(1rem + 0.6vw), 1.75rem);
 }
-
 .stacked-publications__cta .btn {
   font-size: 0.95rem;
   padding: 0.5rem 1.35rem;
   border: none !important;
   color: #024589 !important;
   border-radius: 2rem;
-  background: linear-gradient(90deg, #024589 0%, #0077B6 50%, #00B4D8 100%);
+  background: rgba(255, 255, 255, 0.96);
   box-shadow:
-    0 10px 24px rgba(2, 69, 137, 0.18),
-    0 4px 10px rgba(0, 119, 182, 0.12);
+    0 6px 18px rgba(2, 69, 137, 0.16),
+    0 3px 10px rgba(0, 119, 182, 0.10);
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  text-decoration: none !important; /* Add this */
 
   &:hover,
   &:focus {
@@ -340,8 +340,10 @@
     box-shadow:
       0 14px 28px rgba(2, 69, 137, 0.22),
       0 6px 14px rgba(0, 119, 182, 0.16);
+    text-decoration: none !important; /* And this */
   }
 }
+
 
 @media (max-width: 720px) {
   .stacked-publications__item {
