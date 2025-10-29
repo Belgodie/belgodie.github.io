@@ -38,7 +38,9 @@
 .page .page__inner-wrap,
 .archive .page__inner-wrap {
   max-width: 100%;
-  padding: var(--content-block-padding);
+  padding:
+    clamp(1.15rem, calc(0.9rem + 1vw), 1.8rem)
+    var(--content-block-padding);
   margin-top: 0;
   margin-left: auto;
   margin-right: auto;
@@ -69,7 +71,9 @@ article.page {
 }
 
 article.page > .page__inner-wrap {
-  padding: var(--content-block-padding);
+  padding:
+    clamp(1.15rem, calc(0.9rem + 1vw), 1.8rem)
+    var(--content-block-padding);
   box-sizing: border-box;
 }
 
@@ -79,8 +83,8 @@ article.page > .page__inner-wrap {
 
 .page__inner-wrap > header,
 .page__inner-wrap > .page__title {
-  margin-top: 0;
-  margin-bottom: clamp(0.75rem, calc(0.5rem + 1vw), 1.5rem);
+  margin-top: clamp(-0.4rem, calc(-0.2rem - 0.5vw), -0.15rem);
+  margin-bottom: clamp(0.6rem, calc(0.4rem + 0.8vw), 1.1rem);
   padding: 0;
 }
 
@@ -89,7 +93,7 @@ article.page > .page__inner-wrap {
   margin: 0;
   line-height: 1.2;
   position: relative;
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.55rem;
 }
 
 .page__inner-wrap > header .page__title::after,
