@@ -9,12 +9,12 @@
     <p class="stacked-publications__title">
       <span class="stacked-publications__title-text">{{ publication.title }}</span>
       {% if link_url != '' %}
-        <a
-          class="stacked-publications__title-link"
-          href="{{ link_url }}"
-          {% if include.link_external %}target="_blank" rel="noopener"{% endif %}
-          aria-label="{{ link_label }}">
-          🔗
+        <a class="stacked-publications__title-link"
+           href="{{ link_url }}"
+           {% if include.link_external %}target="_blank" rel="noopener"{% endif %}
+           aria-label="{{ link_label }}">
+          <i class="fas fa-link" aria-hidden="true"></i>
+          <span class="visually-hidden">{{ link_label }}</span>
         </a>
       {% endif %}
     </p>
