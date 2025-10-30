@@ -5,6 +5,6 @@ excerpt: "Three well millifluidic platform integrating 3D microelectrode arrays 
 date: 2025-01-15
 header:
   teaser: /images/projects/HalfPlatform2.svg
-  alt: "Man que come pico"
+  alt: "Organoid Platform with Organoids Preview"
 ---
 Full description here if you want a separate project page.

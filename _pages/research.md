@@ -14,10 +14,10 @@ permalink: /research/
 #   style            -> card layout name (currently "projects" or "publications")
 #   show_meta        -> set to false to hide project metadata line
 #   cta_url / cta_label -> optional button under publication lists
-#   link_field       -> front-matter field to use for the link icon (set to "url" to use the page URL)
-#   link_url         -> constant URL applied to every item (overrides link_field if present)
-#   link_external    -> true to open the icon link in a new tab
-#   link_label_prefix -> optional text prepended to the accessible label for the icon
+#   link_field       -> what to use for the link icon ("url" to use the internal page URL // 'pdf' for /files/paper.pdf // 'paperurl' for doi.org from markdown file)
+#   link_url         -> constant URL applied to every item (overrides link_field if present) - almost never used
+#   link_external    -> true to open the icon link in a new tab (good for external sites) // false or omitted is same tab (good for internal pages) 
+#   link_label_prefix -> optional text prepended to the accessible label for the icon (For screen readers)
 # Any Markdown between <!-- section: id --> and <!-- endsection --> renders inside the card before the auto-generated list.
 sections:
   - title: "Current Projects"
@@ -26,15 +26,22 @@ sections:
     filter: "featured"
     style: "projects"
     limit: 6
-    link_field: "url"
+    
   - title: "Publications"
     id: "publications"
     collection: "publications"
     style: "publications"
     limit: 5
-    link_field: "url"
+    link_field: "paperurl"
+    link_external: true
     cta_url: "/publications/"
     cta_label: "See all publications"
+
+  - title: "News"
+    id: "news"
+    style: "publications"
+    collection: "news"
+    limit: 5
 ---
 
 <!-- section: projects -->
