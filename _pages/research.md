@@ -37,11 +37,17 @@ sections:
     cta_url: "/publications/"
     cta_label: "See all publications"
 
-  - title: "News"
+  - title: "Recent News"
     id: "news"
-    style: "publications"
+    style: "news"
     collection: "news"
     limit: 5
+    link_field: "link"
+    link_external: true 
+
+  #- title: "Acerca del Man"
+  #  content: |
+  #      literalmente tu content
 ---
 
 <!-- section: projects -->

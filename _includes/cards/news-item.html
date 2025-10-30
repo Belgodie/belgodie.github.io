@@ -1,0 +1,19 @@
+{% assign news_item = include.item %}
+{% assign link_url = include.link_url | default: '' %}
+{% assign link_external = include.link_external | default: false %}
+{% assign link_label = include.link_label | default: '' %}
+
+<div class="news-item">
+  {% if news_item.date %}
+    <span class="news-item__date">{{ news_item.date | date: "%B %Y" }}:</span>
+  {% endif %}
+  <span class="news-item__text">{{ news_item.content | strip_html | strip }}</span>
+  {% if link_url != '' %}
+    <a class="news-item__link"
+       href="{{ link_url }}"
+       {% if link_external %}target="_blank" rel="noopener"{% endif %}
+       aria-label="{{ link_label }}">
+      <i class="fas fa-link" aria-hidden="true"></i>
+    </a>
+  {% endif %}
+</div>

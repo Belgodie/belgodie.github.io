@@ -76,7 +76,7 @@ layout: default
                   {{ '' }}
                 {% endif %}
 
-                {% if documents != '' and documents.size > 0 and section.style %}
+                {% if documents != '' and documents.size > 0 %}
                   {% assign card_style = section.style | downcase %}
                   {% assign link_field = section.link_field | default: '' %}
                   {% assign base_link_url = section.link_url | default: '' %}
@@ -109,6 +109,36 @@ layout: default
                             link_label=link_label %}
                         {% endfor %}
                       </div>
+                    {% when 'text' %}
+                      <div class="text-list">
+                        {% for doc in documents %}
+                          {% include cards/text-item.html item=doc %}
+                        {% endfor %}
+                      </div>
+                    {% when 'news' %}
+                      <div class="news-list">
+                        {% for doc in documents %}
+                          {% assign doc_link = '' %}
+                          {% if base_link_url != '' %}
+                            {% assign doc_link = base_link_url %}
+                          {% elsif link_field != '' %}
+                            {% if link_field == 'url' %}
+                              {% assign doc_link = doc.url | relative_url %}
+                            {% else %}
+                              {% assign doc_link = doc[link_field] | default: '' %}
+                            {% endif %}
+                          {% endif %}
+                          {% assign link_label = link_label_prefix %}
+                          {% if link_label == '' and doc_link != '' %}
+                            {% assign link_label = 'View ' | append: doc.title %}
+                          {% endif %}
+                          {% include cards/news-item.html
+                            item=doc
+                            link_url=doc_link
+                            link_external=link_external
+                            link_label=link_label %}
+                        {% endfor %}
+                      </div> 
                     {% when 'publications' %}
                       <ol class="stacked-publications__list">
                         {% for doc in documents %}
@@ -141,28 +171,10 @@ layout: default
                         </div>
                       {% endif %}
                     {% else %}
-                      <div class="project-rows">
+                      <!-- Default: simple text rendering for unrecognized or missing style -->
+                      <div class="text-list">
                         {% for doc in documents %}
-                          {% assign doc_link = '' %}
-                          {% if base_link_url != '' %}
-                            {% assign doc_link = base_link_url %}
-                          {% elsif link_field != '' %}
-                            {% if link_field == 'url' %}
-                              {% assign doc_link = doc.url | relative_url %}
-                            {% else %}
-                              {% assign doc_link = doc[link_field] | default: '' %}
-                            {% endif %}
-                          {% endif %}
-                          {% assign link_label = link_label_prefix %}
-                          {% if link_label == '' and doc_link != '' %}
-                            {% assign link_label = 'View ' | append: doc.title %}
-                          {% endif %}
-                          {% include cards/project-row.html
-                            item=doc
-                            show_meta=section.show_meta
-                            link_url=doc_link
-                            link_external=link_external
-                            link_label=link_label %}
+                          {% include cards/text-item.html item=doc %}
                         {% endfor %}
                       </div>
                   {% endcase %}
