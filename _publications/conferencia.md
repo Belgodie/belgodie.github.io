@@ -1,5 +1,6 @@
 ---
 title: " Millifluidic triMEA organoid platform with stretchable microelectrode arrays for multi organoid evaluation"
+sitemap: false
 category: conferences
 authors: "Chica, Erick and Hojae, Jang, and Kwon, Youngak, and Kim, Yoojeong, and Lee, Yeongsun, and Lee, Mi-ok*, and Lee, Hyunjoo Jenny*"
 date: 2025-11-19
