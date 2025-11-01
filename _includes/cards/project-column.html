@@ -1,0 +1,72 @@
+{% assign project = include.item %}
+{% assign show_meta = include.show_meta | default: true %}
+{% assign teaser_path = project.header.teaser | default: project.teaser %}
+{% assign link_url = include.link_url | default: '' %}
+{% assign default_label = 'View ' | append: project.title %}
+{% assign link_label = include.link_label | default: default_label %}
+
+<article class="project-column">
+  {% if teaser_path %}
+    {% if link_url != '' %}
+      <a class="project-column__teaser"
+         href="{{ link_url }}"
+         {% if include.link_external %}target="_blank" rel="noopener"{% endif %}>
+        <img
+          src="{{ teaser_path | relative_url }}"
+          alt="{{ project.header.alt | default: project.title }}"
+          loading="lazy">
+      </a>
+    {% else %}
+      <div class="project-column__teaser">
+        <img
+          src="{{ teaser_path | relative_url }}"
+          alt="{{ project.header.alt | default: project.title }}"
+          loading="lazy">
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="project-column__teaser project-column__teaser--placeholder" aria-hidden="true">
+      <span class="project-column__placeholder-text">No image</span>
+    </div>
+  {% endif %}
+
+  <div class="project-column__body">
+    <h3 class="project-column__title">
+      <span class="project-column__title-text">{{ project.title }}</span>
+      {% if link_url != '' %}
+        <a class="project-column__title-link"
+           href="{{ link_url }}"
+           {% if include.link_external %}target="_blank" rel="noopener"{% endif %}
+           aria-label="{{ link_label }}">
+          <i class="fas fa-link" aria-hidden="true"></i>
+          <span class="visually-hidden">{{ link_label }}</span>
+        </a>
+      {% endif %}
+    </h3>
+
+    {% assign excerpt_text = project.excerpt | default: project.description %}
+    {% if excerpt_text %}
+      <p class="project-column__excerpt">
+        {{ excerpt_text | markdownify | strip_html | strip }}
+      </p>
+    {% endif %}
+
+    {% if show_meta and project.tags %}
+      <p class="project-column__meta">
+        {{ project.tags | array_to_sentence_string }}
+      </p>
+    {% endif %}
+
+    {% if project.links %}
+      <div class="project-column__actions">
+        {% for link in project.links %}
+          <a class="project-column__action"
+             href="{{ link.url }}"
+             {% if link.external or link.url contains 'http' %}target="_blank" rel="noopener"{% endif %}>
+            {{ link.label | default: "Learn more" }}
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</article>
