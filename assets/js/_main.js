@@ -102,20 +102,12 @@ $(document).ready(function () {
   // Enable the theme toggle
   $('#theme-toggle').on('click', toggleTheme);
 
-  // Enable the sticky footer
-  var bumpIt = function () {
-    $("body").css("margin-bottom", $(".page__footer").outerHeight(true));
-  }
-  $(window).resize(function () {
-    didResize = true;
+  // Switch project layout when column cards are used
+  document.querySelectorAll('.project-rows').forEach((container) => {
+    if (container.querySelector('.project-column')) {
+      container.classList.add('project-rows--column');
+    }
   });
-  setInterval(function () {
-    if (didResize) {
-      didResize = false;
-      bumpIt();
-    }}, 250);
-  var didResize = false;
-  bumpIt();
 
   // FitVids init
   fitvids();

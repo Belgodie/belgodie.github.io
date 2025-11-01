@@ -55,15 +55,6 @@
   --project-column-img-h: clamp(180px, 30vw, 240px);
 }
 
-.project-column-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
-  gap: var(--project-column-gap);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
 .project-column {
   display: flex;
   flex-direction: column;
@@ -235,6 +226,21 @@
 
 .project-row + .project-row {
   margin-top: clamp(1rem, calc(0.8rem + 0.6vw), 1.5rem);
+}
+
+.project-rows.project-rows--column {
+  --project-column-repeat: auto-fit;
+  --project-column-max-width: 360px;
+  display: grid;
+  grid-template-columns: repeat(
+    var(--project-column-repeat),
+    minmax(min(100%, var(--project-column-max-width)), 1fr)
+  );
+  gap: var(--project-column-gap);
+}
+
+.project-rows.project-rows--column > article:not(.project-column) {
+  grid-column: 1 / -1;
 }
 
 .project-row__image {

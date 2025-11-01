@@ -83,7 +83,7 @@ layout: default
                   {% assign link_external = section.link_external | default: false %}
                   {% assign link_label_prefix = section.link_label_prefix | default: '' %}
                   {% case card_style %}
-                    {% when 'projects' %}
+                    {% when 'project-row' %}
                       {% assign show_meta = section.show_meta %}
                       <div class="project-rows">
                         {% for doc in documents %}
@@ -102,6 +102,41 @@ layout: default
                             {% assign link_label = 'View ' | append: doc.title %}
                           {% endif %}
                           {% include cards/project-row.html
+                            item=doc
+                            show_meta=show_meta
+                            link_url=doc_link
+                            link_external=link_external
+                            link_label=link_label %}
+                        {% endfor %}
+                      </div>
+                    {% when 'project-column' %}
+                      {% assign show_meta = section.show_meta %}
+                      {% assign column_styles = '' %}
+                      {% assign column_repeat = section.columns | default: section.column_count %}
+                      {% assign column_width = section.column_width %}
+                      {% if column_repeat %}
+                        {% assign column_styles = column_styles | append: '--project-column-repeat:' | append: column_repeat | append: ';' %}
+                      {% endif %}
+                      {% if column_width %}
+                        {% assign column_styles = column_styles | append: '--project-column-max-width:' | append: column_width | append: ';' %}
+                      {% endif %}
+                      <div class="project-rows project-rows--column"{% if column_styles != '' %} style="{{ column_styles }}"{% endif %}>
+                        {% for doc in documents %}
+                          {% assign doc_link = '' %}
+                          {% if base_link_url != '' %}
+                            {% assign doc_link = base_link_url %}
+                          {% elsif link_field != '' %}
+                            {% if link_field == 'url' %}
+                              {% assign doc_link = doc.url | relative_url %}
+                            {% else %}
+                              {% assign doc_link = doc[link_field] | default: '' %}
+                            {% endif %}
+                          {% endif %}
+                          {% assign link_label = link_label_prefix %}
+                          {% if link_label == '' and doc_link != '' %}
+                            {% assign link_label = 'View ' | append: doc.title %}
+                          {% endif %}
+                          {% include cards/project-column.html
                             item=doc
                             show_meta=show_meta
                             link_url=doc_link

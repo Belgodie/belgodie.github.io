@@ -19,10 +19,14 @@
 #main {
   width: 100%;
   max-width: var(--content-max-width);
-  margin: 1.25rem auto 0;
+  margin: 0 auto;
   padding-left: var(--content-side-padding);
   padding-right: var(--content-side-padding);
   box-sizing: border-box;
+}
+
+body:not(:has(.hero-frame)) #main {
+  margin-top: clamp(1rem, calc(0.75rem + 0.5vw), 1.75rem);
 }
 
 .page,
@@ -49,10 +53,13 @@
 
 @media (max-width: 768px) {
   #main {
-    margin-top: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding-left: var(--content-side-padding);
+  padding-right: var(--content-side-padding);
+  box-sizing: border-box;
+}
 
   .page .page__inner-wrap,
   .archive .page__inner-wrap {
@@ -197,3 +204,10 @@ section.page__content div.projects-grid,
 }
 
 @import 'stacked';
+
+/* Remove animated underline bar from page links */
+.page__content a::after {
+  content: none !important;
+}
+
+

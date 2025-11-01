@@ -11,7 +11,7 @@ permalink: /research/
 #   sort             -> field used for ordering (defaults to date)
 #   order            -> "asc" for ascending; omit for descending
 #   limit            -> maximum number of items to display
-#   style            -> card layout name (currently "projects" or "publications")
+#   style            -> card layout name (currently "project-row or project-column (+ columns and column_width)" or "publications" or 'news")
 #   show_meta        -> set to false to hide project metadata line
 #   cta_url / cta_label -> optional button under publication lists
 #   link_field       -> what to use for the link icon ("url" to use the internal page URL // 'pdf' for /files/paper.pdf // 'paperurl' for doi.org from markdown file)
@@ -24,7 +24,7 @@ sections:
     id: "projects"
     collection: "portfolio"
     filter: "featured"
-    style: "projects"
+    style: "project-column"
     limit: 6
     
   - title: "Publications"

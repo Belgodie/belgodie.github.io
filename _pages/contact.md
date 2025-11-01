@@ -16,4 +16,4 @@ eccca[at]dtu.dk
 
 Department of Health Technology  
 Ørsteds Plads, Building 345C  
-DK-2800 Kgs. Lyngby, Denmark
+DK-2800 Kongens Lyngby, Denmark
