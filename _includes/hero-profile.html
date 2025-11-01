@@ -33,19 +33,19 @@
               <a href="mailto:{{ author.email }}" title="Email" aria-label="Email"><i class="fas fa-envelope"></i></a>
             {% endif %}
             {% if author.googlescholar %}
-              <a href="{{ author.googlescholar }}" title="Google Scholar" aria-label="Google Scholar"><i class="ai ai-google-scholar"></i></a>
+              <a href="{{ author.googlescholar }}" title="Google Scholar" aria-label="Google Scholar" target="_blank" rel="noopener"><i class="ai ai-google-scholar"></i></a>
             {% endif %}
             {% if author.orcid %}
-              <a href="{{ author.orcid }}" title="ORCID" aria-label="ORCID"><i class="ai ai-orcid"></i></a>
+              <a href="{{ author.orcid }}" title="ORCID" aria-label="ORCID" target="_blank" rel="noopener"><i class="ai ai-orcid"></i></a>
             {% endif %}
             {% if author.researchgate %}
-              <a href="{{ author.researchgate }}" title="ResearchGate" aria-label="ResearchGate"><i class="fab fa-researchgate"></i></a>
+              <a href="{{ author.researchgate }}" title="ResearchGate" aria-label="ResearchGate" target="_blank" rel="noopener"><i class="fab fa-researchgate"></i></a>
             {% endif %}
             {% if author.bluesky %}
-              <a href="https://bsky.app/profile/{{ author.bluesky }}" title="Bluesky" aria-label="Bluesky"><i class="fab fa-bluesky"></i></a>
+              <a href="https://bsky.app/profile/{{ author.bluesky }}" title="Bluesky" aria-label="Bluesky" target="_blank" rel="noopener"><i class="fab fa-bluesky"></i></a>
             {% endif %}
             {% if author.github %}
-              <a href="https://github.com/{{ author.github }}" title="GitHub" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/{{ author.github }}" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
             {% endif %}
           </div>
         </div>
