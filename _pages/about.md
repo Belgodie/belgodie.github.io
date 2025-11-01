@@ -3,6 +3,7 @@ layout: single
 permalink: /
 title: "About"
 author_profile: true
+skip_title_in_tab: true
 redirect_from:
   - /about/
   - /about.html
