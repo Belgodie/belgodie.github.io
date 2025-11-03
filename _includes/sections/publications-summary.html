@@ -1,8 +1,17 @@
 {% assign limit = 5 %}
+{% assign cta_url = '/publications/' | relative_url %}
+{% assign cta_label = 'See all publications' %}
+
 {% if include.section %}
   {% assign limit = include.section.limit | default: limit %}
+  {% assign cta_url = include.section.cta_url | default: cta_url %}
+  {% assign cta_label = include.section.cta_label | default: cta_label %}
 {% endif %}
+
 {% assign limit = include.limit | default: limit %}
+{% assign cta_url = include.cta_url | default: cta_url %}
+{% assign cta_label = include.cta_label | default: cta_label %}
+
 {% assign publications = site.publications | sort: "date" | reverse %}
 {% assign publications = publications | slice: 0, limit %}
 
@@ -31,8 +40,10 @@
   {% endfor %}
 </ol>
 
+{% if cta_url %}
 <div class="stacked-publications__cta">
-  <a class="btn btn--light-outline" href="{{ '/publications/' | relative_url }}">
-    See all publications
+  <a class="btn btn--light-outline" href="{{ cta_url }}">
+    {{ cta_label }}
   </a>
 </div>
+{% endif %}

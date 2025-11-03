@@ -20,34 +20,61 @@
 
         <div class="hero-info">
           <h1 class="hero-name">{{ author.name }}</h1>
-          <p class="hero-title">PhD Candidate in Biomedical Engineering</p>
-          <p class="hero-affiliation">
-            <span class="affiliation-main">Technical University of Denmark (DTU)</span> |
-            <span class="affiliation-secondary">Intelli-Ingest Consortium</span>
-            <br>
-            <span class="hero-location"><i class="fas fa-map-marker-alt"></i> Copenhagen, Denmark</span>
-          </p>
+          {% assign hero_title = author.hero_title | default: author.title %}
+          {% assign affiliation_main = author.affiliation_main | default: author.employer %}
+          {% assign affiliation_secondary = author.affiliation_secondary %}
+          {% assign hero_location = author.hero_location | default: author.location %}
 
+          {% if hero_title %}
+            <p class="hero-title">{{ hero_title }}</p>
+          {% endif %}
+
+          {% if affiliation_main or affiliation_secondary or hero_location %}
+            <p class="hero-affiliation">
+              {% if affiliation_main %}
+                <span class="affiliation-main">{{ affiliation_main }}</span>{% if affiliation_secondary %} |{% endif %}
+              {% endif %}
+              {% if affiliation_secondary %}
+                <span class="affiliation-secondary">{{ affiliation_secondary }}</span>
+              {% endif %}
+              {% if hero_location %}
+                {% if affiliation_main or affiliation_secondary %}<br>{% endif %}
+                <span class="hero-location"><i class="fas fa-map-marker-alt"></i> {{ hero_location }}</span>
+              {% endif %}
+            </p>
+          {% endif %}
+
+          {% assign hero_links = author.hero_links | default: site.author.hero_links %}
+          {% if hero_links %}
           <div class="hero-social">
-            {% if author.email %}
-              <a href="mailto:{{ author.email }}" title="Email" aria-label="Email"><i class="fas fa-envelope"></i></a>
-            {% endif %}
-            {% if author.googlescholar %}
-              <a href="{{ author.googlescholar }}" title="Google Scholar" aria-label="Google Scholar" target="_blank" rel="noopener"><i class="ai ai-google-scholar"></i></a>
-            {% endif %}
-            {% if author.orcid %}
-              <a href="{{ author.orcid }}" title="ORCID" aria-label="ORCID" target="_blank" rel="noopener"><i class="ai ai-orcid"></i></a>
-            {% endif %}
-            {% if author.researchgate %}
-              <a href="{{ author.researchgate }}" title="ResearchGate" aria-label="ResearchGate" target="_blank" rel="noopener"><i class="fab fa-researchgate"></i></a>
-            {% endif %}
-            {% if author.bluesky %}
-              <a href="https://bsky.app/profile/{{ author.bluesky }}" title="Bluesky" aria-label="Bluesky" target="_blank" rel="noopener"><i class="fab fa-bluesky"></i></a>
-            {% endif %}
-            {% if author.github %}
-              <a href="https://github.com/{{ author.github }}" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-            {% endif %}
+            {% for link in hero_links %}
+              {% assign field_key = link.field | default: '' %}
+              {% if field_key != '' %}
+                {% assign field_value = author[field_key] %}
+              {% endif %}
+              {% if field_value %}
+                {% assign final_url = field_value %}
+                {% if link.url %}
+                  {% assign final_url = link.url | replace: '{{ value }}', field_value %}
+                {% elsif link.prefix %}
+                  {% assign final_url = link.prefix | append: field_value %}
+                {% elsif field_key == 'email' %}
+                  {% assign final_url = 'mailto:' | append: field_value %}
+                {% endif %}
+                {% assign external = link.external | default: true %}
+                {% if field_key == 'email' and link.external == nil %}
+                  {% assign external = false %}
+                {% endif %}
+                <a href="{{ final_url }}"
+                   title="{{ link.label }}"
+                   aria-label="{{ link.label }}"
+                   {% if external %}target="_blank" rel="noopener"{% endif %}>
+                  <i class="{{ link.icon }}"></i>
+                </a>
+              {% endif %}
+            {% endfor %}
           </div>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -63,7 +90,6 @@
         <span></span>
       </button>
       <ul class="hero-nav-list" id="hero-nav-list">
-        <li><a href="{{ base_path }}/">About</a></li>
         {% for link in site.data.navigation.main %}
           <li><a href="{{ link.url | prepend: base_path }}">{{ link.title }}</a></li>
         {% endfor %}

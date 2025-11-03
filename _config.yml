@@ -24,12 +24,38 @@ author:
   # Biographic information
   avatar           : "profile.png"
   name             : "Erick Chica"
+  hero_title       : "PhD Candidate in Biomedical Engineering"
+  affiliation_main : "Technical University of Denmark (DTU)"
+  affiliation_secondary : "Intelli-Ingest Consortium"
+  hero_location    : "Copenhagen, Denmark"
   pronouns         : # example: "she/her"  
   bio              : "Electrical Engineer researching bioelectronics and nanomaterials"
   location         : "Daejeon, South Korea"
   employer         : "KAIST"
   uri              : # URL
   email            : "erickchica[at]kaist.ac.kr" 
+  hero_links:
+    - field: email
+      icon: "fas fa-envelope"
+      label: "Email"
+      external: false
+    - field: googlescholar
+      icon: "ai ai-google-scholar"
+      label: "Google Scholar"
+    - field: orcid
+      icon: "ai ai-orcid"
+      label: "ORCID"
+    - field: researchgate
+      icon: "fab fa-researchgate"
+      label: "ResearchGate"
+    - field: bluesky
+      icon: "fab fa-bluesky"
+      label: "Bluesky"
+      url: "https://bsky.app/profile/{{ value }}"
+    - field: github
+      icon: "fab fa-github"
+      label: "GitHub"
+      url: "https://github.com/{{ value }}"
 
   # Academic websites
   academia         : # URL
