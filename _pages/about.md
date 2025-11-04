@@ -7,6 +7,12 @@ skip_title_in_tab: true
 redirect_from:
   - /about/
   - /about.html
+  - /tags/
+  - /categories/
+  - /collection-archive/ 
+  - /page-archive/ 
+  - /talks/
+  - /portfolio/
 ---
 
 Erick is a **PhD student at the Technical University of Denmark (DTU)** and a member of the **Intelli-Ingest consortium**, a **Marie Sklodowska-Curie Actions Doctoral Network** funded by the European Union through Horizon Europe. His current work focuses on the design, fabrication and formulation of micromotors, nanoparticles, and needles, that can be incorporated into devices for targeted drug release, better penetration to the intestinal mucosa, and increased exposure of the formulation to the epithelium for integration with ingestible capsules. The network brings together researchers across Europe and advances minimally invasive oral devices for diagnostics and therapy.
