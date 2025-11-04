@@ -453,9 +453,9 @@ body.hero-nav-only #main > .page + .page {
   margin-top: clamp(0.4rem, 0.6vw, 0.8rem) !important;
 }
 
-.hero-nav-only {
-  margin-bottom: clamp(0.04rem, 0.12vw, 0.18rem);
-  padding: clamp(0.32rem, 0.52vw, 0.45rem) 0 clamp(0.36rem, 0.56vw, 0.48rem);
+.hero-nav-bar.hero-nav-only {
+  margin-bottom: clamp(0.04rem, 0.12vw, 0.18rem) !important;
+  padding: clamp(0.32rem, 0.52vw, 0.45rem) 0 clamp(0.36rem, 0.56vw, 0.48rem) !important;
 }
 
 body.hero-nav-only .page .page__inner-wrap {
