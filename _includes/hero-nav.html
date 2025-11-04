@@ -1,0 +1,22 @@
+{% include base_path %}
+{% assign nav_class = 'hero-nav-bar' %}
+{% if include.mode == 'nav-only' %}
+  {% assign nav_class = nav_class | append: ' hero-nav-only' %}
+{% endif %}
+
+<div class="{{ nav_class }}">
+  <nav class="hero-nav" id="hero-nav" aria-label="Primary">
+    <div class="hero-nav-inner">
+      <button class="hero-nav-toggle" id="hero-nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="hero-nav-list" id="hero-nav-list">
+        {% for link in site.data.navigation.main %}
+          <li><a href="{{ link.url | prepend: base_path }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </nav>
+</div>

@@ -4,6 +4,26 @@ layout: compress
 
 {% include base_path %}
 
+{% assign use_hero = false %}
+{% if page.author_profile or layout.author_profile or site.author_profile %}
+  {% assign use_hero = true %}
+{% endif %}
+{% assign use_hero_nav = use_hero %}
+{% if page.hero_nav or layout.hero_nav or site.hero_nav %}
+  {% assign use_hero_nav = true %}
+{% endif %}
+
+{% assign body_classes = '' %}
+{% if page.classes %}
+  {% assign body_classes = page.classes %}
+{% endif %}
+{% if use_hero_nav and use_hero == false %}
+  {% if body_classes != '' %}
+    {% assign body_classes = body_classes | append: ' ' %}
+  {% endif %}
+  {% assign body_classes = body_classes | append: 'hero-nav-only' %}
+{% endif %}
+
 <!doctype html>
 <html lang="{{ site.locale | slice: 0,2 }}" class="no-js"{% if site.site_theme == "dark" %} data-theme="dark"{% endif %}>
   <head>
@@ -11,24 +31,21 @@ layout: compress
     {% include head/custom.html %}
   </head>
 
-  <body{% if page.classes %} class="{{ page.classes }}"{% endif %}>
+  <body{% if body_classes != '' %} class="{{ body_classes | strip }}"{% endif %}>
 
     {% include browser-upgrade.html %}
 
-    {% assign use_hero = false %}
-    {% if page.author_profile or layout.author_profile or site.author_profile %}
-      {% assign use_hero = true %}
-    {% endif %}
+{% unless page.hide_masthead or use_hero_nav %}
+  {% include masthead.html %}
+{% endunless %}
 
-    {% unless page.hide_masthead or use_hero %}
-      {% include masthead.html %}
-    {% endunless %}
+{% if use_hero %}
+  {% include hero-profile.html %}
+{% elsif use_hero_nav %}
+  {% include hero-nav.html mode="nav-only" %}
+{% endif %}
 
-    {% if use_hero %}
-      {% include hero-profile.html %}
-    {% endif %}
-
-    {{ content }}
+{{ content }}
 
     <div class="page__footer">
       <footer>
@@ -37,10 +54,12 @@ layout: compress
       </footer>
     </div>
 
-    {% include scripts.html %}
-    {% if use_hero %}
-      {% include hero-sticky-nav.html %}
-    {% endif %}
+{% include scripts.html %}
+{% if use_hero_nav %}
+  {% include hero-sticky-nav.html %}
+{% endif %}
 
   </body>
 </html>
+
+

@@ -428,3 +428,48 @@ body.hero-compact:has(.hero-frame) .hero-nav-inner {
   padding: clamp(0.16rem, 0.32vw, 0.26rem) var(--content-side-padding, 1.5rem);
 }
 
+
+.hero-nav-bar {
+  justify-content: flex-start !important;
+}
+
+body.hero-nav-only {
+  justify-content: flex-start;
+  align-items: stretch;
+  padding-top: 0;
+}
+
+body.hero-nav-only #main {
+  margin: 0 auto;
+  padding-top: 0;
+  flex: 1 0 auto;
+}
+
+body.hero-nav-only #main > .page:first-of-type {
+  margin-top: clamp(0.25rem, 0.45vw, 0.75rem) !important;
+}
+
+body.hero-nav-only #main > .page + .page {
+  margin-top: clamp(0.4rem, 0.6vw, 0.8rem) !important;
+}
+
+.hero-nav-only {
+  margin-bottom: clamp(0.04rem, 0.12vw, 0.18rem);
+  padding: clamp(0.32rem, 0.52vw, 0.45rem) 0 clamp(0.36rem, 0.56vw, 0.48rem);
+}
+
+body.hero-nav-only .page .page__inner-wrap {
+  padding-top: clamp(1.3rem, calc(1.0rem + 0.7vw), 2.1rem) !important;
+}
+
+body.hero-nav-only .page__inner-wrap > header,
+body.hero-nav-only .page__inner-wrap > .page__title {
+  margin-top: clamp(-0.1rem, calc(-0.04rem - 0.18vw), 0) !important;
+  margin-bottom: clamp(0.45rem, calc(0.32rem + 0.7vw), 0.85rem) !important;
+}
+
+body.hero-nav-only .page__footer {
+  margin-top: clamp(1rem, 1.2vw, 1.8rem);
+}
+
+
