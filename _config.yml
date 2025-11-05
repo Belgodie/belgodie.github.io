@@ -13,7 +13,7 @@ title                    : "Erick Chica"
 title_separator          : "-"
 name                     : &name "Erick Chica"
 description              : &description "Researcher"
-url                      : erickchica.com# the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io" or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
+url                      : https://erickchica.com # production base URL for canonical/meta links
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "belgodie/belgodie.github.io"
 
