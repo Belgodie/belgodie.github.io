@@ -24,14 +24,11 @@ author:
   # Biographic information
   avatar           : "profile.png"
   name             : "Erick Chica"
-  hero_title       : "PhD Candidate in Biomedical Engineering"
-  affiliation_main : "Technical University of Denmark (DTU)"
-  affiliation_secondary : "Intelli-Ingest Consortium"
-  hero_location    : "Copenhagen, Denmark"
+  hero_title       : "Biotechnology Researcher"
+  affiliation_main : "Korea Advanced Institute of Science and Technology"
+  affiliation_secondary : "Master in Science"
+  hero_location    : "Daejeon, Korea"
   pronouns         : # example: "she/her"  
-  bio              : "Electrical Engineer researching bioelectronics and nanomaterials"
-  location         : "Daejeon, South Korea"
-  employer         : "KAIST"
   uri              : # URL
   email            : "erickchica[at]kaist.ac.kr" 
   hero_links:

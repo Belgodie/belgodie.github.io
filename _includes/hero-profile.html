@@ -20,10 +20,10 @@
 
         <div class="hero-info">
           <h1 class="hero-name">{{ author.name }}</h1>
-          {% assign hero_title = author.hero_title | default: author.title %}
-          {% assign affiliation_main = author.affiliation_main | default: author.employer %}
+          {% assign hero_title = author.hero_title %}
+          {% assign affiliation_main = author.affiliation_main %}
           {% assign affiliation_secondary = author.affiliation_secondary %}
-          {% assign hero_location = author.hero_location | default: author.location %}
+          {% assign hero_location = author.hero_location %}
 
           {% if hero_title %}
             <p class="hero-title">{{ hero_title }}</p>
