@@ -53,6 +53,8 @@
 :root {
   --project-column-gap: clamp(1rem, 1.4vw, 1.8rem);
   --project-column-img-h: clamp(180px, 30vw, 240px);
+  /* Shared thumbnail aspect ratio for project cards (row + column) */
+  --project-thumb-aspect: 3 / 2;
 }
 
 .project-column {
@@ -95,6 +97,17 @@
   height: var(--project-column-img-h);
   object-fit: cover;
   display: block;
+}
+
+/* Prefer a fixed aspect ratio when supported */
+@supports (aspect-ratio: 1 / 1) {
+  .project-column__teaser {
+    aspect-ratio: var(--project-thumb-aspect, 3 / 2);
+  }
+
+  .project-column__teaser img {
+    height: 100%;
+  }
 }
 
 .project-column__teaser--placeholder {
@@ -258,6 +271,18 @@
   display: block;
 }
 
+/* Fixed aspect ratio for row thumbnails when supported */
+@supports (aspect-ratio: 1 / 1) {
+  .project-row__image {
+    aspect-ratio: var(--project-thumb-aspect, 3 / 2);
+  }
+
+  /* Ensure placeholders follow the same ratio instead of min-height */
+  .project-row__image--placeholder {
+    min-height: 0;
+  }
+}
+
 .project-row__image--placeholder {
   display: flex;
   align-items: center;
@@ -276,6 +301,13 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+/* Ensure placeholder respects aspect ratio when supported (override min-height) */
+@supports (aspect-ratio: 1 / 1) {
+  .project-row__image--placeholder {
+    min-height: 0;
+  }
 }
 
 .project-row__placeholder-text {
@@ -599,7 +631,13 @@
 
   .project-row__image {
     max-width: 100%;
-    height: clamp(180px, 45vw, 260px);
+  }
+
+  /* Fallback height on small screens when aspect-ratio isn't supported */
+  @supports not (aspect-ratio: 1 / 1) {
+    .project-row__image {
+      height: clamp(180px, 45vw, 260px);
+    }
   }
 }
 
