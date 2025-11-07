@@ -29,7 +29,7 @@ sections:
     style: "project-row"
     limit: 6
     
-  - title: "Publications"
+  - title: "Selected Publications"
     id: "publications"
     collection: "publications"
     style: "publications"
@@ -56,7 +56,7 @@ sections:
 <!-- endsection -->
 
 <!-- section: publications -->
-You can also find my articles on [Google Scholar]({{ site.author.googlescholar }}).
+
 <!-- endsection -->
 
 
