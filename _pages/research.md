@@ -24,6 +24,8 @@ sections:
     id: "projects"
     collection: "portfolio"
     filter: "featured"
+    sort: "order"
+    order: "asc"
     style: "project-row"
     limit: 6
     
