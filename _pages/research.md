@@ -24,7 +24,7 @@ sections:
     id: "projects"
     collection: "portfolio"
     filter: "featured"
-    style: "project-column"
+    style: "project-row"
     limit: 6
     
   - title: "Publications"
