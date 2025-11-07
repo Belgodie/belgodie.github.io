@@ -1,0 +1,10 @@
+{% assign url = include.url | default: page.cta_url %}
+{% assign label = include.label | default: page.cta_label | default: 'Open link' %}
+{% assign external = include.external | default: page.cta_external | default: page.link_external | default: false %}
+
+{% if url or label %}
+  <div class="stacked-publications__cta page-cta">
+    <a class="btn btn--light-outline" href="{% if external %}{{ url }}{% else %}{{ url | relative_url }}{% endif %}"{% if external %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ label }}</a>
+  </div>
+{% endif %}
+

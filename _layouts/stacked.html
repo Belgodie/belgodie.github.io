@@ -200,7 +200,7 @@ layout: default
                       </ol>
                       {% if section.cta_url or section.cta_label %}
                         <div class="stacked-publications__cta">
-                          <a class="btn btn--light-outline" href="{{ section.cta_url | default: '/publications/' | relative_url }}">
+                          <a class="btn btn--light-outline" href="{{ section.cta_url | default: '/publications/' | relative_url }}"{% if section.link_external %} target="_blank" rel="noopener noreferrer"{% endif %}>
                             {{ section.cta_label | default: 'See all publications' }}
                           </a>
                         </div>

@@ -73,6 +73,9 @@ hide_masthead: true
         {% endif %}
 
         {% if page.link %}<div><a href="{{ page.link }}" class="btn">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
+        {% if page.cta_url or page.cta_label %}
+          {% include page-cta.html %}
+        {% endif %}
       </section>
 
       <footer class="page__meta">

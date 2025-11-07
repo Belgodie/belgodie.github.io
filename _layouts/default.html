@@ -47,6 +47,12 @@ layout: compress
 
 {{ content }}
 
+{% if page.cta_url or page.cta_label %}
+  {% if page.layout != 'single' %}
+    {% include page-cta.html %}
+  {% endif %}
+{% endif %}
+
     <div class="page__footer">
       <footer>
         {% include footer/custom.html %}
