@@ -7,7 +7,7 @@ redirect_from:
   - /resume
 cta_url: "/files/CV.pdf"
 cta_label: "Download Erick's CV (PDF)"
-cta_external: true
+cta_external: false
 ---
 
 {% include base_path %}

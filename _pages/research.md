@@ -33,9 +33,9 @@ sections:
     id: "publications"
     collection: "publications"
     style: "publications"
-    limit: 5
+    filter: "featured"
     link_field: "paperurl"
-    link_external: true
+    link_external: false
     cta_url: "/publications/"
     cta_label: "See all publications"
 
