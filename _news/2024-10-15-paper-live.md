@@ -3,4 +3,4 @@ date: 2024-12-04
 title: "Paper Published"
 link: "https://doi.org/somethingsomething"
 ---
-The review paper on 'Microfabricated Sensors for Organoids' is now live on the Journal of Micro and Nano Systems Letters
+The review **“Microfabricated sensors for non-invasive, real-time monitoring of organoids”** is now published in *Micro and Nano Systems Letters*.

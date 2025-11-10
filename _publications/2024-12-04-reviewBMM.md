@@ -13,6 +13,8 @@ issue: '1'
 pages: '26'
 cofirst: true
 cofirstnumber: 2
+corresponding: true
+correspondingnumber: 1
 header:
   teaser: /images/image-alignment-300x200.jpg
 ---

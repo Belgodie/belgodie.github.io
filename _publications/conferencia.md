@@ -6,9 +6,11 @@ date: 2025-11-19
 venue: "Society of Micro and Nano Systems 2025 MNS Fall Conference"
 venue_article: "the"
 presentation_type: "Poster presentation"
-featured: true
+featured: false
 paperurl: false
 cofirst: false
 place: Yeosu, South Korea
-prize: "Best Poster Award"
 ---
+{%comment%}
+prize: "Best Poster Award"
+{%endcomment%}

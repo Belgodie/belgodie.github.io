@@ -7,7 +7,13 @@
   {% if news_item.date %}
     <span class="news-item__date">{{ news_item.date | date: "%B %Y" }}:</span>
   {% endif %}
-  <span class="news-item__text">{{ news_item.content | strip_html | strip }}</span>
+  <span class="news-item__text">
+    {{- news_item.content
+       | markdownify
+       | replace: "<p>", ""
+       | replace: "</p>", ""
+       | strip -}}
+  </span>
   {% if link_url != '' %}
     <a class="news-item__link"
        href="{{ link_url }}"

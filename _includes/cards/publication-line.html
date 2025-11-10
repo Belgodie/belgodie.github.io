@@ -26,6 +26,7 @@
     {% if publication.authors %}
       {% assign my_last_name = site.author.last | default: "Chica" %}
       {% assign author_list = publication.authors | split: " and " %}
+      {% assign author_count = author_list | size %}
       {% assign formatted_authors = "" %}
       {% for author in author_list %}
         {% assign author_trimmed = author | strip %}
@@ -54,6 +55,13 @@
             {% assign add_cofirst = true %}
           {% endif %}
         {% endif %}
+        {% assign add_corresponding = false %}
+        {% if publication.corresponding == true and publication.correspondingnumber %}
+          {% assign corresponding_start = author_count | minus: publication.correspondingnumber %}
+          {% if author_index > corresponding_start %}
+            {% assign add_corresponding = true %}
+          {% endif %}
+        {% endif %}
 
         {% if last_name contains my_last_name %}
           {% assign formatted_author = "<strong>" | append: last_name | append: ", " | append: initials | append: "</strong>" %}
@@ -63,6 +71,9 @@
 
         {% if add_cofirst %}
           {% assign formatted_author = formatted_author | append: "<sup>†</sup>" %}
+        {% endif %}
+        {% if add_corresponding %}
+          {% assign formatted_author = formatted_author | append: "<sup>*</sup>" %}
         {% endif %}
 
         {% if forloop.first %}
