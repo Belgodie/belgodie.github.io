@@ -4,7 +4,7 @@ authors:
   - key: yoojeong
   - key: erick
     variant: hyphenated
-    first: "Erick Christian"
+    display_first: "Erick Christian"
   - key: hyunjoo
 collection: publications
 category: reviews

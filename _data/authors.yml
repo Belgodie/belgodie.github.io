@@ -12,7 +12,7 @@
 #       - key: collaborator
 #         last1: Ramirez             # override surname inline
 # - Legacy `"Last, First"` strings still work and fall back to the old parser.
-# Options
+# Options for author_format:
 # - last_first → Chica, Erick
 # - last_initial → Chica, E.
 # - initial_last → E. Chica

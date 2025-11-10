@@ -120,7 +120,8 @@
       {% else %}
         {% assign first_name = override_first | default: base.first | default: "" %}
         {% assign middle_name = override_middle | default: base.middle | default: "" %}
-        {% assign display_first = override_display_first | default: base.display_first | default: first_name | default: middle_name | default: "" %}
+        {% assign display_first_custom = override_display_first | default: base.display_first | default: "" %}
+        {% assign display_first = display_first_custom | default: first_name | default: middle_name | default: "" %}
         {% assign last1 = override_last1 | default: base.last1 | default: base.last | default: "" %}
         {% assign last2 = override_last2 | default: base.last2 | default: "" %}
         {% assign display_last = override_display_last | default: base.display_last | default: "" %}
@@ -139,28 +140,36 @@
         {% assign display_first = display_first | strip %}
         {% assign display_last = display_last | strip %}
 
-        {% assign base_first_for_initial = first_name %}
-        {% if middle_name != "" %}
-          {% if base_first_for_initial != "" %}
-            {% assign base_first_for_initial = base_first_for_initial | append: " " | append: middle_name %}
-          {% else %}
-            {% assign base_first_for_initial = middle_name %}
-          {% endif %}
-        {% endif %}
-        {% if base_first_for_initial == "" %}
-          {% assign base_first_for_initial = display_first %}
-        {% endif %}
         {% assign first_initial = "" %}
-        {% if base_first_for_initial != "" %}
-          {% assign base_first_clean = base_first_for_initial | replace: ".", " " | replace: "-", " " %}
-          {% assign base_first_parts = base_first_clean | strip | split: " " %}
-          {% for part in base_first_parts %}
+        {% if display_first_custom != "" %}
+          {% assign first_source_clean = display_first_custom | replace: ".", " " | replace: "-", " " %}
+          {% assign first_source_parts = first_source_clean | strip | split: " " %}
+          {% for part in first_source_parts %}
             {% assign trimmed_part = part | strip %}
             {% if trimmed_part != "" %}
               {% assign initial_char = trimmed_part | slice: 0, 1 | upcase %}
               {% assign first_initial = first_initial | append: initial_char | append: "." %}
             {% endif %}
           {% endfor %}
+        {% else %}
+          {% if first_name != "" %}
+            {% assign trimmed_first = first_name | strip %}
+            {% if trimmed_first != "" %}
+              {% assign initial_char = trimmed_first | slice: 0, 1 | upcase %}
+              {% assign first_initial = first_initial | append: initial_char | append: "." %}
+            {% endif %}
+          {% endif %}
+          {% if middle_name != "" %}
+            {% assign middle_clean = middle_name | replace: ".", " " | replace: "-", " " %}
+            {% assign middle_parts = middle_clean | strip | split: " " %}
+            {% for part in middle_parts %}
+              {% assign trimmed_part = part | strip %}
+              {% if trimmed_part != "" %}
+                {% assign initial_char = trimmed_part | slice: 0, 1 | upcase %}
+                {% assign first_initial = first_initial | append: initial_char | append: "." %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
         {% endif %}
 
         {% assign raw_label = "" %}
@@ -217,16 +226,21 @@
       {% assign name_parts = author_trimmed | split: ", " %}
       {% assign last_name = name_parts[0] | strip %}
       {% assign first_names_raw = name_parts[1] | default: "" | strip %}
-      {% assign base_first_for_initial = first_names_raw %}
       {% assign first_initial = "" %}
-      {% if base_first_for_initial != "" %}
-        {% assign base_first_clean = base_first_for_initial | replace: ".", " " | replace: "-", " " %}
-        {% assign base_first_parts = base_first_clean | strip | split: " " %}
-        {% for part in base_first_parts %}
+      {% if first_names_raw != "" %}
+        {% assign base_clean = first_names_raw | replace: ".", " " | replace: "-", " " %}
+        {% assign base_parts = base_clean | strip | split: " " %}
+        {% assign part_index = 0 %}
+        {% for part in base_parts %}
           {% assign trimmed_part = part | strip %}
           {% if trimmed_part != "" %}
             {% assign initial_char = trimmed_part | slice: 0, 1 | upcase %}
-            {% assign first_initial = first_initial | append: initial_char | append: "." %}
+            {% if part_index == 0 %}
+              {% assign first_initial = initial_char | append: "." %}
+            {% else %}
+              {% assign first_initial = first_initial | append: initial_char | append: "." %}
+            {% endif %}
+            {% assign part_index = part_index | plus: 1 %}
           {% endif %}
         {% endfor %}
       {% endif %}
