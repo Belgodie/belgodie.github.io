@@ -175,6 +175,7 @@ layout: default
                         {% endfor %}
                       </div> 
                     {% when 'publications' %}
+                      {% assign last_year = '' %}
                       <ol class="stacked-publications__list">
                         {% for doc in documents %}
                           {% assign doc_link = '' %}
@@ -195,9 +196,11 @@ layout: default
                             item=doc
                             link_url=doc_link
                             link_external=link_external
-                            link_label=link_label %}
+                            link_label=link_label
+                            previous_year=last_year %}
+                          {% assign last_year = doc.date | date: "%Y" %}
                         {% endfor %}
-                      </ol>
+                      </ol> 
                       {% if section.cta_url or section.cta_label %}
                         <div class="stacked-publications__cta">
                           <a class="btn btn--light-outline" href="{{ section.cta_url | default: '/publications/' | relative_url }}"{% if section.link_external %} target="_blank" rel="noopener noreferrer"{% endif %}>

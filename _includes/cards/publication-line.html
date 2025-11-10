@@ -2,9 +2,21 @@
 {% assign link_url = include.link_url | default: '' %}
 {% assign default_label = 'Open ' | append: publication.title %}
 {% assign link_label = include.link_label | default: default_label %}
+{% assign previous_year = include.previous_year | default: '' %}
+{% assign pub_year = publication.date | date: "%Y" %}
+{% assign show_year = true %}
+{% if previous_year == pub_year %}
+  {% assign show_year = false %}
+{% endif %}
 
 <li class="stacked-publications__item">
-  <span class="stacked-publications__year">{{ publication.date | date: "%Y" }}</span>
+  <span class="stacked-publications__year{% unless show_year %} stacked-publications__year--blank{% endunless %}">
+    {% if show_year %}
+      {{ pub_year }}
+    {% else %}
+      &nbsp;
+    {% endif %}
+  </span>
   <div class="stacked-publications__details">
     <p class="stacked-publications__title">
       <span class="stacked-publications__title-text">{{ publication.title }}</span>

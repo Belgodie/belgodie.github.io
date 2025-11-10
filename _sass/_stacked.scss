@@ -445,6 +445,10 @@
   color: #03045E;
   text-transform: uppercase;
 }
+.stacked-publications__year--blank {
+  color: transparent;
+  user-select: none;
+}
 
 .stacked-publications__details {
   display: flex;

@@ -14,11 +14,23 @@
 
 {% assign publications = site.publications | sort: "date" | reverse %}
 {% assign publications = publications | slice: 0, limit %}
+{% assign last_year = "" %}
 
 <ol class="stacked-publications__list">
   {% for pub in publications %}
+    {% assign pub_year = pub.date | date: "%Y" %}
+    {% assign show_year = true %}
+    {% if pub_year == last_year %}
+      {% assign show_year = false %}
+    {% endif %}
     <li class="stacked-publications__item">
-      <span class="stacked-publications__year">{{ pub.date | date: "%Y" }}</span>
+      <span class="stacked-publications__year{% unless show_year %} stacked-publications__year--blank{% endunless %}">
+        {% if show_year %}
+          {{ pub_year }}
+        {% else %}
+          &nbsp;
+        {% endif %}
+      </span>
       <div class="stacked-publications__details">
         <p class="stacked-publications__title">
           {% if pub.paperurl %}
@@ -37,6 +49,7 @@
         {% endif %}
       </div>
     </li>
+    {% assign last_year = pub_year %}
   {% endfor %}
 </ol>
 
