@@ -12,14 +12,12 @@
        | markdownify
        | replace: "<p>", ""
        | replace: "</p>", ""
-       | strip -}}
-  </span>
-  {% if link_url != '' %}
+       | strip -}}{% if link_url != '' %}
     <a class="news-item__link"
        href="{{ link_url }}"
        {% if link_external %}target="_blank" rel="noopener"{% endif %}
        aria-label="{{ link_label }}">
       <i class="fas fa-link" aria-hidden="true"></i>
-    </a>
-  {% endif %}
+    </a>{% endif %}
+  </span>
 </div>

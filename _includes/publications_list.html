@@ -1,66 +1,38 @@
 {% assign items = site.publications | sort: "date" | reverse %}
+{% assign publication_categories = site.publication_category | default: '' %}
 
-<!-- Reviews Section -->
-{% assign reviews = items | where: "category", "reviews" %}
-{% if reviews.size > 0 %}
-<h2>Review Articles</h2>
-<ol class="teaching-bullets">
-  {% for item in reviews %}
-  <li>
-    {% if item.authors %}
-      {% capture formatted_authors %}
-        {% include components/author-list.html item=item %}
-      {% endcapture %}
-      {{ formatted_authors | strip }}  
-    {% endif %}
-    ({{ item.date | date: "%Y" }}). 
-    <em>{{ item.title }}</em>. 
-    {% if item.venue_article %}{{ item.venue_article | capitalize }} {% endif %}{% if item.venue %}{{ item.venue }}{% endif %}{% if item.volume and item.pages %}, {{ item.volume }}:{{ item.pages }}{% elsif item.volume %}, {{ item.volume }}{% elsif item.pages %}, {{ item.pages }}{% endif %}{% if item.place %}, {{ item.place }}{% endif %}. 
-    {% if item.paperurl %}<a href="{{ item.paperurl }}">{{ item.paperurl }}</a>{% endif %}
-  </li>
-  {% endfor %}
-</ol>
-{% endif %}
+{% if publication_categories and publication_categories.size > 0 %}
+  {% for category in publication_categories %}
+    {% assign category_key = category.key | default: '' %}
+    {% assign category_title = category.title | default: category_key %}
+    {% assign category_style = category.style | default: 'article' %}
+    {% assign category_items = items | where: "category", category_key %}
 
-<!-- Journal Articles Section -->
-{% assign journals = items | where: "category", "journals" %}
-{% if journals.size > 0 %}
-<h2>Journal Articles</h2>
-<ol class="teaching-bullets">
-  {% for item in journals %}
-  <li>
-    {% if item.authors %}
-      {% capture formatted_authors %}
-        {% include components/author-list.html item=item %}
-      {% endcapture %}
-      {{ formatted_authors | strip }}  
-    {% endif %}
-    ({{ item.date | date: "%Y" }}). 
-    <em>{{ item.title }}</em>. 
-    {% if item.venue_article %}{{ item.venue_article | capitalize }} {% endif %}{% if item.venue %}{{ item.venue }}{% endif %}{% if item.volume and item.pages %}, {{ item.volume }}:{{ item.pages }}{% elsif item.volume %}, {{ item.volume }}{% elsif item.pages %}, {{ item.pages }}{% endif %}{% if item.place %}, {{ item.place }}{% endif %}. 
-    {% if item.paperurl %}<a href="{{ item.paperurl }}">{{ item.paperurl }}</a>{% endif %}
-  </li>
-  {% endfor %}
-</ol>
-{% endif %}
+    {% if category_items and category_items.size > 0 %}
+      <h2>{{ category_title }}</h2>
+      <ol class="teaching-bullets">
+        {% for item in category_items %}
+        <li>
+          {% if item.authors %}
+            {% capture formatted_authors %}
+              {% include components/author-list.html item=item %}
+            {% endcapture %}
+            {{ formatted_authors | strip }}  
+          {% endif %}
 
-<!-- Conference Presentations Section -->
-{% assign conferences = items | where: "category", "conferences" %}
-{% if conferences.size > 0 %}
-<h2>Conference Presentations</h2>
-<ol class="teaching-bullets">
-  {% for item in conferences %}
-  <li>
-    {% if item.authors %}
-      {% capture formatted_authors %}
-        {% include components/author-list.html item=item %}
-      {% endcapture %}
-      {{ formatted_authors | strip }}  
+          {% if category_style == 'conference' %}
+            <em>{{ item.title }}</em>. 
+            {% if item.prize %}<u>{{ item.prize }}</u> at {% elsif item.presentation_type %}{{ item.presentation_type }} at {% endif %}{% if item.venue_article %}{{ item.venue_article }} {% endif %}{% if item.venue %}{{ item.venue }}{% endif %}{% if item.place %}, {{ item.place }}{% endif %}{% if item.date %}, {{ item.date | date: "%-d %B %Y" }}{% endif %}. 
+          {% else %}
+            ({{ item.date | date: "%Y" }}). 
+            <em>{{ item.title }}</em>. 
+            {% if item.venue_article %}{{ item.venue_article | capitalize }} {% endif %}{% if item.venue %}{{ item.venue }}{% endif %}{% if item.volume and item.pages %}, {{ item.volume }}:{{ item.pages }}{% elsif item.volume %}, {{ item.volume }}{% elsif item.pages %}, {{ item.pages }}{% endif %}{% if item.place %}, {{ item.place }}{% endif %}. 
+          {% endif %}
+
+          {% if item.paperurl %}<a href="{{ item.paperurl }}">{{ item.paperurl }}</a>{% endif %}
+        </li>
+        {% endfor %}
+      </ol>
     {% endif %}
-    <em>{{ item.title }}</em>. 
-    {% if item.prize %}<u>{{ item.prize }}</u> at {% elsif item.presentation_type %}{{ item.presentation_type }} at {% endif %}{% if item.venue_article %}{{ item.venue_article }} {% endif %}{% if item.venue %}{{ item.venue }}{% endif %}{% if item.place %}, {{ item.place }}{% endif %}{% if item.date %}, {{ item.date | date: "%-d %B %Y" }}{% endif %}. 
-    {% if item.paperurl %}<a href="{{ item.paperurl }}">{{ item.paperurl }}</a>{% endif %}
-  </li>
   {% endfor %}
-</ol>
 {% endif %}

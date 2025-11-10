@@ -104,12 +104,15 @@ author:
 
 # Publication Category - The following the list of publication categories and their headings
 publication_category:
-  reviews:
+  - key: reviews
     title: 'Review Articles'
-  journals:
+    style: article
+  - key: journals
     title: 'Journal Articles'
-  conferences:
-    title: 'Conference Presentations'
+    style: article
+  - key: conferences
+    title: 'Conferences and Presentations'
+    style: conference
 
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"

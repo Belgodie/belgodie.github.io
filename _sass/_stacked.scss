@@ -581,13 +581,10 @@
 .news-item__link {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 1.2rem;
-  height: 1.2rem;
+  margin-left: 0.35rem;
   color: #024589;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
   text-decoration: none !important;
-  flex-shrink: 0;
   
   i {
     font-size: 0.85rem;

@@ -1,7 +1,8 @@
 <!-- Conference Papers Section -->
+{% assign conference_category = site.publication_category | where: "key", "conferences" | first %}
 {% assign conferences = items | where: "category", "conferences" %}
 {% if conferences.size > 0 %}
-<h2>Conference Papers</h2>
+<h2>{{ conference_category.title | default: "Conference Papers" }}</h2>
 <ol class="teaching-bullets">
   {% for item in conferences %}
   <li>
