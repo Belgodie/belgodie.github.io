@@ -6,68 +6,10 @@
   {% for item in conferences %}
   <li>
     {% if item.authors %}
-      {% assign author_list = item.authors | split: " and " %}
-      {% assign author_count = author_list | size %}
-      {% assign formatted_authors = "" %}
-      {% for author in author_list %}
-        {% assign author_trimmed = author | strip %}
-        {% assign name_parts = author_trimmed | split: ", " %}
-        {% assign last_name = name_parts[0] | strip %}
-        {% assign first_names = name_parts[1] | strip | split: " " %}
-        
-        {% assign initials = "" %}
-        {% assign has_asterisk = false %}
-
-        {% for name in first_names %}
-          {% if name contains "*" %}
-            {% assign has_asterisk = true %}
-            {% assign name = name | remove: "*" %}
-          {% endif %}
-          {% assign first_char = name | slice: 0 %}
-          {% assign initials = initials | append: first_char | append: "." %}
-        {% endfor %}
-
-        {% if has_asterisk %}
-          {% assign initials = initials | append: "*" %}
-        {% endif %}
-        
-        {% assign author_index = forloop.index %}
-        {% assign add_cofirst = false %}
-        {% if item.cofirst == true and item.cofirstnumber %}
-          {% if author_index <= item.cofirstnumber %}
-            {% assign add_cofirst = true %}
-          {% endif %}
-        {% endif %}
-        {% assign add_corresponding = false %}
-        {% if item.corresponding == true and item.correspondingnumber %}
-          {% assign corresponding_start = author_count | minus: item.correspondingnumber %}
-          {% if author_index > corresponding_start %}
-            {% assign add_corresponding = true %}
-          {% endif %}
-        {% endif %}
-        
-        {% if last_name contains my_last_name %}
-          {% assign formatted_author = "<strong>" | append: last_name | append: ", " | append: initials | append: "</strong>" %}
-        {% else %}
-          {% assign formatted_author = last_name | append: ", " | append: initials %}
-        {% endif %}
-        
-        {% if add_cofirst %}
-          {% assign formatted_author = formatted_author | append: "<sup>†</sup>" %}
-        {% endif %}
-        {% if add_corresponding %}
-          {% assign formatted_author = formatted_author | append: "<sup>*</sup>" %}
-        {% endif %}
-        
-        {% if forloop.first %}
-          {% assign formatted_authors = formatted_author %}
-        {% elsif forloop.last %}
-          {% assign formatted_authors = formatted_authors | append: " & " | append: formatted_author %}
-        {% else %}
-          {% assign formatted_authors = formatted_authors | append: ", " | append: formatted_author %}
-        {% endif %}
-      {% endfor %}
-      {{ formatted_authors }}  
+      {% capture formatted_authors %}
+        {% include components/author-list.html item=item %}
+      {% endcapture %}
+      {{ formatted_authors | strip }}  
     {% endif %}
     ({{ item.date | date: "%Y" }}). 
     <em>{{ item.title }}</em>. 

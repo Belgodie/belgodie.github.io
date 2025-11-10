@@ -24,6 +24,7 @@ author:
   # Biographic information
   avatar           : "profile.png"
   name             : "Erick Chica"
+  last             : "Chica"
   hero_title       : "Biotechnology Researcher"
   affiliation_main : "Korea Advanced Institute of Science and Technology"
   affiliation_secondary : "Master in Science"
@@ -103,12 +104,12 @@ author:
 
 # Publication Category - The following the list of publication categories and their headings
 publication_category:
-  books:
-    title: 'Books'
-  manuscripts:
-    title: 'Journal Articles'    
   reviews:
     title: 'Review Articles'
+  journals:
+    title: 'Journal Articles'
+  conferences:
+    title: 'Conference Presentations'
 
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"

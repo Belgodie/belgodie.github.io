@@ -1,0 +1,82 @@
+{% assign record = include.item %}
+{% assign authors_source = include.authors | default: record.authors %}
+{% if authors_source %}
+  {% assign my_last_name = include.my_last_name | default: site.author.last | default: "Chica" %}
+  {% assign cofirst_flag = include.cofirst | default: record.cofirst %}
+  {% assign cofirst_number = include.cofirstnumber | default: record.cofirstnumber %}
+  {% assign corresponding_flag = include.corresponding | default: record.corresponding %}
+  {% assign corresponding_number = include.correspondingnumber | default: record.correspondingnumber %}
+
+  {% assign author_list = authors_source | split: " and " %}
+  {% assign author_count = author_list | size %}
+  {% assign formatted_authors = "" %}
+
+  {% for author in author_list %}
+    {% assign author_trimmed = author | strip %}
+    {% assign name_parts = author_trimmed | split: ", " %}
+    {% assign last_name = name_parts[0] | strip %}
+    {% assign first_names_raw = name_parts[1] | default: "" | strip %}
+    {% if first_names_raw == "" %}
+      {% assign first_names = '' | split: '' %}
+    {% else %}
+      {% assign first_names = first_names_raw | split: " " %}
+    {% endif %}
+
+    {% assign initials = "" %}
+    {% assign has_asterisk = false %}
+    {% for name in first_names %}
+      {% assign clean_name = name %}
+      {% if clean_name contains "*" %}
+        {% assign has_asterisk = true %}
+        {% assign clean_name = clean_name | remove: "*" %}
+      {% endif %}
+      {% if clean_name != "" %}
+        {% assign first_char = clean_name | slice: 0 %}
+        {% assign initials = initials | append: first_char | append: "." %}
+      {% endif %}
+    {% endfor %}
+
+    {% if has_asterisk %}
+      {% assign initials = initials | append: "*" %}
+    {% endif %}
+
+    {% assign author_index = forloop.index %}
+    {% assign add_cofirst = false %}
+    {% if cofirst_flag == true and cofirst_number %}
+      {% if author_index <= cofirst_number %}
+        {% assign add_cofirst = true %}
+      {% endif %}
+    {% endif %}
+
+    {% assign add_corresponding = false %}
+    {% if corresponding_flag == true and corresponding_number %}
+      {% assign corresponding_start = author_count | minus: corresponding_number %}
+      {% if author_index > corresponding_start %}
+        {% assign add_corresponding = true %}
+      {% endif %}
+    {% endif %}
+
+    {% if last_name contains my_last_name %}
+      {% assign formatted_author = "<strong>" | append: last_name | append: ", " | append: initials | append: "</strong>" %}
+    {% else %}
+      {% assign formatted_author = last_name | append: ", " | append: initials %}
+    {% endif %}
+
+    {% if add_cofirst %}
+      {% assign formatted_author = formatted_author | append: "<sup>†</sup>" %}
+    {% endif %}
+    {% if add_corresponding %}
+      {% assign formatted_author = formatted_author | append: "<sup>*</sup>" %}
+    {% endif %}
+
+    {% if forloop.first %}
+      {% assign formatted_authors = formatted_author %}
+    {% elsif forloop.last %}
+      {% assign formatted_authors = formatted_authors | append: " & " | append: formatted_author %}
+    {% else %}
+      {% assign formatted_authors = formatted_authors | append: ", " | append: formatted_author %}
+    {% endif %}
+  {% endfor %}
+
+  {{ formatted_authors }}
+{% endif %}
