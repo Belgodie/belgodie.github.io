@@ -114,6 +114,9 @@ publication_category:
     title: 'Conferences and Presentations'
     style: conference
 
+#Author Name Format - Determines formatting output globally. Check authors.yml for information on options. 
+author_name_format: last_initial
+
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)

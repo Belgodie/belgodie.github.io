@@ -1,6 +1,11 @@
 ---
 title: "Microfabricated sensors for non-invasive, real-time monitoring of organoids"
-authors: 'Kim, Yoojeong and Chica-Carrillo, Erick Christian and Lee, Hyunjoo Jenny*'
+authors:
+  - key: yoojeong
+  - key: erick
+    variant: hyphenated
+    first: "Erick Christian"
+  - key: hyunjoo
 collection: publications
 category: reviews
 permalink: /publication/2025-06-08-reviewBMM-1
@@ -15,6 +20,4 @@ cofirst: true
 cofirstnumber: 2
 corresponding: true
 correspondingnumber: 1
-header:
-  teaser: /images/image-alignment-300x200.jpg
 ---

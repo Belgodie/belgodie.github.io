@@ -1,7 +1,14 @@
 ---
 title: " Millifluidic triMEA organoid platform with stretchable microelectrode arrays for multi organoid evaluation"
 category: conferences
-authors: "Chica, Erick and Hojae, Jang, and Kwon, Youngak, and Kim, Yoojeong, and Lee, Yeongsun, and Lee, Mi-ok, and Lee, Hyunjoo Jenny"
+authors:
+  - key: erick
+  - key: hojae
+  - key: youngak
+  - key: yoojeong
+  - key: yeongsun
+  - key: miok
+  - key: hyunjoo
 date: 2025-11-19
 venue: "Society of Micro and Nano Systems 2025 MNS Fall Conference"
 venue_article: "the"
@@ -10,7 +17,13 @@ featured: false
 paperurl: false
 cofirst: false
 place: Yeosu, South Korea
+otherpresenter: true
+otherpresenternumber: 2
 ---
 {%comment%}
 prize: "Best Poster Award"
+author_format: initial_last y otros, en authors.yml
+-key: erick
+ variant: hyphenated
+ display_first: "Erick Christian"
 {%endcomment%}

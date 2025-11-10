@@ -1,18 +1,54 @@
-# Authors
+# Usage:
+# - Define each person once with `first`, optional `middle`, `last1`, optional `last2`.
+# - Default render is `last1, first`. 
+# - Add `variant: hyphenated` (→ `last1-last2, first`) or variant: compound (last1 last2)
+# - Add `display_last` / `display_first` to force a custom string.
+# - In a publication you can override per entry:
+#     authors:
+#       - key: erick                 # use defaults below
+#       - key: erick
+#         variant: hyphenated        # switch to last1-last2 form for this paper only
+#         display_first: "Erick Christian"
+#       - key: collaborator
+#         last1: Ramirez             # override surname inline
+# - Legacy `"Last, First"` strings still work and fall back to the old parser.
+# Options
+# - last_first → Chica, Erick
+# - last_initial → Chica, E.
+# - initial_last → E. Chica
+# - last_first_nocomma → Chica Erick
+# - first_last → Erick Chica
+# - initials_only → E. (handy for compact CVs)
 
-Name Name:
-  name        : "Name Name"
-  uri         : "http://name.com"
-  email       : "name@name.com"
-  bio         : "This is the first name."
-  avatar      : "bio-photo-2.jpg"
-  twitter     : "name"
-  google_plus : "Name"
+# === ME ====
+erick:
+  first: Erick
+  last1: Chica
+  last2: Carrillo
 
-Name2 Name2:
-  name        : "Name2 Name2"
-  email       : "name2@name2.com"
-  bio         : "I ordered what?"
-  avatar      : "bio-photo.jpg"
-  twitter     : "name2"
-  google_plus : "Name"
+# === KAIST ====
+yoojeong:
+  first: Yoojeong
+  last1: Kim
+
+hojae:
+  first: Hojae
+  last1: Jang
+
+youngak:
+  first: Youngak
+  last1: Kwon
+
+yeongsun:
+  first: Yeongsun
+  last1: Lee
+
+miok:
+  first: "Mi-ok"
+  last1: Lee
+
+hyunjoo:
+  first: Hyunjoo
+  middle: Jenny
+  last1: Lee
+
