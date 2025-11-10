@@ -1,5 +1,5 @@
 ---
-layout: single
+layout: stacked
 permalink: /
 title: "About"
 author_profile: true
@@ -13,8 +13,21 @@ redirect_from:
   - /page-archive/ 
   - /talks/
   - /portfolio/
+
+sections:
+  - title: "About"
+    id: "about"
+
+  - title: "Recent News"
+    id: "news"
+    style: "news"
+    collection: "news"
+    limit: 5
+    link_field: "link"
+    link_external: true 
 ---
 
+<!-- section: about -->
 Erick designs *microfabricated and microfluidic platforms* that couple brain organoids with high fidelity electrophysiology for stable, long duration recordings. Systems maintain controlled perfusion, stabilize shear and oxygenation, and yield reproducible multichannel readouts with documented analysis. Current work focuses on a three well millifluidic platform with stretchable multi electrode arrays that supports *parallel experiments, standardized flow profiles, and cross comparability*.
 
 Core strengths include fabrication of stretchable MEAs on polyimide with PEDOT:PSS impedance lowering, reliable PDMS micro and millifluidics with plasma bonding and inline bubble removal, and low noise acquisition supported by custom MATLAB code analysis for spike detection, quality checks, and general signal processing. Designs follow COMSOL flow and mass transport modeling.The emphasis is on reproducibility and modeling for the advancement of disease models based on organoids.
@@ -33,3 +46,4 @@ Research Interests
 * Bioelectronics and biotechnology
 * Device integration in biomedical systems
 * Organoid platforms for mechanism-driven validation
+<!-- endsection -->

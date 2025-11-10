@@ -39,14 +39,6 @@ sections:
     cta_url: "/publications/"
     cta_label: "See all publications"
 
-  - title: "Recent News"
-    id: "news"
-    style: "news"
-    collection: "news"
-    limit: 5
-    link_field: "link"
-    link_external: true 
-
   #- title: "Acerca del Man"
   #  content: |
   #      literalmente tu content
