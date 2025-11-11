@@ -340,6 +340,9 @@ defaults:
     values:
       layout: single 
 
+# Publications display settings
+publications:
+  split_by_category: true  # Set to false for a single combined list
 
 # Sass/SCSS
 sass:

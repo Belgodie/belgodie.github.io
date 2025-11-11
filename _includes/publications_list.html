@@ -1,7 +1,17 @@
 {% assign items = site.publications | sort: "date" | reverse %}
 {% assign publication_categories = site.publication_category | default: '' %}
 
-{% if publication_categories and publication_categories.size > 0 %}
+{% comment %} Check split_by_category setting {% endcomment %}
+{% if page.split_by_category == false %}
+  {% assign split_by_category = false %}
+{% elsif site.publications.split_by_category == false %}
+  {% assign split_by_category = false %}
+{% else %}
+  {% assign split_by_category = true %}
+{% endif %}
+
+{% if split_by_category and publication_categories and publication_categories.size > 0 %}
+  {% comment %} Split view - grouped by categories {% endcomment %}
   {% for category in publication_categories %}
     {% assign category_key = category.key | default: '' %}
     {% assign category_title = category.title | default: category_key %}
@@ -29,4 +39,24 @@
       </ol>
     {% endif %}
   {% endfor %}
+{% else %}
+  {% comment %} Combined view - single list {% endcomment %}
+  <ol class="teaching-bullets">
+    {% for item in items %}
+    <li>
+      {% if item.authors %}
+        {% capture formatted_authors %}
+          {% include components/author-list.html item=item %}
+        {% endcapture %}
+        {{ formatted_authors | strip }}  
+      {% endif %}
+
+      ({{ item.date | date: "%Y" }}). 
+      <em>{{ item.title }}</em>. 
+      {% if item.venue_article %}{{ item.venue_article | capitalize }} {% endif %}{% if item.venue %}{{ item.venue }}{% endif %}{% if item.volume and item.pages %}, {{ item.volume }}:{{ item.pages }}{% elsif item.volume %}, {{ item.volume }}{% elsif item.pages %}, {{ item.pages }}{% endif %}{% if item.place %}, {{ item.place }}{% endif %}. 
+
+      {% if item.paperurl %}<a href="{{ item.paperurl }}">{{ item.paperurl }}</a>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
 {% endif %}
