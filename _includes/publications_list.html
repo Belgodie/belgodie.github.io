@@ -5,7 +5,6 @@
   {% for category in publication_categories %}
     {% assign category_key = category.key | default: '' %}
     {% assign category_title = category.title | default: category_key %}
-    {% assign category_style = category.style | default: 'article' %}
     {% assign category_items = items | where: "category", category_key %}
 
     {% if category_items and category_items.size > 0 %}
@@ -20,14 +19,9 @@
             {{ formatted_authors | strip }}  
           {% endif %}
 
-          {% if category_style == 'conference' %}
-            <em>{{ item.title }}</em>. 
-            {% if item.prize %}<u>{{ item.prize }}</u> at {% elsif item.presentation_type %}{{ item.presentation_type }} at {% endif %}{% if item.venue_article %}{{ item.venue_article }} {% endif %}{% if item.venue %}{{ item.venue }}{% endif %}{% if item.place %}, {{ item.place }}{% endif %}{% if item.date %}, {{ item.date | date: "%-d %B %Y" }}{% endif %}. 
-          {% else %}
-            ({{ item.date | date: "%Y" }}). 
-            <em>{{ item.title }}</em>. 
-            {% if item.venue_article %}{{ item.venue_article | capitalize }} {% endif %}{% if item.venue %}{{ item.venue }}{% endif %}{% if item.volume and item.pages %}, {{ item.volume }}:{{ item.pages }}{% elsif item.volume %}, {{ item.volume }}{% elsif item.pages %}, {{ item.pages }}{% endif %}{% if item.place %}, {{ item.place }}{% endif %}. 
-          {% endif %}
+          ({{ item.date | date: "%Y" }}). 
+          <em>{{ item.title }}</em>. 
+          {% if item.venue_article %}{{ item.venue_article | capitalize }} {% endif %}{% if item.venue %}{{ item.venue }}{% endif %}{% if item.volume and item.pages %}, {{ item.volume }}:{{ item.pages }}{% elsif item.volume %}, {{ item.volume }}{% elsif item.pages %}, {{ item.pages }}{% endif %}{% if item.place %}, {{ item.place }}{% endif %}. 
 
           {% if item.paperurl %}<a href="{{ item.paperurl }}">{{ item.paperurl }}</a>{% endif %}
         </li>

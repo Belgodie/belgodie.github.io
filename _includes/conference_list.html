@@ -1,0 +1,17 @@
+{% assign items = site.conferences | sort: "date" | reverse %}
+
+<ol class="teaching-bullets">
+{% for item in items %}
+  <li>
+    {% if item.authors %}
+      {% capture formatted_authors %}
+        {% include components/author-list.html item=item %}
+      {% endcapture %}
+      {{ formatted_authors | strip }}  
+    {% endif %}
+    <em>{{ item.title }}</em>. 
+    {% if item.prize %}<u>{{ item.prize }}</u> at {% elsif item.presentation_type %}{{ item.presentation_type }} at {% endif %}{% if item.venue_article %}{{ item.venue_article }} {% endif %}{% if item.venue %}{{ item.venue }}{% endif %}{% if item.place %}, {{ item.place }}{% endif %}{% if item.date %}, {{ item.date | date: "%-d %B %Y" }}{% endif %}. 
+    {% if item.paperurl %}<a href="{{ item.paperurl }}">{{ item.paperurl }}</a>{% endif %}
+  </li>
+{% endfor %}
+</ol>

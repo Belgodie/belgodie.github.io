@@ -208,6 +208,41 @@ layout: default
                           </a>
                         </div>
                       {% endif %}
+
+                    {% when 'conferences' %}
+                      {% assign last_year = '' %}
+                      <ol class="stacked-publications__list">
+                        {% for doc in documents %}
+                          {% assign doc_link = '' %}
+                          {% if base_link_url != '' %}
+                            {% assign doc_link = base_link_url %}
+                          {% elsif link_field != '' %}
+                            {% if link_field == 'url' %}
+                              {% assign doc_link = doc.url | relative_url %}
+                            {% else %}
+                              {% assign doc_link = doc[link_field] | default: '' %}
+                            {% endif %}
+                          {% endif %}
+                          {% assign link_label = link_label_prefix %}
+                          {% if link_label == '' and doc_link != '' %}
+                            {% assign link_label = 'Open ' | append: doc.title %}
+                          {% endif %}
+                          {% include cards/conference-line.html
+                            item=doc
+                            link_url=doc_link
+                            link_external=link_external
+                            link_label=link_label
+                            previous_year=last_year %}
+                          {% assign last_year = doc.date | date: "%Y" %}
+                        {% endfor %}
+                      </ol> 
+                      {% if section.cta_url or section.cta_label %}
+                        <div class="stacked-publications__cta">
+                          <a class="btn btn--light-outline" href="{{ section.cta_url | default: '/conferences/' | relative_url }}"{% if section.link_external %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                            {{ section.cta_label | default: 'See all conferences' }}
+                          </a>
+                        </div>
+                      {% endif %}  
                     {% else %}
                       <!-- Default: simple text rendering for unrecognized or missing style -->
                       <div class="text-list">

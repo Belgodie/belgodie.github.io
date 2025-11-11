@@ -16,9 +16,13 @@ Education
 ======
 {% include education_list.html %}
 
-Publications and Presentations
+Publications and Manuscripts
 ======
 {% include publications_list_flat.html suppress_links=true %}
+
+Poster Presentations
+======
+{% include conference_list_flat.html suppress_links=true %}
 
 Teaching Experience
 ======

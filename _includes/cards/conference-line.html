@@ -1,0 +1,45 @@
+{% assign conference = include.item %}
+{% assign link_url = include.link_url | default: '' %}
+{% assign default_label = 'Open ' | append: conference.title %}
+{% assign link_label = include.link_label | default: default_label %}
+{% assign previous_year = include.previous_year | default: '' %}
+{% assign conf_year = conference.date | date: "%Y" %}
+{% assign show_year = true %}
+{% if previous_year == conf_year %}
+  {% assign show_year = false %}
+{% endif %}
+
+<li class="stacked-publications__item">
+  <span class="stacked-publications__year{% unless show_year %} stacked-publications__year--blank{% endunless %}">
+    {% if show_year %}
+      {{ conf_year }}
+    {% else %}
+      &nbsp;
+    {% endif %}
+  </span>
+  <div class="stacked-publications__details">
+    <p class="stacked-publications__title">
+      <span class="stacked-publications__title-text">{{ conference.title }}</span>
+      {% if link_url != '' %}
+        <a class="stacked-publications__title-link"
+           href="{{ link_url }}"
+           {% if include.link_external %}target="_blank" rel="noopener"{% endif %}
+           aria-label="{{ link_label }}">
+          <i class="fas fa-link" aria-hidden="true"></i>
+          <span class="visually-hidden">{{ link_label }}</span>
+        </a>
+      {% endif %}
+    </p>
+    {% if conference.venue %}
+      <p class="stacked-publications__venue">
+        {{ conference.venue }}{% if conference.volume %}, {{ conference.volume }}{% endif %}{% if conference.pages %}, {{ conference.pages }}{% endif %}
+      </p>
+    {% endif %}
+    {% if conference.authors %}
+      {% capture formatted_authors %}
+        {% include components/author-list.html item=conference %}
+      {% endcapture %}
+      <p class="stacked-publications__authors">{{ formatted_authors | strip }}</p>
+    {% endif %}
+  </div>
+</li>

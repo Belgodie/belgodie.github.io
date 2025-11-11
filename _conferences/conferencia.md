@@ -17,6 +17,7 @@ featured: false
 paperurl: false
 cofirst: false
 place: Yeosu, South Korea
+featured: true
 otherpresenter: true
 otherpresenternumber: 2
 ---

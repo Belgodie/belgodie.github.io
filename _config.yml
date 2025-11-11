@@ -256,6 +256,9 @@ collections:
   projects:
     output: true
     permalink: /:collection/:path/
+  conferences:
+    output: true
+    permalink: /:collection/:path/  
   news:              
     output: false    
     sort_by: date

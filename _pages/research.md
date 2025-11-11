@@ -39,6 +39,14 @@ sections:
     cta_url: "/publications/"
     cta_label: "See all publications"
 
+  - title: "Selected Conferences"
+    id: "conferences"
+    collection: "conferences"
+    style: "conferences"
+    filter: "featured"
+    link_field: "paperurl"
+    link_external: false
+    
   #- title: "Acerca del Man"
   #  content: |
   #      literalmente tu content

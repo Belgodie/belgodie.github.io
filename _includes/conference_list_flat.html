@@ -1,4 +1,4 @@
-{% assign items = site.publications | sort: "date" | reverse %}
+{% assign items = site.conferences | sort: "date" | reverse %}
 {% assign suppress_links = include.suppress_links | default: false %}
 
 <ol class="teaching-bullets">
@@ -10,9 +10,8 @@
       {% endcapture %}
       {{ formatted_authors | strip }}
     {% endif %}
-    ({{ item.date | date: "%Y" }}).
-    <em>{{ item.title }}</em>.
-    {% if item.venue %}{{ item.venue }}{% endif %}{% if item.volume and item.pages %}, {{ item.volume }}:{{ item.pages }}{% elsif item.volume %}, {{ item.volume }}{% elsif item.pages %}, {{ item.pages }}{% endif %}.
+    <em>{{ item.title }}</em>. 
+    {% if item.prize %}<u>{{ item.prize }}</u> at {% elsif item.presentation_type %}{{ item.presentation_type }} at {% endif %}{% if item.venue_article %}{{ item.venue_article }} {% endif %}{% if item.venue %}{{ item.venue }}{% endif %}{% if item.place %}, {{ item.place }}{% endif %}{% if item.date %}, {{ item.date | date: "%-d %B %Y" }}{% endif %}. 
     {% if item.paperurl and suppress_links != true %}<a href="{{ item.paperurl }}">{{ item.paperurl }}</a>{% endif %}
   </li>
 {% endfor %}
