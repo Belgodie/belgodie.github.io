@@ -16,6 +16,14 @@
   --content-block-padding: clamp(1.5rem, 1.75vw + 1.25rem, 2.5rem);
 }
 
+/* Keep layout from shifting when scrollbars appear/disappear */
+@supports (scrollbar-gutter: stable) {
+  html { scrollbar-gutter: stable; }
+}
+@supports not (scrollbar-gutter: stable) {
+  body { overflow-y: scroll; }
+}
+
 #main {
   width: 100%;
   max-width: var(--content-max-width);
