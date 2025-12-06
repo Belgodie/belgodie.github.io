@@ -2,6 +2,7 @@
 layout: stacked
 permalink: /
 title: "About"
+description: "Erick Chica - Researcher"
 author_profile: true
 skip_title_in_tab: true
 redirect_from:
