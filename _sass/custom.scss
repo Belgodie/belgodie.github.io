@@ -27,14 +27,14 @@
 #main {
   width: 100%;
   max-width: var(--content-max-width);
-  margin: 0 auto;
+  margin: clamp(1rem, calc(0.75rem + 0.5vw), 1.75rem) auto 0;
   padding-left: var(--content-side-padding);
   padding-right: var(--content-side-padding);
   box-sizing: border-box;
 }
 
-body:not(:has(.hero-frame)) #main {
-  margin-top: clamp(1rem, calc(0.75rem + 0.5vw), 1.75rem);
+.has-hero #main {
+  margin: 0 auto;
 }
 
 .page,
@@ -63,7 +63,7 @@ body:not(:has(.hero-frame)) #main {
   #main {
   width: 100%;
   max-width: var(--content-max-width);
-  margin: 0 auto;
+  margin: clamp(1rem, calc(0.65rem + 0.5vw), 1.5rem) auto 0;
   padding-left: var(--content-side-padding);
   padding-right: var(--content-side-padding);
   box-sizing: border-box;
@@ -216,6 +216,45 @@ section.page__content div.projects-grid,
 /* Remove animated underline bar from page links */
 .page__content a::after {
   content: none !important;
+}
+
+/* =====================================================================
+   Font-face overrides to prevent icon flash (add font-display: swap)
+   ===================================================================== */
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../webfonts/fa-solid-900.woff2") format("woff2"),
+       url("../webfonts/fa-solid-900.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../webfonts/fa-regular-400.woff2") format("woff2"),
+       url("../webfonts/fa-regular-400.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Brands";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../webfonts/fa-brands-400.woff2") format("woff2"),
+       url("../webfonts/fa-brands-400.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Academicons";
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url("../fonts/academicons.woff") format("woff"),
+       url("../fonts/academicons.ttf") format("truetype");
 }
 
 

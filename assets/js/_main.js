@@ -16,7 +16,8 @@ let determineComputedTheme = () => {
   if (themeSetting != "system") {
     return themeSetting;
   }
-  return (userPref && userPref("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+  const mediaPref = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+  return (mediaPref && mediaPref.matches) ? "dark" : "light";
 };
 
 // detect OS/browser preference
@@ -89,6 +90,13 @@ $(document).ready(function () {
   // SCSS SETTINGS - These should be the same as the settings in the relevant files 
   const scssLarge = 925;          // pixels, from /_sass/_themes.scss
   const scssMastheadHeight = 70;  // pixels, from the current theme (e.g., /_sass/theme/_default.scss)
+
+  // Add a body flag for hero-present pages as a fallback for :has() selectors
+  if (document.querySelector('.hero-frame')) {
+    document.body.classList.add('has-hero');
+  } else {
+    document.body.classList.remove('has-hero');
+  }
 
   // If the user hasn't chosen a theme, follow the OS preference
   setTheme();

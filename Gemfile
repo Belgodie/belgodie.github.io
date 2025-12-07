@@ -11,4 +11,4 @@ end
 gem 'github-pages'
 gem 'connection_pool', '2.5.0'
 
-gem "tzinfo-data", "~> 1.2025"
+gem "tzinfo-data", "~> 1.2024"
