@@ -14,7 +14,20 @@
       </button>
       <ul class="hero-nav-list" id="hero-nav-list">
         {% for link in site.data.navigation.main %}
-          <li><a href="{{ link.url | prepend: base_path }}">{{ link.title }}</a></li>
+          {% if link.children %}
+            <li class="has-children">
+              <a href="{{ link.url | prepend: base_path }}">{{ link.title }}</a>
+              <ul class="hero-submenu">
+                {% for child in link.children %}
+                  <li>
+                    <a href="{{ child.url | prepend: base_path }}">{{ child.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% else %}
+            <li><a href="{{ link.url | prepend: base_path }}">{{ link.title }}</a></li>
+          {% endif %}
         {% endfor %}
       </ul>
     </div>

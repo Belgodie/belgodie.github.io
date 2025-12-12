@@ -1,0 +1,81 @@
+{% comment %}
+  Generic card renderer.
+  Params:
+    - items: array of objects to render
+    - fields: array of "Label:key" strings
+    - title_key: key for main title (string)
+    - subtitle_key: key for subtitle (optional)
+    - photo_key: key for photo/url (optional)
+    - initials_key: key for initials fallback (optional)
+    - two_column: boolean to enable two-column grid (optional)
+{% endcomment %}
+{% assign cards = include.items | default: site.data.empty_array %}
+{% assign fields_raw = include.fields | default: site.data.empty_array %}
+{% assign two_col = include.two_column | default: false %}
+{% assign title_key = include.title_key | default: 'title' %}
+{% assign subtitle_key = include.subtitle_key %}
+{% assign photo_key = include.photo_key | default: 'photo' %}
+{% assign initials_key = include.initials_key | default: 'initials' %}
+
+{% if cards and cards.size > 0 %}
+  {% assign list_class = "group-list" %}
+  {% if two_col %}
+    {% assign list_class = list_class | append: " group-list--two" %}
+  {% endif %}
+  <div class="{{ list_class }}">
+    {% for item in cards %}
+      {% assign photo_src = item[photo_key] %}
+      {% assign initials_val = item[initials_key] %}
+      {% if initials_val == nil or initials_val == '' %}
+        {% assign name_val = item[title_key] | default: '' %}
+        {% assign name_parts = name_val | split: ' ' %}
+        {% assign first = name_parts[0] | slice: 0,1 | upcase %}
+        {% assign second = name_parts[1] | slice: 0,1 | upcase %}
+        {% if second == '' %}
+          {% assign second = name_parts[0] | slice: 1,1 | upcase %}
+        {% endif %}
+        {% assign initials_val = first | append: second %}
+      {% endif %}
+      {% if initials_val == '' %}
+        {% assign initials_val = '??' %}
+      {% endif %}
+      <div class="group-member">
+        <div class="group-member__photo{% if photo_src %} has-photo{% endif %}" data-initials="{{ initials_val }}" aria-hidden="true">
+          {% if photo_src %}
+            <img src="{{ photo_src | relative_url }}" alt="{{ item[title_key] }} photo" loading="lazy">
+          {% endif %}
+        </div>
+        <div class="group-member__info">
+          <h3 class="group-member__name">{{ item[title_key] }}</h3>
+          {% if subtitle_key and item[subtitle_key] %}
+            <div class="group-member__role">{{ item[subtitle_key] }}</div>
+          {% endif %}
+          <div class="group-member__divider" aria-hidden="true"></div>
+
+          {% for field in fields_raw %}
+            {% assign parts = field | split: ':' %}
+            {% assign label = parts[0] | strip %}
+            {% assign key = parts[1] | strip %}
+            {% assign value = item[key] %}
+            {% if value %}
+              <div class="group-member__row">
+                <div class="group-member__label">{{ label }}</div>
+                <div class="group-member__text">
+                  {% if value.first %}
+                    {% for v in value %}
+                      <div>{{ v }}</div>
+                    {% endfor %}
+                  {% else %}
+                    {{ value }}
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="group-member__empty">No items to display.</p>
+{% endif %}

@@ -1,0 +1,79 @@
+sections:
+  - title: "PhD Members"
+    open: true
+    members:
+      - name: "Da Phuc"
+        initials: "DP"
+        research: "Flexible Electronics"
+        education:
+        - "2021 · M.S. in Biotechnology, California State University, Fresno"
+        - "2019 · B.S. in Chemistry, California State University, Fresno"
+        email: "da.phuc@example.edu"
+        photo: "/images/members/daphuc.png"
+        role: "PhD Candidate"
+
+      - name: "Susana Horia"
+        initials: "SH"
+        research: "Soft actuators for Tissue Manipulation"
+        education:
+        - "2021 · M.S. in Biomedical Engineering, Oxford University"
+        - "2019 · B.S. in Mechanical Engineering, KAIST"
+        email: "susana.horia@example.edu"
+        photo: "/images/members/susanahoria.png"
+        role: "PhD Candidate"
+
+      - name: "Rick A. Chu"
+        initials: "RC"
+        research: "Machine learning for Disease Monitoring"
+        education: 
+        - "2023 · M.S. in Computer Science, Hufflepuff University"
+        - "2019 · B.S. in Computer Engineering, New York University"
+        email: "rickachu@example.edu"
+        role: "PhD Student"
+        photo: "/images/members/rickachu.png"
+
+      - name: "Peter Croft"
+        initials: "PC"
+        research: "Bioelectronics for Disease Monitoring"
+        education: 
+        - "2022 · M.S. in Chemical Engineering, Warwick University"
+        - "2018 · B.S. in Chemical Engineering, Warwick University"
+        email: "petercroft@example.edu"
+        role: "Integrated MS & PhD Student"
+        photo: "/images/members/petercroft.png"
+
+  - title: "MS Members"
+    members:
+      - name: "Alma Marcela Gozo"
+        initials: "AMG"
+        research: "Flexible Microfluidics"
+        education: "2022 · B.S. in Mechanical Engineering, San Francisco de Quito University"
+        photo: "/images/members/almamarcelagozo.png"
+        email: "alma.marcela.gozo@example.edu"
+        role: "Master Student"
+
+      - name: "Rita Lazo"
+        initials: "RL"
+        research: "Flexible Microfluidics"
+        education: "2022 · B.S. in Electronics Engineering, National Polythencnical University"
+        photo: "/images/members/ritalazo.png"
+        email: "rita.lazo@example.edu"
+        role: "Master Student"
+
+  - title: "Undergrad Members"
+    members:
+      - name: "Tom Walker"
+        initials: "TW"
+        research: "Human-Robot interaction studies"
+        education: "2025 · BS · Computer Science · Example College"
+        email: "tom.walker@example.edu"
+        role: "Undergraduate Intern"
+
+  - title: "Alumni"
+    members: 
+      - name: "Mica Bezona"
+        role: "La Chica que Salia con Vos"
+        education: "2024 · B.S. in Material Science, Universidad de la Plata, Buenos Aires"
+        research: "Organoid Disease Modeling"
+        email: "micabezona@example.edu"
+        photo: "/images/members/micabezona.png"

@@ -212,14 +212,18 @@
   background: linear-gradient(90deg, #00B4D8 0%, #ffffff 50%, #00B4D8 100%);
   opacity: 0.8;
   pointer-events: none;
+  z-index: 0;
 }
 
 .hero-nav {
   width: 100%;
+  overflow: visible;
 }
 
 .hero-nav-inner {
   position: relative;
+  overflow: visible;
+  z-index: 1;
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(4px);
   border-radius: 42px;
@@ -298,6 +302,8 @@
   align-items: center;
   gap: 0.25rem;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
   
   @media (max-width: 768px) {
     display: none;
@@ -312,6 +318,7 @@
   
   li {
     margin: 0;
+    position: relative;
     
     @media (max-width: 768px) {
       width: 100%;
@@ -342,6 +349,48 @@
       }
     }
   }
+}
+
+.hero-nav-list > li.has-children > a {
+  padding-right: 0.55rem;
+}
+
+.hero-submenu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  min-width: 180px;
+  background: #ffffff;
+  border: 1px solid rgba(2, 69, 137, 0.18);
+  border-radius: 10px;
+  box-shadow:
+    0 10px 20px rgba(2, 69, 137, 0.15),
+    0 4px 8px rgba(0, 0, 0, 0.06);
+  padding: 0.35rem 0;
+  z-index: 2;
+}
+
+.hero-submenu li {
+  list-style: none;
+}
+
+.hero-submenu a {
+  display: block;
+  padding: 0.55rem 0.95rem;
+  color: #024589;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.hero-submenu a:hover,
+.hero-submenu a:focus-visible {
+  background: linear-gradient(90deg, rgba(0, 180, 216, 0.08), rgba(2, 69, 137, 0.08));
+}
+
+.hero-nav-list > li.has-children:hover > .hero-submenu,
+.hero-nav-list > li.has-children:focus-within > .hero-submenu {
+  display: block;
 }
 
 /* Add padding when nav is sticky to prevent content jump */
