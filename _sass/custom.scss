@@ -772,3 +772,119 @@ section.page__content div.projects-grid,
     grid-template-columns: 1fr;
   }
 }
+
+/* Flatten outer card for welcome/news so only inner cards show */
+
+.home-news__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.home-news__item {
+  border-bottom: 1px solid rgba(2, 69, 137, 0.08);
+  padding-bottom: 0.5rem;
+}
+
+.home-news__item:last-child {
+  border-bottom: none;
+}
+
+.home-news__title {
+  font-weight: 600;
+  color: #01245d;
+  margin-bottom: 0.15rem;
+}
+
+.home-news__date {
+  font-size: 0.92rem;
+  color: #024589;
+  opacity: 0.9;
+}
+
+.home-news__date--below {
+  margin-top: 0.2rem;
+}
+
+.home-news__blurb {
+  display: block;
+}
+
+.home-news__link-icon {
+  color: #0d78c6;
+  text-decoration: none;
+}
+
+.home-news__link-icon:hover {
+  color: #065a96;
+}
+
+/* Welcome & News split */
+.home-split-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: clamp(1rem, 1.6vw, 1.5rem);
+  margin-top: clamp(1.2rem, 2vw, 1.8rem);
+  align-items: stretch;
+}
+
+/* Normalize first element margins inside the home split row */
+.home-split-cards .stacked-card__body > * {
+  margin-top: 0;
+}
+.home-split-cards .stacked-card__body h1,
+.home-split-cards .stacked-card__body h2,
+.home-split-cards .stacked-card__body h3,
+.home-split-cards .stacked-card__body p,
+.home-split-cards .stacked-card__body ul,
+.home-split-cards .stacked-card__body ol {
+  margin-top: 0;
+}
+
+/* Equal height for split cards */
+.home-split-cards .stacked-card {
+  height: 100%;
+  display: flex;
+}
+.home-split-cards .stacked-card__article,
+.home-split-cards .page__inner-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.home-split-cards .stacked-card__body {
+  flex: 1;
+}
+
+/* Image with text wrapping (Jeong-style) */
+.wrap-card {
+  display: flow-root;
+  margin-bottom: 1.5rem;
+}
+
+.wrap-card__img {
+  float: left;
+  width: 150px;
+  height: 190px;
+  object-fit: cover;
+  margin: 0 1rem 0.5rem 0;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.wrap-card__text {
+  line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+  .wrap-card__img {
+    float: none;
+    display: block;
+    margin: 0 auto 1rem auto;
+    width: 70%;
+    height: auto;
+  }
+}

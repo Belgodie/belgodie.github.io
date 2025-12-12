@@ -1,0 +1,12 @@
+<section class="stacked-card">
+  <article class="page stacked-card__article">
+    <div class="page__inner-wrap">
+      <header class="stacked-card__header">
+        <h2 class="page__title">{{ include.title | default: "Welcome" }}</h2>
+      </header>
+      <section class="stacked-card__body page__content">
+        {{ include.content | default: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer feugiat, nibh quis facilisis posuere, risus nisl tincidunt arcu, nec aliquet nisl justo a lorem." }}
+      </section>
+    </div>
+  </article>
+</section>

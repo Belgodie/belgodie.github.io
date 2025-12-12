@@ -15,6 +15,9 @@ carousel_slides:
     bgopacity: 0.25
     textcolor: "#ffffff"
 sections:
+  - title: ""
+    id: "welcome-news"
+    layout: "row"
   - title: "Research & Recent Work"
     id: "research-highlights"
 ---
@@ -59,4 +62,48 @@ sections:
   </div>
 </div>
 
+<!-- endsection -->
+
+<!-- section: welcome-news -->
+{% capture welcome_body %}
+<div class="wrap-card">
+  <img src="{{ '/images/welcome.png' | relative_url }}" alt="Welcome" class="wrap-card__img">
+  <div class="wrap-card__text">
+    Welcome to my research page! Here you will find information about my work in microfluidic systems, biosensors, and organ-on-chip technologies. Feel free to explore my projects, publications, and get in touch if you are interested in collaborating or learning more. I am especially interested in collaborations that bring together microfabrication, microfluidics, and signal processing.
+  </div>
+</div>
+{% endcapture %}
+
+{% capture news_body %}
+{% assign news_items = site.news | sort: "date" | reverse | slice: 0, 5 %}
+<ul class="home-news__list">
+  {% for item in news_items %}
+    <li class="home-news__item">
+      <div class="home-news__blurb">
+        {{ item.content
+           | markdownify
+           | replace: "<p>", ""
+           | replace: "</p>", ""
+           | strip
+           | strip_newlines
+           | replace: "\r", " "
+           | replace: "\n", " "
+           | truncate: 220 }}
+        {% if item.link %}
+          <a class="home-news__link-icon" href="{{ item.link }}" target="_blank" rel="noopener" aria-label="Open link">
+            <i class="fas fa-link" aria-hidden="true"></i>
+          </a>
+        {% endif %}
+      </div>
+      <div class="home-news__date home-news__date--below">{{ item.date | date: "%b, %Y" }}</div>
+    </li>
+  {% endfor %}
+</ul>
+{% endcapture %}
+
+{% include row-two-cards.html
+   left_title="Welcome"
+   left_md=welcome_body
+   right_title="Recent News"
+   right_md=news_body %}
 <!-- endsection -->

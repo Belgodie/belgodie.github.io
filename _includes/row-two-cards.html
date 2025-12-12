@@ -1,0 +1,44 @@
+{% comment %}
+  Two-card row. Options:
+  - left_md / right_md: Markdown strings rendered in identical stacked-card markup
+  - left_include / right_include: fallback to include files
+{% endcomment %}
+<div class="home-split-cards">
+  {% if include.left_md %}
+    <section class="stacked-card">
+      <article class="page stacked-card__article">
+        <div class="page__inner-wrap">
+          {% if include.left_title %}
+            <header class="stacked-card__header">
+              <h2 class="page__title">{{ include.left_title }}</h2>
+            </header>
+          {% endif %}
+          <section class="stacked-card__body page__content">
+            {{ include.left_md | markdownify }}
+          </section>
+        </div>
+      </article>
+    </section>
+  {% elsif include.left_include %}
+    {% include {{ include.left_include }} %}
+  {% endif %}
+
+  {% if include.right_md %}
+    <section class="stacked-card">
+      <article class="page stacked-card__article">
+        <div class="page__inner-wrap">
+          {% if include.right_title %}
+            <header class="stacked-card__header">
+              <h2 class="page__title">{{ include.right_title }}</h2>
+            </header>
+          {% endif %}
+          <section class="stacked-card__body page__content">
+            {{ include.right_md | markdownify }}
+          </section>
+        </div>
+      </article>
+    </section>
+  {% elsif include.right_include %}
+    {% include {{ include.right_include }} %}
+  {% endif %}
+</div>
