@@ -4,19 +4,14 @@ layout: stacked
 permalink: /phd-members/
 author_profile: true
 two_column: false
+fields_members:
+  - research
+  - education
+  - email
 sections:
   - title: "Ph.D. Members"
     id: "phd-members"
+    data_title: "PhD Members"
+    include: datacard-section.html
 ---
-{% assign fields_members = "Research Areas:research,Education:education,E-mail:email" | split: "," %}
-{% assign phd_section = site.data.datacards.members.sections | where: "title", "PhD Members" | first %}
-
-<!-- section: phd-members -->
-{% include cards/generic-cards.html
-   items=phd_section.members
-   fields=fields_members
-   title_key="name"
-   subtitle_key="role"
-   photo_key="photo"
-   two_column=page.two_column %}
-<!-- endsection -->
+<!-- Content handled by datacard-section.html include via stacked layout -->

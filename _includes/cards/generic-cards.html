@@ -2,7 +2,7 @@
   Generic card renderer.
   Params:
     - items: array of objects to render
-    - fields: array of "Label:key" strings
+    - fields: array of keys to display, labels auto-generated from keys
     - title_key: key for main title (string)
     - subtitle_key: key for subtitle (optional)
     - photo_key: key for photo/url (optional)
@@ -52,10 +52,8 @@
           {% endif %}
           <div class="group-member__divider" aria-hidden="true"></div>
 
-          {% for field in fields_raw %}
-            {% assign parts = field | split: ':' %}
-            {% assign label = parts[0] | strip %}
-            {% assign key = parts[1] | strip %}
+          {% for key in fields_raw %}
+            {% assign label = key | replace: '_', ' ' | capitalize %}
             {% assign value = item[key] %}
             {% if value %}
               <div class="group-member__row">

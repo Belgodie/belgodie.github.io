@@ -1,0 +1,24 @@
+{%- comment -%}
+  Generic datacard section renderer.
+  Expects to be called from stacked layout with `section` passed in.
+  Pulls data from _data/datacards/members.yml by title (data_title or title).
+  Field and two_column priority:
+    section.fields -> include.fields -> page.fields_members -> fallback (none)
+    section.two_column -> include.two_column -> page.two_column
+{%- endcomment -%}
+{%- assign section_title = include.section.data_title | default: include.section.title -%}
+{%- assign section_data = site.data.datacards.members.sections | where: "title", section_title | first -%}
+{%- assign fields = include.section.fields | default: include.fields | default: page.fields_members | default: site.data.empty_array -%}
+{%- assign cards_two_col = include.section.two_column | default: include.two_column | default: page.two_column -%}
+
+{%- if section_data and section_data.members -%}
+  {%- include cards/generic-cards.html
+     items=section_data.members
+     fields=fields
+     title_key="name"
+     subtitle_key="role"
+     photo_key="photo"
+     two_column=cards_two_col -%}
+{%- else -%}
+  <p class="group-member__empty">No items to display.</p>
+{%- endif -%}
