@@ -1,0 +1,83 @@
+{% comment %}
+  Generic hero carousel
+  Params:
+    - slides: array of { image, text, bgcolor, bgopacity, textcolor } (text optional, colors optional)
+    - id: optional id/label suffix
+    - interval: autoplay ms (default 6500)
+{% endcomment %}
+{% assign slides = include.slides | default: site.data.empty_array %}
+{% assign carousel_id = include.id | default: 'hero-carousel' %}
+{% assign interval_ms = include.interval | default: 6500 %}
+
+{% if slides and slides.size > 0 %}
+<div class="hero-carousel" data-interval="{{ interval_ms | escape }}" aria-label="Research highlights carousel">
+  <div class="hero-carousel__viewport">
+    <div class="hero-carousel__slides">
+      {% for slide in slides %}
+      <div class="hero-carousel__slide{% if forloop.first %} is-active{% endif %}">
+        <img src="{{ slide.image | relative_url }}" alt="{{ slide.title }}">
+      </div>
+      {% endfor %}
+    </div>
+    <div class="hero-carousel__captions">
+      {% for slide in slides %}
+        {% assign txt = slide.text | to_s | strip %}
+        {% if txt != '' %}
+          <div class="hero-carousel__caption{% if forloop.first %} is-active{% endif %}">
+            {% assign bg_raw = slide.bgcolor | to_s | strip %}
+            {% assign bg_color = 'rgba(0,0,0,0.55)' %}
+            {% if slide.bgopacity %}
+              {% if bg_raw contains 'rgb(' %}
+                {% assign temp = bg_raw | replace: 'rgb(', 'rgba(' %}
+                {% assign bg_color = temp | replace: ')', ', ' | append: slide.bgopacity | append: ')' %}
+              {% elsif bg_raw != '' %}
+                {% assign bg_color = bg_raw %}
+              {% else %}
+                {% assign bg_color = 'rgba(0,0,0,' | append: slide.bgopacity | append: ')' %}
+              {% endif %}
+            {% elsif bg_raw != '' %}
+              {% assign bg_color = bg_raw %}
+            {% endif %}
+            {% assign txt_color = slide.textcolor | default: '#ffffff' %}
+            <div class="hero-carousel__caption-inner" style="background: {{ bg_color }}; color: {{ txt_color }};">
+              <p>{{ txt }}</p>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  <div class="hero-carousel__controls" aria-hidden="true">
+    <button class="hero-carousel__btn hero-carousel__btn--prev" type="button" aria-label="Previous slide">‹</button>
+    <button class="hero-carousel__btn hero-carousel__btn--next" type="button" aria-label="Next slide">›</button>
+  </div>
+</div>
+<script>
+(function() {
+  if (window.__heroCarouselInit) return;
+  window.__heroCarouselInit = true;
+  const initCarousels = () => {
+    document.querySelectorAll('.hero-carousel').forEach(carousel => {
+      const slides = Array.from(carousel.querySelectorAll('.hero-carousel__slide'));
+      const captions = Array.from(carousel.querySelectorAll('.hero-carousel__caption'));
+      if (!slides.length) return;
+      let current = 0;
+      const activate = (idx) => {
+        slides[current]?.classList.remove('is-active');
+        captions[current]?.classList.remove('is-active');
+        current = (idx + slides.length) % slides.length;
+        slides[current]?.classList.add('is-active');
+        captions[current]?.classList.add('is-active');
+      };
+      carousel.querySelector('.hero-carousel__btn--prev')?.addEventListener('click', () => activate(current - 1));
+      carousel.querySelector('.hero-carousel__btn--next')?.addEventListener('click', () => activate(current + 1));
+      const interval = parseInt(carousel.dataset.interval || '6500', 10);
+      if (!isNaN(interval) && interval > 0) {
+        setInterval(() => activate(current + 1), interval);
+      }
+    });
+  };
+  document.addEventListener('DOMContentLoaded', initCarousels);
+})();
+</script>
+{% endif %}

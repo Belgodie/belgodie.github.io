@@ -1,0 +1,13 @@
+ - title: "Bio-inspired soft microgripper"
+   journal: "Soft Robotics"
+   authors: "A. Author, B. Author, C. Author"
+   published: "2024"
+   link: "https://doi.org/10.1234/example"
+   photo: "/images/pubs/gripper.png"
+
+ - title: "Wireless organoid interface"
+   journal: "Nature Electronics"
+   authors: "D. Author, E. Author"
+   published: "2023"
+   link: "https://doi.org/10.5678/example"
+   photo: "/images/pubs/organoid.png"

@@ -1,0 +1,69 @@
+{% assign sections = include.sections | default: site.data.datacards.members.sections | default: site.data.empty_array %}
+{% assign two_column = include.two_column | default: false %}
+
+{% for section in sections %}
+<div class="group-section">
+  {% unless include.hide_section_title %}
+    <h2 class="group-section__title">{{ section.title | default: "Members" }}</h2>
+  {% endunless %}
+
+  {% if section.members and section.members.size > 0 %}
+    {% assign list_class = "group-list" %}
+    {% if two_column %}
+      {% assign list_class = list_class | append: " group-list--two" %}
+    {% endif %}
+    <div class="{{ list_class }}">
+      {% for member in section.members %}
+        {% assign photo_src = member.photo | default: member.image %}
+        <div class="group-member">
+          <div class="group-member__photo{% if photo_src %} has-photo{% endif %}" data-initials="{{ member.initials | default: '??' }}" aria-hidden="true">
+            {% if photo_src %}
+              <img src="{{ photo_src | relative_url }}" alt="{{ member.name }} photo" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="group-member__info">
+            <h3 class="group-member__name">{{ member.name }}</h3>
+            {% if member.role %}
+            <div class="group-member__role">{{ member.role }}</div>
+            {% endif %}
+            <div class="group-member__divider" aria-hidden="true"></div>
+
+            {% if member.research %}
+            <div class="group-member__row">
+              <div class="group-member__label">Research Areas</div>
+              <div class="group-member__text">{{ member.research }}</div>
+            </div>
+            {% endif %}
+
+            {% if member.education %}
+            <div class="group-member__row">
+              <div class="group-member__label">Education</div>
+              <div class="group-member__text">
+                {% if member.education.first %}
+                  {% for edu in member.education %}
+                    <div>{{ edu }}</div>
+                  {% endfor %}
+                {% else %}
+                  {{ member.education }}
+                {% endif %}
+              </div>
+            </div>
+            {% endif %}
+
+            {% if member.email %}
+            <div class="group-member__row">
+              <div class="group-member__label">E-mail</div>
+              <div class="group-member__text">
+                <a href="mailto:{{ member.email }}">{{ member.email }}</a>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="group-member__empty">No members listed yet.</p>
+  {% endif %}
+</div>
+{% endfor %}

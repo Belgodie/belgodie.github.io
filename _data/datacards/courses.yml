@@ -1,0 +1,9 @@
+ - class: "EECS 210: Intro to Embedded Systems"
+   university: "Example University"
+   description: "Foundations of microcontrollers, interrupts, and low-level I/O."
+
+
+ - class: "BIOE 315: Bioinstrumentation"
+   university: "Example Tech"
+   description: "Sensors, conditioning circuits, and data acquisition for biomedical systems."
+

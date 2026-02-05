@@ -11,15 +11,19 @@
     <div class="hero-content">
       <div class="hero-left">
         <div class="hero-avatar">
-          {% if author.avatar contains "://" %}
-            <img src="{{ author.avatar }}" alt="{{ author.name }}" />
-          {% else %}
-            <img src="{{ author.avatar | prepend: "/images/" | prepend: base_path }}" alt="{{ author.name }}" />
-          {% endif %}
+          <a href="{{ base_path }}/" aria-label="Home">
+            {% if author.avatar contains "://" %}
+              <img src="{{ author.avatar }}" alt="{{ author.name }}" />
+            {% else %}
+              <img src="{{ author.avatar | prepend: "/images/" | prepend: base_path }}" alt="{{ author.name }}" />
+            {% endif %}
+          </a>
         </div>
 
         <div class="hero-info">
-          <h1 class="hero-name">{{ author.name }}</h1>
+          <h1 class="hero-name">
+            <a href="{{ base_path }}/" aria-label="Home">{{ author.name }}</a>
+          </h1>
           {% assign hero_title = author.hero_title %}
           {% assign affiliation_main = author.affiliation_main %}
           {% assign affiliation_secondary = author.affiliation_secondary %}

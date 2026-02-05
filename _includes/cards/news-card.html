@@ -1,0 +1,21 @@
+<section class="stacked-card">
+  <article class="page stacked-card__article">
+    <div class="page__inner-wrap">
+      <header class="stacked-card__header">
+        <h2 class="page__title">{{ include.title | default: "Recent News" }}</h2>
+      </header>
+      <section class="stacked-card__body page__content">
+        {% assign limit = include.limit | default: 5 %}
+        {% assign news_items = site.news | sort: "date" | reverse | slice: 0, limit %}
+        <ul class="home-news__list">
+          {% for item in news_items %}
+          <li class="home-news__item">
+            <div class="home-news__title">{{ item.title }}</div>
+            <div class="home-news__date">{{ item.date | date: "%B %-d, %Y" }}</div>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+    </div>
+  </article>
+</section>
