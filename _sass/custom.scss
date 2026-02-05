@@ -59,6 +59,7 @@
   box-sizing: border-box;
 }
 
+
 @media (max-width: 768px) {
   #main {
   width: 100%;
@@ -524,18 +525,19 @@ section.page__content div.projects-grid,
   position: relative;
   width: 100%;
   max-width: var(--content-max-width);
-  margin: 0 auto clamp(1.25rem, 1.8vw, 2rem);
+  margin: 0 auto clamp(1.2rem, 1.8vw, 2rem);
   border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 18px 36px rgba(2, 69, 137, 0.16), 0 6px 12px rgba(0,0,0,0.08);
+  overflow: visible;
+  box-shadow: none;
   background: #ffffff;
 }
 
 .hero-carousel__viewport {
   position: relative;
   width: 100%;
-  padding: 0.5rem;
-  background: linear-gradient(180deg, rgba(0,180,216,0.12), rgba(2,69,137,0.05));
+  padding: 0;
+  background: transparent;
+  margin-bottom: 0.35rem;
 }
 
 .hero-carousel__slides {
@@ -544,8 +546,11 @@ section.page__content div.projects-grid,
   overflow: hidden;
   border-radius: 14px;
   background: #ffffff;
-  min-height: 320px;
+  aspect-ratio: 3 / 2;
+  height: auto;
   position: relative;
+  box-shadow: 0 18px 36px rgba(2, 69, 137, 0.16), 0 6px 12px rgba(0,0,0,0.08);
+  --caption-h: 3.2rem;
 }
 
 .hero-carousel__slide {
@@ -564,23 +569,36 @@ section.page__content div.projects-grid,
   position: absolute;
 }
 
+.hero-carousel__image {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
 .hero-carousel__slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  background: transparent;
+  position: relative;
+  z-index: 1;
+  border-radius: 0;
 }
 
 .hero-carousel__captions {
   position: absolute;
-  left: 1rem;
-  bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  width: auto;
-  max-width: calc(100% - 2rem);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.6rem;
+  margin: 0;
+  width: 100%;
   pointer-events: none;
+  z-index: 2;
 }
 
 .hero-carousel__caption {
@@ -588,14 +606,15 @@ section.page__content div.projects-grid,
 }
 
 .hero-carousel__caption-inner {
-  background: rgba(0,0,0,0.55);
-  border-radius: 12px;
-  padding: 0.75rem 0.95rem;
-  box-shadow: none;
-  width: auto;
-  max-width: 100%;
+  background: var(--caption-bg, rgba(0,0,0,0.55));
+  border: none;
+  border-radius: 0;
+  padding: 0.7rem 0.95rem;
+  box-shadow: 0 8px 16px rgba(2, 69, 137, 0.12);
+  width: 100%;
   min-height: auto;
   pointer-events: none;
+  padding-right: 3.5rem; /* keep text clear of right arrow */
 }
 
 .hero-carousel__caption h4 {
@@ -618,19 +637,20 @@ section.page__content div.projects-grid,
 .hero-carousel__controls {
   position: absolute;
   top: 50%;
-  left: 0;
-  right: 0;
+  left: -0.6rem;
+  right: -0.6rem;
   display: flex;
   justify-content: space-between;
-  padding: 0 0.4rem;
+  padding: 0 0.6rem;
   transform: translateY(-50%);
   pointer-events: none;
+  z-index: 3;
 }
 
 .hero-carousel__btn {
   pointer-events: auto;
   border: none;
-  background: rgba(255,255,255,0.9);
+  background: transparent;
   color: #024589;
   width: 42px;
   height: 42px;
@@ -638,53 +658,74 @@ section.page__content div.projects-grid,
   font-size: 1.35rem;
   line-height: 1;
   cursor: pointer;
-  box-shadow: 0 6px 12px rgba(2,69,137,0.18);
+  box-shadow: none;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .hero-carousel__btn:hover {
+  background: rgba(255,255,255,0.9);
   transform: translateY(-2px);
-  box-shadow: 0 10px 16px rgba(2,69,137,0.22);
+  box-shadow: none;
 }
 
 .hero-carousel__dots {
-  display: inline-flex;
-  gap: 0.45rem;
-  padding: 0.65rem 0.9rem;
-  position: absolute;
-  bottom: 0.25rem;
-  right: 0.5rem;
-  background: rgba(255,255,255,0.9);
-  border-radius: 18px;
-  box-shadow: 0 6px 12px rgba(2,69,137,0.14);
+  display: flex;
+  width: 100%;
+  gap: 0.4rem;
+  padding: 0.3rem 0.4rem;
+  position: relative;
+  margin: 0;
+  transform: none;
+  justify-content: center;
+  background: transparent;
+  border-radius: 999px;
+  box-shadow: none;
+  z-index: 2;
 }
 
 .hero-carousel__dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  margin: 0;
+  border-radius: 999px;
   border: none;
   background: rgba(2,69,137,0.25);
   cursor: pointer;
+  display: block;
+  line-height: 0;
+  font-size: 0;
+  aspect-ratio: 1 / 1;
 }
 
 .hero-carousel__dot.is-active {
-  background: linear-gradient(90deg, #00b4d8, #024589);
+  background: #024589;
 }
 
 @media (max-width: 768px) {
   .hero-carousel__slides {
-    min-height: 220px;
+    aspect-ratio: 3 / 2;
+    height: auto;
+    --caption-h: 2.8rem;
+  }
+  .hero-carousel__image {
+    padding: 0;
   }
   .hero-carousel__btn {
     width: 36px;
     height: 36px;
     font-size: 1.1rem;
   }
+  .hero-carousel__captions {
+    bottom: 0;
+    padding: 0.5rem;
+  }
+  .hero-carousel__caption-inner {
+    padding-right: 2.75rem;
+  }
   .hero-carousel__dots {
-    right: 0.35rem;
-    bottom: 0.15rem;
-    padding: 0.45rem 0.7rem;
+    margin: 0;
+    padding: 0.3rem 0.45rem;
   }
 }
 
@@ -693,6 +734,12 @@ section.page__content div.projects-grid,
   grid-template-columns: 1.2fr 1fr;
   gap: clamp(0.9rem, 1.5vw, 1.4rem);
   align-items: start;
+  margin-bottom: 0;
+}
+
+/* Tighten bottom padding for the Research & Recent Work section only */
+#research-highlights .page__inner-wrap {
+  padding-bottom: 0;
 }
 
 .home-hero-row__right {
@@ -857,6 +904,16 @@ section.page__content div.projects-grid,
 }
 .home-split-cards .stacked-card__body {
   flex: 1;
+}
+
+/* Trim extra bottom space in stacked card bodies */
+.stacked-card__body.page__content {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.stacked-card__body.page__content > :last-child {
+  margin-bottom: 0;
 }
 
 /* Image with text wrapping (Jeong-style) */

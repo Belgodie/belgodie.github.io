@@ -3,11 +3,11 @@
   Params:
     - slides: array of { image, text, bgcolor, bgopacity, textcolor } (text optional, colors optional)
     - id: optional id/label suffix
-    - interval: autoplay ms (default 6500)
+    - interval: autoplay ms (default 0 = manual only)
 {% endcomment %}
 {% assign slides = include.slides | default: site.data.empty_array %}
 {% assign carousel_id = include.id | default: 'hero-carousel' %}
-{% assign interval_ms = include.interval | default: 6500 %}
+{% assign interval_ms = include.interval | default: 0 %}
 
 {% if slides and slides.size > 0 %}
 <div class="hero-carousel" data-interval="{{ interval_ms | escape }}" aria-label="Research highlights carousel">
@@ -15,13 +15,25 @@
     <div class="hero-carousel__slides">
       {% for slide in slides %}
       <div class="hero-carousel__slide{% if forloop.first %} is-active{% endif %}">
-        <img src="{{ slide.image | relative_url }}" alt="{{ slide.title }}">
+        {% assign alt_text = slide.alt | default: slide.title | default: slide.text | default: 'Featured work slide' %}
+        <div class="hero-carousel__image">
+          <img src="{{ slide.image | relative_url }}" alt="{{ alt_text }}">
+        </div>
       </div>
       {% endfor %}
     </div>
     <div class="hero-carousel__captions">
       {% for slide in slides %}
         {% assign txt = slide.text | to_s | strip %}
+        {% if txt == '' %}
+          {% assign txt = slide.title | to_s | strip %}
+        {% endif %}
+        {% if txt == '' and slide.pub_slug %}
+          {% assign pub = site.publications | where: "slug", slide.pub_slug | first %}
+          {% if pub and pub.title %}
+            {% assign txt = pub.title %}
+          {% endif %}
+        {% endif %}
         {% if txt != '' %}
           <div class="hero-carousel__caption{% if forloop.first %} is-active{% endif %}">
             {% assign bg_raw = slide.bgcolor | to_s | strip %}
@@ -39,7 +51,7 @@
               {% assign bg_color = bg_raw %}
             {% endif %}
             {% assign txt_color = slide.textcolor | default: '#ffffff' %}
-            <div class="hero-carousel__caption-inner" style="background: {{ bg_color }}; color: {{ txt_color }};">
+            <div class="hero-carousel__caption-inner" style="--caption-bg: {{ bg_color }}; color: {{ txt_color }};">
               <p>{{ txt }}</p>
             </div>
           </div>
@@ -48,8 +60,19 @@
     </div>
   </div>
   <div class="hero-carousel__controls" aria-hidden="true">
-    <button class="hero-carousel__btn hero-carousel__btn--prev" type="button" aria-label="Previous slide">‹</button>
-    <button class="hero-carousel__btn hero-carousel__btn--next" type="button" aria-label="Next slide">›</button>
+    <button class="hero-carousel__btn hero-carousel__btn--prev" type="button" aria-label="Previous slide"><span aria-hidden="true">&lsaquo;</span></button>
+    <button class="hero-carousel__btn hero-carousel__btn--next" type="button" aria-label="Next slide"><span aria-hidden="true">&rsaquo;</span></button>
+  </div>
+  <div class="hero-carousel__dots" role="tablist" aria-label="Carousel slides">
+    {% for slide in slides %}
+      <button
+        class="hero-carousel__dot{% if forloop.first %} is-active{% endif %}"
+        type="button"
+        role="tab"
+        aria-label="Go to slide {{ forloop.index }}"
+        aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+      </button>
+    {% endfor %}
   </div>
 </div>
 <script>
@@ -60,18 +83,24 @@
     document.querySelectorAll('.hero-carousel').forEach(carousel => {
       const slides = Array.from(carousel.querySelectorAll('.hero-carousel__slide'));
       const captions = Array.from(carousel.querySelectorAll('.hero-carousel__caption'));
+      const dots = Array.from(carousel.querySelectorAll('.hero-carousel__dot'));
       if (!slides.length) return;
       let current = 0;
       const activate = (idx) => {
         slides[current]?.classList.remove('is-active');
         captions[current]?.classList.remove('is-active');
+        dots[current]?.classList.remove('is-active');
+        dots[current]?.setAttribute('aria-selected', 'false');
         current = (idx + slides.length) % slides.length;
         slides[current]?.classList.add('is-active');
         captions[current]?.classList.add('is-active');
+        dots[current]?.classList.add('is-active');
+        dots[current]?.setAttribute('aria-selected', 'true');
       };
       carousel.querySelector('.hero-carousel__btn--prev')?.addEventListener('click', () => activate(current - 1));
       carousel.querySelector('.hero-carousel__btn--next')?.addEventListener('click', () => activate(current + 1));
-      const interval = parseInt(carousel.dataset.interval || '6500', 10);
+      dots.forEach((dot, idx) => dot.addEventListener('click', () => activate(idx)));
+      const interval = parseInt(carousel.dataset.interval || '0', 10);
       if (!isNaN(interval) && interval > 0) {
         setInterval(() => activate(current + 1), interval);
       }
