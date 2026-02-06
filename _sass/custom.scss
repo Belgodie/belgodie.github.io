@@ -546,7 +546,7 @@ section.page__content div.projects-grid,
   overflow: hidden;
   border-radius: 14px;
   background: #ffffff;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: var(--carousel-aspect, 3 / 2);
   height: auto;
   position: relative;
   box-shadow: none;
@@ -705,7 +705,7 @@ section.page__content div.projects-grid,
 
 @media (max-width: 768px) {
   .hero-carousel__slides {
-    aspect-ratio: 3 / 2;
+    aspect-ratio: var(--carousel-aspect, 3 / 2);
     height: auto;
     --caption-h: 2.8rem;
   }
@@ -940,13 +940,17 @@ section.page__content div.projects-grid,
   width: 150px;
   height: 190px;
   object-fit: cover;
-  margin: 0 1rem 0.5rem 0;
+  margin: 0 1rem 0 0;
   border-radius: 10px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
 .wrap-card__text {
   line-height: 1.55;
+}
+
+.wrap-card__text > :first-child {
+  margin-top: 0;
 }
 
 @media (max-width: 640px) {

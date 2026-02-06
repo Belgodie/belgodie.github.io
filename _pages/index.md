@@ -5,15 +5,16 @@ permalink: /
 author_profile: true
 two_column: true
 carousel_slides:
-  - image: "/images/projects/PlatformOverview.webp"
-    text: "Hola"
+  - image: "/images/pubsfigures/DeviceDone2.jpeg"
+    text: "Organoid Platform for Drug Screening (2026)"
+    bgopacity: 0.25
+    textcolor: "#ffffff"
+  - image: "/images/pubsfigures/Review1_Fig1_2.svg"
+    text: "Review on Sensor Technologies for Organoids (2024)"
     #bgcolor: "rgba(255, 0, 0, 0.25)"
     bgopacity: 0.25
     textcolor: "#ffffffff"
-  - image: "/images/projects/MatlabProject.svg"
-    text: "Spike Sorting Toolkit"
-    bgopacity: 0.25
-    textcolor: "#ffffff"
+carousel_aspect: "3/ 2"
 sections:
   - title: ""
     id: "welcome-news"
@@ -25,7 +26,7 @@ sections:
 <!-- section: research-highlights -->
 <div class="home-hero-row">
   <div class="home-hero-row__left">
-    {% include components/hero-carousel.html slides=page.carousel_slides %}
+    {% include components/hero-carousel.html slides=page.carousel_slides aspect=page.carousel_aspect %}
   </div>
   <div class="home-hero-row__right">
     {% assign recent = site.publications %}
@@ -67,9 +68,9 @@ sections:
 <!-- section: welcome-news -->
 {% capture welcome_body %}
 <div class="wrap-card">
-  <img src="{{ '/images/welcome.png' | relative_url }}" alt="Welcome" class="wrap-card__img">
+  <img src="{{ '/images/pubsfigures/CoverHD_Final (1).jpg' | relative_url }}" alt="Welcome" class="wrap-card__img">
   <div class="wrap-card__text">
-    Welcome to my research page! Here you will find information about my work in microfluidic systems, biosensors, and organ-on-chip technologies. Feel free to explore my projects, publications, and get in touch if you are interested in collaborating or learning more. I am especially interested in collaborations that bring together microfabrication, microfluidics, and signal processing.
+    Here you will find information about my work in micro/nano technology, biosensors, and organ-on-chip technologies. Feel free to explore my work, and get in touch if you are interested in collaborating or learning more. I am especially interested in collaborations that bring together nanotechnology, microfabrication, material science, and health technologies.
   </div>
 </div>
 {% endcapture %}

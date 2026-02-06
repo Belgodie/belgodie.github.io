@@ -8,9 +8,10 @@
 {% assign slides = include.slides | default: site.data.empty_array %}
 {% assign carousel_id = include.id | default: 'hero-carousel' %}
 {% assign interval_ms = include.interval | default: 0 %}
+{% assign aspect_ratio = include.aspect | default: '3 / 2' %}
 
 {% if slides and slides.size > 0 %}
-<div class="hero-carousel" data-interval="{{ interval_ms | escape }}" aria-label="Research highlights carousel">
+<div class="hero-carousel" data-interval="{{ interval_ms | escape }}" aria-label="Research highlights carousel" style="--carousel-aspect: {{ aspect_ratio }};">
   <div class="hero-carousel__viewport">
     <div class="hero-carousel__slides">
       {% for slide in slides %}
