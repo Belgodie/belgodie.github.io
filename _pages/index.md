@@ -5,12 +5,12 @@ permalink: /
 author_profile: true
 two_column: true
 carousel_slides:
-  - image: "/images/pubsfigures/DeviceDone2.jpeg"
+  - image: "/images/pubsfigures/DeviceDone3.jpeg"
     text: "Organoid Platform for Drug Screening (2026)"
     bgopacity: 0.25
     textcolor: "#ffffff"
   - image: "/images/pubsfigures/Review1_Fig1_2.svg"
-    text: "Review on Sensor Technologies for Organoids (2024)"
+    text: "Sensor Technologies for Organoids Roadmap (2024)"
     #bgcolor: "rgba(255, 0, 0, 0.25)"
     bgopacity: 0.25
     textcolor: "#ffffffff"
@@ -70,7 +70,7 @@ sections:
 <div class="wrap-card">
   <img src="{{ '/images/pubsfigures/CoverHD_Final (1).jpg' | relative_url }}" alt="Welcome" class="wrap-card__img">
   <div class="wrap-card__text">
-    Here you will find information about my work in micro/nano technology, biosensors, and organ-on-chip technologies. Feel free to explore my work, and get in touch if you are interested in collaborating or learning more. I am especially interested in collaborations that bring together nanotechnology, microfabrication, material science, and health technologies.
+    Here you can find my work in micro/nano particles, biosensors, and organ-on-chip systems. My focus lies on the integration of nanotechnology, microfabrication, and material science within health technologies. I welcome inquiries regarding professional collaborations or opportunities to discuss this research further.
   </div>
 </div>
 {% endcapture %}

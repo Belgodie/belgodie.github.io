@@ -652,10 +652,12 @@ section.page__content div.projects-grid,
   border: none;
   background: transparent;
   color: #024589;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  font-size: 1.35rem;
+  width: auto;
+  height: auto;
+  padding: 0.9rem 1rem;
+  border-radius: 0;
+  font-size: 1.8rem;
+  font-weight: 800;
   line-height: 1;
   cursor: pointer;
   box-shadow: none;
@@ -663,9 +665,17 @@ section.page__content div.projects-grid,
 }
 
 .hero-carousel__btn:hover {
-  background: rgba(255,255,255,0.9);
-  transform: translateY(-2px);
+  background: rgba(255,255,255,0.85);
+  transform: none;
   box-shadow: none;
+}
+
+.hero-carousel__btn--prev {
+  border-radius: 4px 0 0 4px;
+}
+
+.hero-carousel__btn--next {
+  border-radius: 0 4px 4px 0;
 }
 
 .hero-carousel__dots {
@@ -713,9 +723,9 @@ section.page__content div.projects-grid,
     padding: 0;
   }
   .hero-carousel__btn {
-    width: 36px;
-    height: 36px;
-    font-size: 1.1rem;
+    padding: 0.7rem 0.85rem;
+    font-size: 1.4rem;
+    font-weight: 800;
   }
   .hero-carousel__captions {
     bottom: 0;
@@ -889,6 +899,11 @@ section.page__content div.projects-grid,
   gap: clamp(1rem, 1.6vw, 1.5rem);
   margin-top: clamp(1.2rem, 2vw, 1.8rem);
   align-items: stretch;
+}
+
+/* Strictly align Welcome/Recent News titles with other page titles */
+#welcome-news .home-split-cards {
+  margin-top: 0;
 }
 
 /* Normalize first element margins inside the home split row */

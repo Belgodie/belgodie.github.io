@@ -20,7 +20,7 @@ permalink: /research/
 #   link_label_prefix -> optional text prepended to the accessible label for the icon (For screen readers)
 # Any Markdown between <!-- section: id --> and <!-- endsection --> renders inside the card before the auto-generated list.
 sections:
-  - title: "Current Projects"
+  - title: "Previous Projects"
     id: "projects"
     collection: "portfolio"
     filter: "featured"
