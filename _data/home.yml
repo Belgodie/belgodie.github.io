@@ -1,0 +1,26 @@
+carousel:
+  aspect: "3/ 2"
+  slides:
+    - image: "/images/pubsfigures/DeviceDone3.jpeg"
+      text: "Organoid Platform for Drug Screening (2026)"
+      bgopacity: 0.25
+      textcolor: "#ffffff"
+    - image: "/images/pubsfigures/Review1_Fig1_2.svg"
+      text: "Sensor Technologies for Organoids Roadmap (2024)"
+      bgopacity: 0.25
+      textcolor: "#ffffffff"
+
+research_recent:
+  title: "Research & Recent Work"
+  limit: 5
+  pinned_publications: []
+
+welcome:
+  title: "Welcome"
+  image: "/images/pubsfigures/CoverHD_Final (1).jpg"
+  image_alt: "Welcome"
+  text: "Here you can find my work in micro/nano particles, biosensors, and organ-on-chip systems. My focus lies on the integration of nanotechnology, microfabrication, and material science within health technologies. I welcome inquiries regarding professional collaborations or opportunities to discuss this research further."
+
+news:
+  title: "Recent News"
+  limit: 5

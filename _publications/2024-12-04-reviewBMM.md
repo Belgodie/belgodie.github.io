@@ -8,6 +8,7 @@ authors:
   - key: hyunjoo
 collection: publications
 category: reviews
+publication_id: review-bmm-2024
 permalink: /publication/2025-06-08-reviewBMM-1
 date: 2024-12-04
 venue: 'Micro and Nano Syst Lett'

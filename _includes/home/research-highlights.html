@@ -1,0 +1,41 @@
+{% assign home = site.data.home %}
+<div class="home-hero-row">
+  <div class="home-hero-row__left">
+    {% include components/hero-carousel.html slides=home.carousel.slides aspect=home.carousel.aspect %}
+  </div>
+  <div class="home-hero-row__right">
+    {% assign recent = site.publications %}
+    {% assign pinned_publications = home.research_recent.pinned_publications | default: home.research_recent.slugs | default: site.data.empty_array %}
+    {% if pinned_publications and pinned_publications.size > 0 %}
+      {% assign recent = site.publications | where_exp: "doc", "pinned_publications contains doc.publication_id or pinned_publications contains doc.slug" %}
+    {% endif %}
+    {% assign recent = recent | sort: "date" | reverse %}
+    {% assign recent_limit = home.research_recent.limit | default: 5 %}
+    {% assign recent = recent | slice: 0, recent_limit %}
+    <div class="recent-work">
+      <ul class="recent-work__list">
+        {% for pub in recent %}
+          <li class="recent-work__item">
+            <div class="recent-work__title">
+              {% if pub.paperurl %}
+                <a href="{{ pub.paperurl }}" target="_blank" rel="noopener">{{ pub.title }}</a>
+              {% else %}
+                {{ pub.title }}
+              {% endif %}
+            </div>
+            <div class="recent-work__meta">
+              {% assign year = pub.date | date: "%Y" %}
+              <span class="recent-work__year">{{ year }}</span>
+              {% if pub.venue %}
+                &middot; <span class="recent-work__venue">{{ pub.venue }}</span>
+              {% endif %}
+              {% if pub.status %}
+                &middot; <span class="recent-work__status">{{ pub.status }}</span>
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
