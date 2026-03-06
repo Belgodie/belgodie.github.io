@@ -977,3 +977,24 @@ section.page__content div.projects-grid,
     height: auto;
   }
 }
+
+/* =====================================================================
+   Surface Contrast
+   ===================================================================== */
+body {
+  background: linear-gradient(180deg, #edf4f8 0%, #e6eff5 100%);
+}
+
+.stacked-layout .page__inner-wrap,
+.page .page__inner-wrap,
+.archive .page__inner-wrap {
+  background: #ffffff;
+  border: 1px solid #cfe0ea;
+  box-shadow: 0 8px 24px rgba(10, 40, 80, 0.08);
+}
+
+/* Research inner cards: make card edges explicit */
+#projects .project-row,
+#projects .project-column {
+  border: 1px solid #cfe0ea;
+}
