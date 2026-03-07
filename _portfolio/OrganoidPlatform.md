@@ -1,6 +1,7 @@
 ---
 title: "Millifluidic Organoid Platform"
 featured: true
+project_group: previous
 excerpt: "Three well millifluidic platform integrating 3D microelectrode arrays for perfused brain organoids that provides uniform shear control, high throughput operation, and reliable multichannel electrophysiology, with applications in organoid media interactions, organoid to organoid communication, disease modeling, and human on a chip studies."
 date: 2026-01-15
 order: 1

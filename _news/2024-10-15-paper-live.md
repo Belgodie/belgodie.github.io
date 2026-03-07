@@ -1,6 +1,5 @@
 ---
-date: 2024-12-04
-title: "Paper Published"
-link: "https://doi.org/10.1186/s40486-024-00216-y"
+date: 2026-01-01
+title: "DTU Start"
 ---
-The review **“Microfabricated sensors for non-invasive, real-time monitoring of organoids”** is now published in *Micro and Nano Systems Letters*.
+Erick has joined the **Technical University of Denmark (DTU)** as a *PhD Student* in Health Technology as part of the **INTELLI-INGEST** consortium.

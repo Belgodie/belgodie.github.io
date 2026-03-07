@@ -994,7 +994,191 @@ body {
 }
 
 /* Research inner cards: make card edges explicit */
+#current-projects .project-row,
+#current-projects .project-column,
 #projects .project-row,
 #projects .project-column {
   border: 1px solid #cfe0ea;
+}
+
+/* Footer funding strip */
+.funding-strip-wrap {
+  margin: 0.65rem 0 0.3rem;
+}
+
+/* Keep footer content aligned with the main content column */
+.page__footer footer {
+  max-width: var(--content-max-width);
+  padding-left: var(--content-side-padding);
+  padding-right: var(--content-side-padding);
+  box-sizing: border-box;
+}
+
+.funding-strip {
+  --funding-logo-height: 48px;
+  /* Footer logo knobs (desktop) */
+  --funding-pill-width-msca: 2.2;
+  --funding-pill-width-eu: 2.6;
+  --funding-pill-width-intelli: 2.4;
+  --funding-scale-msca: 1.5;
+  --funding-scale-eu: 1.5;
+  --funding-scale-intelli: 2.5;
+  /* Footer logo knobs (mobile) */
+  --funding-pill-width-intelli-mobile: 2.1;
+  --funding-scale-msca-mobile: 1.1;
+  --funding-scale-eu-mobile: 1.1;
+  --funding-scale-intelli-mobile: 2.1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  gap: 0.65rem;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  text-decoration: none !important;
+  box-shadow: none;
+}
+
+.funding-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.funding-strip__left,
+.funding-strip__right {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.funding-strip__left {
+  gap: 5rem; /* was effectively 0.65rem */
+}
+
+.funding-strip__right {
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
+/* Move everything in the funding row down a bit */
+.funding-strip {
+  padding-top: 0.4rem;
+}
+
+
+.funding-pill--link {
+  text-decoration: none !important;
+}
+
+.funding-pill--link:hover,
+.funding-pill--link:focus {
+  text-decoration: none !important;
+  opacity: 0.92;
+}
+
+.funding-pill--intelli {
+  height: var(--funding-logo-height);
+  width: calc(var(--funding-logo-height) * var(--funding-pill-width-intelli));
+  overflow: hidden;
+}
+
+.funding-pill--msca {
+  overflow: visible;
+  width: calc(var(--funding-logo-height) * var(--funding-pill-width-msca));
+}
+
+.funding-pill--eu {
+  overflow: visible;
+  width: calc(var(--funding-logo-height) * var(--funding-pill-width-eu));
+}
+
+.funding-strip__logo {
+  display: block;
+  height: var(--funding-logo-height);
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.funding-strip__logo--msca {
+  transform: scale(var(--funding-scale-msca));
+  transform-origin: left center;
+}
+
+.funding-strip__logo--eu {
+  transform: scale(var(--funding-scale-eu));
+}
+
+.funding-strip__logo--intelli {
+  height: var(--funding-logo-height);
+  transform: scale(var(--funding-scale-intelli));
+  transform-origin: center center;
+}
+
+.funding-strip__meta-inline {
+  font-size: 0.7rem;
+  line-height: 1.25;
+  color: #ffffff;
+  opacity: 0.94;
+  margin: 0;
+  white-space: nowrap;
+  text-align: right;
+}
+
+@media (max-width: 1080px) {
+  .funding-strip {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .funding-strip__right {
+    margin-left: 0;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 640px) {
+  .funding-strip {
+    --funding-logo-height: 34px;
+  }
+
+  .funding-strip__meta-inline {
+    white-space: normal;
+    margin-left: 0;
+    margin-top: 0.1rem;
+    width: auto;
+    text-align: left;
+  }
+
+  .funding-pill {
+    padding: 0;
+  }
+
+  .funding-pill--intelli {
+    width: calc(var(--funding-logo-height) * var(--funding-pill-width-intelli-mobile));
+  }
+
+  .funding-strip__logo--intelli {
+    transform: scale(var(--funding-scale-intelli-mobile));
+  }
+
+  .funding-strip__logo--msca {
+    transform: scale(var(--funding-scale-msca-mobile));
+    transform-origin: left center;
+  }
+
+  .funding-strip__logo--eu {
+    transform: scale(var(--funding-scale-eu-mobile));
+    transform-origin: left center;
+  }
 }

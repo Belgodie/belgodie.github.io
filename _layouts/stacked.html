@@ -41,6 +41,11 @@ layout: default
           {% assign documents = documents | where: section.filter, true %}
         {% endif %}
 
+        {% if documents != '' and section.filter_key %}
+          {% assign section_filter_value = section.filter_value | default: true %}
+          {% assign documents = documents | where: section.filter_key, section_filter_value %}
+        {% endif %}
+
         {% assign sort_field = section.sort | default: 'date' %}
         {% if documents != '' and sort_field %}
           {% assign documents = documents | sort: sort_field %}

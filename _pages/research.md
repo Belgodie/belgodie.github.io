@@ -7,6 +7,7 @@ permalink: /research/
 #   id               -> anchor slug and marker used in <!-- section: id -->
 #   collection       -> which Jekyll collection to pull items from (portfolio, publications, news, etc.)
 #   filter           -> optional boolean flag to include items where that front-matter key is true (e.g., featured)
+#   filter_key/value -> optional exact-match filter (e.g., project_group: current)
 #   slugs            -> optional ordered list of specific items to show instead of the whole collection
 #   sort             -> field used for ordering (defaults to date)
 #   order            -> "asc" for ascending; omit for descending
@@ -20,10 +21,23 @@ permalink: /research/
 #   link_label_prefix -> optional text prepended to the accessible label for the icon (For screen readers)
 # Any Markdown between <!-- section: id --> and <!-- endsection --> renders inside the card before the auto-generated list.
 sections:
+  # - title: "Current Projects"
+  #   id: "current-projects"
+  #   collection: "portfolio"
+  #   filter: "featured"
+  #   filter_key: "project_group"
+  #   filter_value: "current"
+  #   sort: "order"
+  #   order: "asc"
+  #   style: "project-row"
+  #   limit: 6
+
   - title: "Previous Projects"
     id: "projects"
     collection: "portfolio"
     filter: "featured"
+    filter_key: "project_group"
+    filter_value: "previous"
     sort: "order"
     order: "asc"
     style: "project-row"
@@ -51,6 +65,9 @@ sections:
   #  content: |
   #      literalmente tu content
 ---
+
+<!-- section: current-projects -->
+<!-- endsection -->
 
 <!-- section: projects -->
 <!-- endsection -->

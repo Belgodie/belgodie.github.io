@@ -19,6 +19,38 @@
 </div>
 {% endif %}
 
-<div class="page__footer-copyright">
-   © {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved. 
+<div class="funding-strip-wrap">
+  <div class="funding-strip funding-strip--logos">
+    <div class="funding-strip__left">
+      <span class="funding-pill funding-pill--msca">
+        <img
+          class="funding-strip__logo funding-strip__logo--msca"
+          src="{{ '/images/Intelli%20Ingest/MSCA30White.png' | relative_url }}"
+          alt="Marie Sklodowska-Curie Actions Doctoral Networks">
+      </span>
+      <span class="funding-pill funding-pill--eu">
+        <img
+          class="funding-strip__logo funding-strip__logo--eu"
+          src="{{ '/images/Intelli%20Ingest/LOGO_CE_EN_RGB_HORIZONTAL_NEG.svg' | relative_url }}"
+          alt="European Commission">
+      </span>
+    </div>
+
+    <div class="funding-strip__right">
+      <span class="funding-strip__meta-inline">
+        Supported by INTELLI-INGEST (MSCA DN GA 101169012; UKRI Horizon Europe Guarantee EP/U536726/1)
+      </span>
+      <a
+        class="funding-pill funding-pill--intelli funding-pill--link"
+        href="https://www.intelli-ingest.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="INTELLI-INGEST project website">
+        <img
+          class="funding-strip__logo funding-strip__logo--intelli"
+          src="{{ '/images/Intelli%20Ingest/IntelliLogo.png' | relative_url }}"
+          alt="INTELLI-INGEST logo">
+      </a>
+    </div>
+  </div>
 </div>

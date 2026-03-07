@@ -19,7 +19,7 @@ welcome:
   title: "Welcome"
   image: "/images/pubsfigures/CoverHD_Final (1).jpg"
   image_alt: "Welcome"
-  text: "Here you can find my work in micro/nano particles, biosensors, and organ-on-chip systems. My focus lies on the integration of nanotechnology, microfabrication, and material science within health technologies. I welcome inquiries regarding professional collaborations or opportunities to discuss this research further."
+  text: "Here you can find my work in micro/nano particles, biosensors, and organ-on-chip systems. My focus lies on the integration of nanotechnology, microfabrication, and material science within health technologies. I welcome <a href='/contact/'>inquiries regarding professional collaborations</a> or opportunities to discuss this research further."
 
 news:
   title: "Recent News"
