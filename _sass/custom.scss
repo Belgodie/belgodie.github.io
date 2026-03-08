@@ -14,6 +14,7 @@
   --content-max-width: 1200px;
   --content-side-padding: clamp(1.25rem, 2vw + 1rem, 2.5rem);
   --content-block-padding: clamp(1.5rem, 1.75vw + 1.25rem, 2.5rem);
+  --site-page-gradient: linear-gradient(180deg, #edf4f8 0%, #e6eff5 100%);
 }
 
 /* Keep layout from shifting when scrollbars appear/disappear */
@@ -981,8 +982,15 @@ section.page__content div.projects-grid,
 /* =====================================================================
    Surface Contrast
    ===================================================================== */
+html {
+  /* Keep gradient visible during iOS rubber-band overscroll */
+  background: var(--site-page-gradient);
+  background-color: #e6eff5;
+}
+
 body {
-  background: linear-gradient(180deg, #edf4f8 0%, #e6eff5 100%);
+  background: var(--site-page-gradient);
+  min-height: 100dvh;
 }
 
 .stacked-layout .page__inner-wrap,
