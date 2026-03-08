@@ -802,21 +802,44 @@ section.page__content div.projects-grid,
 }
 
 .recent-work__title {
-  font-weight: 700;
-  color: #01245d;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
   margin-bottom: 0.2rem;
   font-size: 1rem;
 }
 
-.recent-work__title a {
-  color: inherit;
-  text-decoration: none;
-  font-weight: inherit;
+.recent-work__title-text {
+  font-weight: 700;
+  color: #01245d;
+  flex: 1 1 auto;
 }
 
-.recent-work__title a:hover {
-  color: #013a70;
-  text-decoration: none;
+.recent-work__title-link,
+.recent-work__title-link:visited,
+.recent-work__title-link:hover,
+.recent-work__title-link:focus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  line-height: 1;
+  color: rgba(2, 69, 137, 0.85);
+  text-decoration: none !important;
+  flex: 0 0 auto;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.recent-work__title-link i {
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+.recent-work__title-link:hover,
+.recent-work__title-link:focus {
+  color: rgba(0, 119, 182, 0.95);
+  transform: translateY(-1px);
 }
 
 .recent-work__meta {

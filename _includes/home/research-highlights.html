@@ -17,10 +17,16 @@
         {% for pub in recent %}
           <li class="recent-work__item">
             <div class="recent-work__title">
+              <span class="recent-work__title-text">{{ pub.title }}</span>
               {% if pub.paperurl %}
-                <a href="{{ pub.paperurl }}" target="_blank" rel="noopener">{{ pub.title }}</a>
-              {% else %}
-                {{ pub.title }}
+                <a class="recent-work__title-link"
+                   href="{{ pub.paperurl }}"
+                   target="_blank"
+                   rel="noopener"
+                   aria-label="Open {{ pub.title }}">
+                  <i class="fas fa-link" aria-hidden="true"></i>
+                  <span class="visually-hidden">Open {{ pub.title }}</span>
+                </a>
               {% endif %}
             </div>
             <div class="recent-work__meta">
