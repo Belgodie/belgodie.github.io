@@ -45,7 +45,10 @@
           <p class="stacked-publications__venue">{{ pub.venue }}{% if pub.volume %}, {{ pub.volume }}{% endif %}{% if pub.pages %}, {{ pub.pages }}{% endif %}</p>
         {% endif %}
         {% if pub.authors %}
-          <p class="stacked-publications__authors">{{ pub.authors }}</p>
+          {% capture formatted_authors %}
+            {% include components/author-list.html item=pub %}
+          {% endcapture %}
+          <p class="stacked-publications__authors">{{ formatted_authors | strip }}</p>
         {% endif %}
       </div>
     </li>
