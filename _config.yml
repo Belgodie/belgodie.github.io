@@ -104,11 +104,11 @@ author:
 
 # Publication Category - The following the list of publication categories and their headings
 publication_category:
-  - key: reviews
-    title: 'Review Articles'
-    style: article
   - key: journals
     title: 'Journal Articles'
+    style: article
+  - key: reviews
+    title: 'Review Articles'
     style: article
   - key: conferences
     title: 'Conferences and Presentations'
