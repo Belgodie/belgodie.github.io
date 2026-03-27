@@ -23,6 +23,24 @@
   {% assign author_count = author_list | size %}
   {% assign formatted_authors = "" %}
   {% assign registry = site.data.authors | default: {} %}
+  {% assign corresponding_positions = "," %}
+
+  {% if corresponding_flag == true and corresponding_number %}
+    {% assign corresponding_json = corresponding_number | jsonify %}
+    {% assign corresponding_json_first = corresponding_json | slice: 0, 1 %}
+    {% if corresponding_json_first == "[" %}
+      {% assign corresponding_entries = corresponding_number %}
+    {% else %}
+      {% assign corresponding_entries = corresponding_number | append: "" | split: "," %}
+    {% endif %}
+
+    {% for corresponding_entry in corresponding_entries %}
+      {% assign corresponding_clean = corresponding_entry | append: "" | strip %}
+      {% if corresponding_clean != "" %}
+        {% assign corresponding_positions = corresponding_positions | append: corresponding_clean | append: "," %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
 
   {% for author in author_list %}
     {% assign author_index = forloop.index %}
@@ -34,9 +52,10 @@
     {% endif %}
 
     {% assign add_corresponding = false %}
-    {% if corresponding_flag == true and corresponding_number %}
-      {% assign corresponding_start = author_count | minus: corresponding_number %}
-      {% if author_index > corresponding_start %}
+    {% if corresponding_flag == true and corresponding_positions != "," %}
+      {% assign right_to_left_index = author_count | minus: author_index | plus: 1 %}
+      {% assign corresponding_token = "," | append: right_to_left_index | append: "," %}
+      {% if corresponding_positions contains corresponding_token %}
         {% assign add_corresponding = true %}
       {% endif %}
     {% endif %}
