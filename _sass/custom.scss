@@ -750,19 +750,24 @@ section.page__content div.projects-grid,
 
 /* Tighten bottom padding for the Research & Recent Work section only */
 #research-highlights .page__inner-wrap {
-  padding-bottom: 0;
+  padding-bottom: clamp(1.9rem, 2.6vw, 2.5rem);
+}
+
+#research-highlights .home-hero-row__left .hero-carousel {
+  margin-bottom: 0;
 }
 
 .home-hero-row__right {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 0;
   min-height: 100%;
 }
 
 .home-hero-row__right .recent-work {
   width: 100%;
+  margin: 0;
 }
 
 #research-highlights .recent-work {
@@ -777,7 +782,10 @@ section.page__content div.projects-grid,
 
 /* Recent work list */
 .recent-work {
-  margin: clamp(1rem, 1.5vw, 1.75rem) 0 0 0;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .recent-work__list {
@@ -786,11 +794,15 @@ section.page__content div.projects-grid,
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  justify-content: space-between;
+  gap: 0;
+  flex: 1 1 auto;
+  border-top: 1px solid rgba(2, 69, 137, 0.1);
+  border-bottom: 1px solid rgba(2, 69, 137, 0.1);
 }
 
 .recent-work__item {
-  padding: 0.35rem 0;
+  padding: clamp(0.5rem, 0.95vw, 0.85rem) 0;
   border-bottom: 1px solid rgba(2, 69, 137, 0.1);
   border-radius: 0;
   background: transparent;
@@ -863,6 +875,26 @@ section.page__content div.projects-grid,
 @media (max-width: 900px) {
   .home-hero-row {
     grid-template-columns: 1fr;
+  }
+
+  .recent-work__list {
+    justify-content: flex-start;
+    gap: 0.85rem;
+    border-top: none;
+    border-bottom: none;
+  }
+}
+
+@media (min-width: 901px) {
+  #research-highlights .home-hero-row__left,
+  #research-highlights .home-hero-row__left .hero-carousel,
+  #research-highlights .home-hero-row__left .hero-carousel__viewport,
+  #research-highlights .home-hero-row__left .hero-carousel__slides {
+    height: 100%;
+  }
+
+  #research-highlights .home-hero-row__left .hero-carousel__slides {
+    aspect-ratio: auto;
   }
 }
 
