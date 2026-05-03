@@ -54,6 +54,10 @@ author:
       icon: "fab fa-github"
       label: "GitHub"
       url: "https://github.com/{{ value }}"
+    - field: linkedin
+      icon: "fab fa-linkedin"
+      label: "LinkedIn"
+      url: "https://www.linkedin.com/in/{{ value }}"
 
   # Academic websites
   academia         : # URL
@@ -77,7 +81,7 @@ author:
 
   # Social media
   artstation       : # Username
-  bluesky          : "erickchica.bsky.social" # Replace this with you Bluesky username
+  bluesky          : # Replace this with you Bluesky username
   facebook         : # Username
   flickr           : # Username
   foursquare       : # Username
@@ -86,7 +90,7 @@ author:
   keybase          : # Username
   instagram        : # Username
   lastfm           : # Username
-  linkedin         : # Username
+  linkedin         : "erickchica"
   mastodon         : # URL
   medium           : # URL
   pinterest        : # Username
