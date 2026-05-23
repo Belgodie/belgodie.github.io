@@ -3,6 +3,7 @@
 {% assign default_label = 'Open ' | append: publication.title %}
 {% assign link_label = include.link_label | default: default_label %}
 {% assign previous_year = include.previous_year | default: '' %}
+{% assign publication_venue = publication.short | default: publication.venue %}
 {% assign pub_year = publication.date | date: "%Y" %}
 {% assign show_year = true %}
 {% if previous_year == pub_year %}
@@ -30,9 +31,9 @@
         </a>
       {% endif %}
     </p>
-    {% if publication.venue %}
+    {% if publication_venue %}
       <p class="stacked-publications__venue">
-        {{ publication.venue }}{% if publication.volume %}, {{ publication.volume }}{% endif %}{% if publication.pages %}, {{ publication.pages }}{% endif %}
+        {{ publication_venue }}{% if publication.volume %}, {{ publication.volume }}{% endif %}{% if publication.pages %}, {{ publication.pages }}{% endif %}
       </p>
     {% endif %}
     {% if publication.authors %}

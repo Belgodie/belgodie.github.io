@@ -1,5 +1,5 @@
 carousel:
-  aspect: "3/ 2"
+  aspect: "3 / 2"
   slides:
     - image: "/images/pubsfigures/DeviceDone3.jpeg"
       text: "Organoid Platform for Drug Screening (2026)"
@@ -7,6 +7,10 @@ carousel:
       textcolor: "#ffffff"
     - image: "/images/pubsfigures/Review1_Fig1_2.svg"
       text: "Sensor Technologies for Organoids Roadmap (2024)"
+      bgopacity: 0.25
+      textcolor: "#ffffffff"
+    - image: "/images/pubsfigures/ZnAu.svg"
+      text: "Zn/Au Micromotors for Anticancer Drug Detection (2026)"
       bgopacity: 0.25
       textcolor: "#ffffffff"
 

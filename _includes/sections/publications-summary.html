@@ -32,6 +32,7 @@
         {% endif %}
       </span>
       <div class="stacked-publications__details">
+        {% assign pub_venue = pub.short | default: pub.venue %}
         <p class="stacked-publications__title">
           {% if pub.paperurl %}
             <a href="{{ pub.paperurl }}" target="_blank" rel="noopener">
@@ -41,8 +42,8 @@
             {{ pub.title }}
           {% endif %}
         </p>
-        {% if pub.venue %}
-          <p class="stacked-publications__venue">{{ pub.venue }}{% if pub.volume %}, {{ pub.volume }}{% endif %}{% if pub.pages %}, {{ pub.pages }}{% endif %}</p>
+        {% if pub_venue %}
+          <p class="stacked-publications__venue">{{ pub_venue }}{% if pub.volume %}, {{ pub.volume }}{% endif %}{% if pub.pages %}, {{ pub.pages }}{% endif %}</p>
         {% endif %}
         {% if pub.authors %}
           {% capture formatted_authors %}

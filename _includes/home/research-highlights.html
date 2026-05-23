@@ -31,9 +31,10 @@
             </div>
             <div class="recent-work__meta">
               {% assign year = pub.date | date: "%Y" %}
+              {% assign pub_venue = pub.venue | default: pub.short %}
               <span class="recent-work__year">{{ year }}</span>
-              {% if pub.venue %}
-                &middot; <span class="recent-work__venue">{{ pub.venue }}</span>
+              {% if pub_venue %}
+                &middot; <span class="recent-work__venue">{{ pub_venue }}</span>
               {% endif %}
               {% if pub.status %}
                 &middot; <span class="recent-work__status">{{ pub.status }}</span>
