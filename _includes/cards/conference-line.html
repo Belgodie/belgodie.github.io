@@ -35,6 +35,11 @@
         {{ conference.venue }}{% if conference.volume %}, {{ conference.volume }}{% endif %}{% if conference.pages %}, {{ conference.pages }}{% endif %}
       </p>
     {% endif %}
+    {% if conference.presentation_type or conference.place %}
+      <p class="stacked-publications__meta">
+        {{ conference.presentation_type }}{% if conference.presentation_type and conference.place %} &middot; {% endif %}{{ conference.place }}
+      </p>
+    {% endif %}
     {% if conference.authors %}
       {% capture formatted_authors %}
         {% include components/author-list.html item=conference %}

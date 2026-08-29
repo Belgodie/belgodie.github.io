@@ -53,7 +53,7 @@ sections:
     cta_url: "/publications/"
     cta_label: "See all publications"
 
-  - title: "Poster Presentations"
+  - title: "Conference Presentations"
     id: "conferences"
     collection: "conferences"
     style: "conferences"

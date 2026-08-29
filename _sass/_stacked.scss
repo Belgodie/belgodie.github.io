@@ -439,6 +439,14 @@
   align-items: start;
 }
 
+.stacked-publications__list--news .stacked-publications__item {
+  grid-template-columns: minmax(0, 90px) 1fr;
+}
+
+.stacked-publications__list--news .stacked-publications__year {
+  text-transform: none;
+}
+
 .stacked-publications__year {
   font-size: 0.95rem;
   font-weight: 700;
@@ -464,6 +472,7 @@
 
 .stacked-publications__title,
 .stacked-publications__venue,
+.stacked-publications__meta,
 .stacked-publications__authors {
   margin: 0 !important; /* Force no margins */
 }
@@ -471,6 +480,7 @@
 /* Also target any child elements that might have margins */
 .stacked-publications__title *,
 .stacked-publications__venue *,
+.stacked-publications__meta *,
 .stacked-publications__authors * {
   margin: 0;
 }
@@ -521,6 +531,14 @@
   color: #03045e;
   line-height: 1.4;
   font-style: italic; /* Add this */
+}
+
+.stacked-publications__meta {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #03045e;
+  opacity: 0.75;
+  line-height: 1.4;
 }
 
 .stacked-publications__authors {

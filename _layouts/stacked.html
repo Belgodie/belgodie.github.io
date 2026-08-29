@@ -169,7 +169,7 @@ layout: default
                           {% endfor %}
                         </div>
                       {% when 'news' %}
-                        <div class="news-list">
+                        <ol class="stacked-publications__list stacked-publications__list--news">
                           {% for doc in documents %}
                             {% assign doc_link = '' %}
                             {% if base_link_url != '' %}
@@ -183,15 +183,22 @@ layout: default
                             {% endif %}
                             {% assign link_label = link_label_prefix %}
                             {% if link_label == '' and doc_link != '' %}
-                              {% assign link_label = 'View ' | append: doc.title %}
+                              {% assign link_label = 'Open ' | append: doc.title %}
                             {% endif %}
-                            {% include cards/news-item.html
+                            {% include cards/news-line.html
                               item=doc
                               link_url=doc_link
                               link_external=link_external
                               link_label=link_label %}
                           {% endfor %}
-                        </div> 
+                        </ol>
+                        {% if section.cta_url or section.cta_label %}
+                          <div class="stacked-publications__cta">
+                            <a class="btn btn--light-outline" href="{{ section.cta_url | default: '/news/' | relative_url }}"{% if section.link_external %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                              {{ section.cta_label | default: 'See all news' }}
+                            </a>
+                          </div>
+                        {% endif %}
                       {% when 'publications' %}
                         {% assign last_year = '' %}
                         <ol class="stacked-publications__list">

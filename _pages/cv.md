@@ -20,7 +20,7 @@ Publications and Manuscripts
 ======
 {% include publications_list_flat.html suppress_links=true %}
 
-Poster Presentations
+Conference Presentations
 ======
 {% include conference_list_flat.html suppress_links=true %}
 

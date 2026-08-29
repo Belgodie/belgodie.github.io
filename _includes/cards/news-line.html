@@ -1,0 +1,29 @@
+{% assign news_item = include.item %}
+{% assign link_url = include.link_url | default: '' %}
+{% assign default_label = 'Open ' | append: news_item.title %}
+{% assign link_label = include.link_label | default: default_label %}
+
+<li class="stacked-publications__item">
+  <span class="stacked-publications__year">{{ news_item.date | date: "%b, %Y" }}</span>
+  <div class="stacked-publications__details">
+    <p class="stacked-publications__venue">
+      {{- news_item.content
+         | markdownify
+         | replace: "<p>", ""
+         | replace: "</p>", ""
+         | strip
+         | strip_newlines
+         | replace: "\r", " "
+         | replace: "\n", " " -}}
+      {% if link_url != '' %}
+        <a class="stacked-publications__title-link"
+           href="{{ link_url }}"
+           {% if include.link_external %}target="_blank" rel="noopener"{% endif %}
+           aria-label="{{ link_label }}">
+          <i class="fas fa-link" aria-hidden="true"></i>
+          <span class="visually-hidden">{{ link_label }}</span>
+        </a>
+      {% endif %}
+    </p>
+  </div>
+</li>

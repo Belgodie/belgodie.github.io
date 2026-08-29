@@ -27,4 +27,4 @@ welcome:
 
 news:
   title: "Recent News"
-  limit: 5
+  limit: 2

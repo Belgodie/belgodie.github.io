@@ -6,6 +6,9 @@
     {{ home.welcome.text }}
   </div>
 </div>
+<div class="stacked-publications__cta">
+  <a class="btn btn--light-outline" href="{{ '/about/' | relative_url }}">Learn more</a>
+</div>
 {% endcapture %}
 
 {% capture news_body %}
@@ -34,6 +37,9 @@
     </li>
   {% endfor %}
 </ul>
+<div class="stacked-publications__cta">
+  <a class="btn btn--light-outline" href="{{ '/news/' | relative_url }}">See all news</a>
+</div>
 {% endcapture %}
 
 {% include row-two-cards.html

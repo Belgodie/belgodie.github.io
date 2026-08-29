@@ -908,6 +908,12 @@ section.page__content div.projects-grid,
 
 /* Flatten outer card for welcome/news so only inner cards show */
 
+#welcome-news .home-split-cards .stacked-card:last-child .stacked-card__body {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
 .home-news__list {
   list-style: none;
   margin: 0;
@@ -915,6 +921,9 @@ section.page__content div.projects-grid,
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .home-news__item {
@@ -982,19 +991,24 @@ section.page__content div.projects-grid,
   margin-top: 0;
 }
 
-/* Equal height for split cards */
+/* Equal height for split cards: both stretch to match the taller (Welcome) card,
+   whatever that natural height is at the current viewport width */
 .home-split-cards .stacked-card {
   height: 100%;
   display: flex;
+  overflow: hidden;
+  min-height: 0;
 }
 .home-split-cards .stacked-card__article,
 .home-split-cards .page__inner-wrap {
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
 .home-split-cards .stacked-card__body {
   flex: 1;
+  min-height: 0;
 }
 
 /* Trim extra bottom space in stacked card bodies */
