@@ -638,7 +638,12 @@
 }
 
 @media (max-width: 720px) {
-  .stacked-publications__item {
+  /* Also re-target the higher-specificity news variant (.list--news
+     .item, defined outside this query) so it doesn't keep winning the
+     2-column layout on mobile and scrambling text/date into cramped
+     columns via the order swap below. */
+  .stacked-publications__item,
+  .stacked-publications__list--news .stacked-publications__item {
     grid-template-columns: 1fr;
     gap: 0.4rem;
   }

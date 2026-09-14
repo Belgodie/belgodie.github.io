@@ -967,7 +967,10 @@ section.page__content div.projects-grid,
 /* Welcome & News split */
 .home-split-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  /* min(100%, 320px) keeps the 320px preferred track width on wide
+     screens without forcing cards wider than the viewport on narrow
+     phones (was causing horizontal overflow/clipped text at ~320px) */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: clamp(1rem, 1.6vw, 1.5rem);
   margin-top: clamp(1.2rem, 2vw, 1.8rem);
   align-items: stretch;
