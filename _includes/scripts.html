@@ -1,3 +1,13 @@
 <script type="module" src="{{ base_path }}/assets/js/main.min.js"></script>
 
+<script>
+  // Open every link to another website in a new tab (internal page links stay in the same tab).
+  document.querySelectorAll('a[href^="http"]').forEach(function (link) {
+    if (link.hostname !== window.location.hostname) {
+      link.target = '_blank';
+      link.rel = 'noopener';
+    }
+  });
+</script>
+
 {% include analytics.html %}
