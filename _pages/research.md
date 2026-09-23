@@ -42,7 +42,19 @@ sections:
     order: "asc"
     style: "project-row"
     limit: 6
-    
+
+  # Saved for later - flip on once there are real students to list.
+  # Data lives in _data/datacards/members.yml (currently sample placeholder entries).
+  # - title: "Students"
+  #   id: "students-sample"
+  #   include: "datacard-section.html"
+  #   data_title: "Students"
+  #   fields:
+  #     - research
+  #     - education
+  #     - email
+  #   two_column: true
+
   - title: "Selected Publications"
     id: "publications"
     collection: "publications"

@@ -43,7 +43,7 @@
           {% endif %}
         </p>
         {% if pub_venue %}
-          <p class="stacked-publications__venue">{{ pub_venue }}{% if pub.volume %}, {{ pub.volume }}{% endif %}{% if pub.pages %}, {{ pub.pages }}{% endif %}</p>
+          <p class="stacked-publications__venue">{% capture pub_numbers %}{% include components/pub-volume.html item=pub %}{% endcapture %}{{ pub_venue }}{% if pub_numbers != '' %}, {{ pub_numbers }}{% endif %}</p>
         {% endif %}
         {% if pub.authors %}
           {% capture formatted_authors %}

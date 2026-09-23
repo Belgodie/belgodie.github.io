@@ -215,6 +215,17 @@
             {% endif %}
           {% when "first_last" %}
             {% assign raw_label = display_first %}
+                {% if display_first_custom == "" and middle_name != "" %}
+                  {% assign middle_clean = middle_name | replace: ".", " " | replace: "-", " " %}
+                  {% assign middle_parts = middle_clean | strip | split: " " %}
+                  {% for part in middle_parts %}
+                    {% assign trimmed_part = part | strip %}
+                    {% if trimmed_part != "" %}
+                      {% assign initial_char = trimmed_part | slice: 0, 1 | upcase %}
+                      {% assign raw_label = raw_label | append: " " | append: initial_char | append: "." %}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
                 {% if display_last != "" %}
                   {% if raw_label != "" %}
                     {% assign raw_label = raw_label | append: " " %}

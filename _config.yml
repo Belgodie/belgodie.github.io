@@ -344,9 +344,13 @@ defaults:
     values:
       layout: single 
 
-# Publications display settings
-publications:
-  split_by_category: true  # Set to false for a single combined list
+# Publications page settings (named publications_page because site.publications is the collection itself)
+publications_page:
+  group_by: year              # "year" (numbered list under year headings), "category" (Journal/Review/... headings) or "none"
+  venue_style: top            # journal placement: "top" (above the title) or "below" (own line under authors)
+  links_style: icons          # Link/PDF: "icons" (pinned right of the title), "top" (pills on the journal line) or "bottom" (pills under the text)
+  author_format: first_last   # author style on /publications/ only; CV and other lists keep author_name_format
+  split_by_category: true     # legacy switch, only used when group_by is empty
 
 # Sass/SCSS
 sass:

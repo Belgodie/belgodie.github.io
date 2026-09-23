@@ -1,0 +1,17 @@
+sections:
+  - title: "Students"
+    members:
+      - name: "Jane Doe"
+        role: "PhD Student"
+        research: "Sample research area"
+        education:
+          - "20XX • M.S. in Sample Field, Sample University"
+          - "20XX • B.S. in Sample Field, Sample University"
+        email: "jane.doe@example.edu"
+        photo:
+      - name: "John Smith"
+        role: "MS Student"
+        research: "Another sample research area"
+        education: "20XX • B.S. in Sample Field, Sample University"
+        email: "john.smith@example.edu"
+        photo:

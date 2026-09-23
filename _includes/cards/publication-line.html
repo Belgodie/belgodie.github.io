@@ -3,6 +3,9 @@
 {% assign default_label = 'Open ' | append: publication.title %}
 {% assign link_label = include.link_label | default: default_label %}
 {% assign previous_year = include.previous_year | default: '' %}
+{% assign link_first4 = link_url | slice: 0, 4 %}
+{% assign link_new_tab = include.link_external %}
+{% if link_first4 == 'http' %}{% assign link_new_tab = true %}{% endif %}
 {% assign publication_venue = publication.short | default: publication.venue %}
 {% assign pub_year = publication.date | date: "%Y" %}
 {% assign show_year = true %}
@@ -20,20 +23,15 @@
   </span>
   <div class="stacked-publications__details">
     <p class="stacked-publications__title">
-      <span class="stacked-publications__title-text">{{ publication.title }}</span>
       {% if link_url != '' %}
-        <a class="stacked-publications__title-link"
-           href="{{ link_url }}"
-           {% if include.link_external %}target="_blank" rel="noopener"{% endif %}
-           aria-label="{{ link_label }}">
-          <i class="fas fa-link" aria-hidden="true"></i>
-          <span class="visually-hidden">{{ link_label }}</span>
-        </a>
+        <a class="stacked-publications__title-text" href="{{ link_url }}"{% if link_new_tab %} target="_blank" rel="noopener"{% endif %}>{{ publication.title }}</a>
+      {% else %}
+        <span class="stacked-publications__title-text">{{ publication.title }}</span>
       {% endif %}
     </p>
     {% if publication_venue %}
       <p class="stacked-publications__venue">
-        {{ publication_venue }}{% if publication.volume %}, {{ publication.volume }}{% endif %}{% if publication.pages %}, {{ publication.pages }}{% endif %}
+        {% capture publication_numbers %}{% include components/pub-volume.html item=publication %}{% endcapture %}{{ publication_venue }}{% if publication_numbers != '' %}, {{ publication_numbers }}{% endif %}
       </p>
     {% endif %}
     {% if publication.authors %}

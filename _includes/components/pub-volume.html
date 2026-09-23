@@ -1,0 +1,8 @@
+{%- comment -%}
+  Citation numbers for a publication, APA style: volume(issue), pages  ->  12(1), 26 / 36(58) / 12, 26 / 26
+  Param: item (publication). Outputs nothing when none of volume / issue / pages is set.
+{%- endcomment -%}
+{%- assign v = include.item -%}
+{%- if v.volume -%}{{ v.volume }}{%- if v.issue -%}({{ v.issue }}){%- endif -%}{%- if v.pages -%}, {{ v.pages }}{%- endif -%}
+{%- elsif v.pages -%}{{ v.pages }}
+{%- endif -%}

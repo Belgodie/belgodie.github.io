@@ -2,7 +2,7 @@ carousel:
   aspect: "3 / 2"
   slides:
     - image: "/images/pubsfigures/DeviceDone3.jpeg"
-      text: "Organoid Platform for Drug Screening (2026)"
+      text: "Organoid Platform for Organoid Electrophysiology (2026)"
       bgopacity: 0.25
       textcolor: "#ffffff"
     - image: "/images/pubsfigures/Review1_Fig1_2.svg"

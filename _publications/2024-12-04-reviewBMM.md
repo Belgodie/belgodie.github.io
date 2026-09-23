@@ -14,6 +14,8 @@ date: 2024-12-04
 venue: 'Micro and Nano Systems Letters'
 short: Micro Nano Syst Lett
 paperurl: https://doi.org/10.1186/s40486-024-00216-y
+pdf: https://link.springer.com/content/pdf/10.1186/s40486-024-00216-y.pdf # open access (CC BY)
+thumbnail: /files/papers/2024-reviewBMM.svg
 volume: '12'
 issue: '1'
 pages: '26'

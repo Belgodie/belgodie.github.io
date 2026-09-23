@@ -500,15 +500,14 @@
 }
 
 .stacked-publications__title-link,
-.stacked-publications__title-link:visited,
-.stacked-publications__title-link:hover,
-.stacked-publications__title-link:focus {
+.stacked-publications__title-link:visited {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 1.4rem;
   height: 1.4rem;
   line-height: 1;
+  color: #024589; /* same as the Publications page icons */
   transition: transform 0.2s ease, color 0.2s ease;
   text-decoration: none !important;
   border: none;
@@ -520,8 +519,8 @@
 }
 
 .stacked-publications__title-link:hover,
-.stacked-publications__title-link:focus {
-  color: rgba(0, 119, 182, 0.95);
+.stacked-publications__title-link:focus-visible {
+  color: #0077b6;
   transform: translateY(-1px);
 }
 
@@ -544,7 +543,7 @@
 .stacked-publications__authors {
   margin: 0;
   font-size: 0.95rem;
-  color: 03045e;
+  color: #03045e;
   line-height: 1.4;
 }
 

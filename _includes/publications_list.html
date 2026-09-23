@@ -1,64 +1,56 @@
 {% assign items = site.publications | sort: "date" | reverse %}
 {% assign publication_categories = site.publication_category | default: '' %}
 
-{% comment %} Check split_by_category setting {% endcomment %}
-{% if page.split_by_category == false %}
-  {% assign split_by_category = false %}
-{% elsif site.publications.split_by_category == false %}
-  {% assign split_by_category = false %}
-{% else %}
-  {% assign split_by_category = true %}
+{% comment %}
+  Grouping: page.group_by, then site.publications_page.group_by ("year", "category" or "none").
+  (_config.yml -> publications_page). If neither is set, the older split_by_category flag decides between "category" and "none".
+{% endcomment %}
+{% assign group_by = page.group_by | default: site.publications_page.group_by | default: "" %}
+{% if group_by == "" %}
+  {% if page.split_by_category == false or site.publications_page.split_by_category == false %}
+    {% assign group_by = "none" %}
+  {% else %}
+    {% assign group_by = "category" %}
+  {% endif %}
 {% endif %}
 
-{% if split_by_category and publication_categories and publication_categories.size > 0 %}
-  {% comment %} Split view - grouped by categories {% endcomment %}
+{% if group_by == "year" %}
+  {% comment %} Grouped by year {% endcomment %}
+  {% assign last_year = "" %}
+  {% for item in items %}
+    {% assign item_year = item.date | date: "%Y" %}
+    {% if item_year != last_year %}
+      {% unless forloop.first %}</ol>{% endunless %}
+      <h2 class="pub-list__year">{{ item_year }}</h2>
+      <ol class="pub-list">
+      {% assign last_year = item_year %}
+    {% endif %}
+    {% include cards/publication-card.html item=item %}
+    {% if forloop.last %}</ol>{% endif %}
+  {% endfor %}
+
+{% elsif group_by == "category" and publication_categories and publication_categories.size > 0 %}
+  {% comment %} Grouped by category {% endcomment %}
   {% for category in publication_categories %}
     {% assign category_key = category.key | default: '' %}
     {% assign category_title = category.title | default: category_key %}
     {% assign category_items = items | where: "category", category_key %}
 
     {% if category_items and category_items.size > 0 %}
-      <h2>{{ category_title }}</h2>
-      <ol class="teaching-bullets">
+      <h2 class="pub-list__year">{{ category_title }}</h2>
+      <ol class="pub-list">
         {% for item in category_items %}
-        <li>
-          {% if item.authors %}
-            {% capture formatted_authors %}
-              {% include components/author-list.html item=item %}
-            {% endcapture %}
-            {{ formatted_authors | strip }}  
-          {% endif %}
-
-          ({{ item.date | date: "%Y" }}). 
-          <em>{{ item.title }}</em>. 
-          {% assign item_venue = item.short | default: item.venue %}
-          {% if item.venue_article %}{{ item.venue_article | capitalize }} {% endif %}{% if item_venue %}{{ item_venue }}{% endif %}{% if item.volume and item.pages %}, {{ item.volume }}:{{ item.pages }}{% elsif item.volume %}, {{ item.volume }}{% elsif item.pages %}, {{ item.pages }}{% endif %}{% if item.place %}, {{ item.place }}{% endif %}. 
-
-          {% if item.paperurl %}<a href="{{ item.paperurl }}">{{ item.paperurl }}</a>{% endif %}
-        </li>
+          {% include cards/publication-card.html item=item show_year=true %}
         {% endfor %}
       </ol>
     {% endif %}
   {% endfor %}
+
 {% else %}
-  {% comment %} Combined view - single list {% endcomment %}
-  <ol class="teaching-bullets">
+  {% comment %} Single combined list {% endcomment %}
+  <ol class="pub-list">
     {% for item in items %}
-    <li>
-      {% if item.authors %}
-        {% capture formatted_authors %}
-          {% include components/author-list.html item=item %}
-        {% endcapture %}
-        {{ formatted_authors | strip }}  
-      {% endif %}
-
-      ({{ item.date | date: "%Y" }}). 
-      <em>{{ item.title }}</em>. 
-      {% assign item_venue = item.short | default: item.venue %}
-      {% if item.venue_article %}{{ item.venue_article | capitalize }} {% endif %}{% if item_venue %}{{ item_venue }}{% endif %}{% if item.volume and item.pages %}, {{ item.volume }}:{{ item.pages }}{% elsif item.volume %}, {{ item.volume }}{% elsif item.pages %}, {{ item.pages }}{% endif %}{% if item.place %}, {{ item.place }}{% endif %}. 
-
-      {% if item.paperurl %}<a href="{{ item.paperurl }}">{{ item.paperurl }}</a>{% endif %}
-    </li>
+      {% include cards/publication-card.html item=item show_year=true %}
     {% endfor %}
   </ol>
 {% endif %}

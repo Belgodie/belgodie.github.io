@@ -836,16 +836,14 @@ section.page__content div.projects-grid,
 }
 
 .recent-work__title-link,
-.recent-work__title-link:visited,
-.recent-work__title-link:hover,
-.recent-work__title-link:focus {
+.recent-work__title-link:visited {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 1.35rem;
   height: 1.35rem;
   line-height: 1;
-  color: rgba(2, 69, 137, 0.85);
+  color: #024589; /* same as the Publications page icons */
   text-decoration: none !important;
   flex: 0 0 auto;
   transition: transform 0.2s ease, color 0.2s ease;
@@ -857,8 +855,8 @@ section.page__content div.projects-grid,
 }
 
 .recent-work__title-link:hover,
-.recent-work__title-link:focus {
-  color: rgba(0, 119, 182, 0.95);
+.recent-work__title-link:focus-visible {
+  color: #0077b6;
   transform: translateY(-1px);
 }
 
@@ -1262,3 +1260,308 @@ body {
     transform-origin: left center;
   }
 }
+
+/* ==========================================================================
+   Publications page - thumbnail rows with Link / Download pills
+   (_includes/cards/publication-card.html, _includes/components/publication-links.html)
+   ========================================================================== */
+
+.pub-list__year {
+  margin: 1.75rem 0 0.25rem;
+  font-size: 1.35rem;
+  color: #03045e;
+
+  &:first-of-type {
+    margin-top: 0.75rem;
+  }
+}
+
+.pub-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pub-card {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: start;
+  margin: 0;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(2, 69, 137, 0.12);
+  scroll-margin-top: 5rem;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:target {
+    background: rgba(0, 119, 182, 0.06);
+  }
+}
+
+.pub-card__thumb a,
+.pub-card__thumb > img {
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.pub-card--no-thumb {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.pub-card__thumb {
+  aspect-ratio: 4 / 3;
+  padding: 1px; /* hairline ring, same weight as the year / row dividers */
+  border-radius: 11px;
+  background: linear-gradient(135deg, rgba(2, 69, 137, 0.45) 0%, rgba(0, 119, 182, 0.35) 50%, rgba(0, 180, 216, 0.4) 100%);
+
+  a {
+    display: block;
+    height: 100%;
+    border: none;
+  }
+
+  img {
+    border-radius: 10px;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;          /* fixed frame: image fills it, overflow trimmed */
+    object-position: center;    /* per paper: thumbnail_position in front matter */
+    display: block;
+  }
+}
+
+.pub-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+
+  p {
+    margin: 0;
+  }
+}
+
+.pub-card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #03045e;
+  overflow-wrap: anywhere;
+
+  /* .page__content a sets every link to weight 500 - keep the title bold (matches the homepage titles) */
+  .page__content & a,
+  a,
+  a:visited {
+    font-weight: inherit;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  /* colour change only - the theme's .page__content a:hover underline is switched off here */
+  a:hover,
+  a:focus-visible {
+    color: #0077b6;
+    text-decoration: none;
+  }
+}
+
+.pub-card__meta {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: rgba(3, 4, 94, 0.75);
+
+  strong {
+    color: #03045e;
+  }
+}
+
+.pub-card__venue {
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.pub-card__venue--top {
+  .pub-card__journal {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #0077b6;
+  }
+
+  .pub-card__details {
+    font-size: 0.8rem;
+    color: rgba(3, 4, 94, 0.55);
+  }
+}
+
+.pub-card__venue--below {
+  .pub-card__journal {
+    font-weight: 700;
+    color: #03045e;
+  }
+
+  .pub-card__details {
+    color: rgba(3, 4, 94, 0.55);
+  }
+}
+
+.pub-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.pub-links--buttons {
+  margin-top: 0.4rem;
+}
+
+/* Same pill as the project links on the Research page (.project-row__link) */
+.pub-links__btn,
+.pub-links__btn:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: rgba(2, 69, 137, 0.9) !important;
+  border: 1px solid rgba(2, 69, 137, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+
+  &:hover,
+  &:focus {
+    color: #fff !important;
+    background: linear-gradient(135deg, rgba(0, 119, 182, 0.95), rgba(0, 180, 216, 0.95));
+    border-color: transparent;
+    box-shadow: 0 8px 18px rgba(0, 119, 182, 0.2);
+  }
+}
+
+.pub-links__icon,
+.pub-links__icon:visited {
+  color: #024589;
+  text-decoration: none !important;
+  padding: 0 0.15rem;
+
+  &:hover,
+  &:focus {
+    color: rgba(0, 119, 182, 0.95);
+  }
+}
+
+/* Links on the journal line: journal left, pills right */
+.pub-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+
+  .pub-links--buttons {
+    margin-top: 0;
+  }
+}
+
+/* Icon-only links pinned right of the title - same look and placement as the homepage
+   Recent work list (.recent-work__title / .recent-work__title-link); label shows on hover (title) */
+.pub-card__title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+
+  .pub-card__title {
+    flex: 1 1 auto;
+  }
+
+  .pub-links--icons {
+    flex: 0 0 auto;
+    display: inline-flex;
+    gap: 0.35rem;
+    padding-top: 0.1rem;
+  }
+}
+
+.pub-card__title-row .pub-links__icon,
+.pub-card__title-row .pub-links__icon:visited {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  padding: 0;
+  line-height: 1;
+  color: #024589;
+  text-decoration: none !important;
+  transition: transform 0.2s ease, color 0.2s ease;
+
+  i {
+    font-size: 0.95rem;
+    pointer-events: none;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: #0077b6;
+    transform: translateY(-1px);
+  }
+}
+
+/* Phones: fixed tall strip down the left of each entry (same size on every row) */
+@media (max-width: 600px) {
+  .pub-card {
+    grid-template-columns: 100px minmax(0, 1fr);
+    gap: 0.8rem;
+  }
+
+  .pub-card__thumb {
+    aspect-ratio: auto;
+    height: 190px;
+  }
+}
+
+/* Linked publication titles on Home (Recent work) and Research (Selected Publications):
+   look like plain titles, fade to the link blue on hover - same as the Publications page */
+a.recent-work__title-text,
+a.recent-work__title-text:visited {
+  font-weight: 700;
+  color: #01245d; /* unchanged title colour from .recent-work__title-text */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.page__content a.stacked-publications__title-text,
+.page__content a.stacked-publications__title-text:visited {
+  font-weight: 700;
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a.recent-work__title-text:hover,
+a.recent-work__title-text:focus-visible,
+.page__content a.stacked-publications__title-text:hover,
+.page__content a.stacked-publications__title-text:focus-visible {
+  color: #0077b6;
+  text-decoration: none;
+}
+
+/* The theme outlines every focused link (orange, 5px) - on a mouse click that flashes around the
+   image/title/icon. Keep it for keyboard users only, on all publication lists. */
+.pub-card a:focus:not(:focus-visible),
+.recent-work a:focus:not(:focus-visible),
+.stacked-publications__list a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+

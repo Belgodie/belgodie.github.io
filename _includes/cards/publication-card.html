@@ -1,0 +1,71 @@
+{% comment %}
+  Publication row for the /publications/ page: thumbnail | title, authors, venue + Link/Download.
+  Params:
+    - item:      publication document - required
+    - show_year: true to append the year to the venue line (use when the list is not grouped by year)
+  Thumbnail comes from `thumbnail:` (falls back to header.teaser). Without one the row drops the image column.
+  It fills a fixed frame (220x165 desktop, 100x190 strip on phones), trimmed around the centre; `thumbnail_position:` (e.g. top, left, "30% 50%") picks another anchor.
+  Optional `status:` (e.g. "In Press") is printed after the venue.
+  Link/PDF placement: `links_style:` per paper, else _config.yml publications_page.links_style (icons | top | bottom).
+    icons  -> icon-only, pinned right of the title (like the homepage Recent work list)
+  Journal placement: `venue_style:` per paper, else _config.yml publications_page.venue_style.
+    top   -> journal line above the title (accent blue, small caps), details after it
+    below -> journal on its own line under the authors (bold italic), details in grey
+{% endcomment %}
+{% assign pub = include.item %}
+{% assign pub_thumb = pub.thumbnail | default: pub.header.teaser | default: "" %}
+{% assign pub_venue = pub.venue | default: pub.short %}
+{% comment %} Title and image both open the publisher page; the icons are the explicit Link / PDF actions {% endcomment %}
+{% assign pub_primary = pub.paperurl | default: "" %}
+{% assign pub_links_style = pub.links_style | default: site.publications_page.links_style | default: "icons" %}
+{% assign pub_venue_style = pub.venue_style | default: site.publications_page.venue_style | default: "top" %}
+{% comment %} Volume / issue / pages are left out on purpose - journal name only keeps every row alike (the CV has the full citation) {% endcomment %}
+{% capture pub_details %}{% if pub.status %}, {{ pub.status }}{% endif %}{% if include.show_year %}, {{ pub.date | date: "%Y" }}{% endif %}{% endcapture %}
+{% assign pub_details = pub_details | strip | remove_first: ", " %}
+{% assign pub_author_format = pub.author_format | default: site.publications_page.author_format | default: site.author_name_format %}
+
+<li class="pub-card{% if pub_thumb == '' %} pub-card--no-thumb{% endif %}"{% if pub.publication_id %} id="{{ pub.publication_id }}"{% endif %}>
+  {% if pub_thumb != '' %}
+    <div class="pub-card__thumb">
+      {% if pub_primary != '' %}<a href="{{ pub_primary }}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">{% endif %}
+        <img src="{{ pub_thumb | relative_url }}" alt="" loading="lazy" decoding="async"{% if pub.thumbnail_position %} style="object-position: {{ pub.thumbnail_position }};"{% endif %}>
+      {% if pub_primary != '' %}</a>{% endif %}
+    </div>
+  {% endif %}
+  <div class="pub-card__body">
+    {% if pub_links_style == "top" %}<div class="pub-card__head">{% endif %}
+    {% if pub_venue_style == "top" and pub_venue %}
+      <p class="pub-card__venue pub-card__venue--top">
+        <span class="pub-card__journal">{{ pub_venue }}</span>{% if pub_details != "" %}<span class="pub-card__details"> &middot; {{ pub_details }}</span>{% endif %}
+      </p>
+    {% endif %}
+    {% if pub_links_style == "top" %}
+      {% include components/publication-links.html item=pub %}
+    </div>
+    {% endif %}
+    <div class="pub-card__title-row">
+      <p class="pub-card__title">
+        {% if pub.paperurl %}
+          <a href="{{ pub.paperurl }}" target="_blank" rel="noopener">{{ pub.title }}</a>
+        {% else %}
+          {{ pub.title }}
+        {% endif %}
+      </p>
+      {% if pub_links_style == "icons" %}{% include components/publication-links.html item=pub style="icons" %}{% endif %}
+    </div>
+    {% if pub.authors %}
+      {% capture formatted_authors %}
+        {% include components/author-list.html item=pub format=pub_author_format %}
+      {% endcapture %}
+      <p class="pub-card__meta">{{ formatted_authors | strip }}</p>
+    {% endif %}
+    {% if pub_venue_style != "top" and pub_venue %}
+      <p class="pub-card__venue pub-card__venue--below">
+        <em class="pub-card__journal">{{ pub_venue }}</em>{% if pub_details != "" %}<span class="pub-card__details">, {{ pub_details }}</span>{% endif %}
+      </p>
+    {% endif %}
+    {% if pub_links_style == "bottom" %}
+      {% include components/publication-links.html item=pub %}
+    {% endif %}
+  </div>
+</li>
