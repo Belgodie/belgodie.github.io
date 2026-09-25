@@ -1285,19 +1285,15 @@ body {
 .pub-card {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
-  gap: 1.1rem;
+  gap: 1.4rem;
   align-items: start;
   margin: 0;
-  padding: 0.9rem 0;
+  padding: 1.3rem 0;
   border-bottom: 1px solid rgba(2, 69, 137, 0.12);
   scroll-margin-top: 5rem;
 
   &:last-child {
     border-bottom: none;
-  }
-
-  &:target {
-    background: rgba(0, 119, 182, 0.06);
   }
 }
 
@@ -1338,7 +1334,7 @@ body {
 .pub-card__body {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.45rem;
   min-width: 0;
 
   p {
@@ -1422,29 +1418,35 @@ body {
   margin-top: 0.4rem;
 }
 
-/* Same pill as the project links on the Research page (.project-row__link) */
-.pub-links__btn,
-.pub-links__btn:visited {
+/* Same as the "See all publications" / "Learn more" buttons (.stacked-publications__cta .btn) - white pill,
+   no border, soft blue shadow that grows on hover, text stays blue - with the shadows roughly halved to suit
+   the smaller size. The .pub-links prefix beats the theme's .page__content a (weight 500, transition: all). */
+.pub-links .pub-links__btn,
+.pub-links .pub-links__btn:visited {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.3rem 0.8rem;
+  padding: 0.35rem 0.9rem;
   font-size: 0.82rem;
   font-weight: 600;
   line-height: 1.2;
-  color: rgba(2, 69, 137, 0.9) !important;
-  border: 1px solid rgba(2, 69, 137, 0.2);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.75);
+  color: #024589 !important;
+  border: none;
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow:
+    0 3px 9px rgba(2, 69, 137, 0.12),
+    0 1px 4px rgba(0, 119, 182, 0.08);
   text-decoration: none !important;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 
   &:hover,
-  &:focus {
-    color: #fff !important;
-    background: linear-gradient(135deg, rgba(0, 119, 182, 0.95), rgba(0, 180, 216, 0.95));
-    border-color: transparent;
-    box-shadow: 0 8px 18px rgba(0, 119, 182, 0.2);
+  &:focus-visible {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+    box-shadow:
+      0 7px 14px rgba(2, 69, 137, 0.16),
+      0 3px 7px rgba(0, 119, 182, 0.12);
   }
 }
 
@@ -1457,6 +1459,80 @@ body {
   &:hover,
   &:focus {
     color: rgba(0, 119, 182, 0.95);
+  }
+}
+
+/* links_style: label - flat "PDF" tag flush in the thumbnail's bottom-left corner (shop "Sold out" style) */
+.pub-card__thumb {
+  position: relative;
+}
+
+.page__content a.pub-card__label,
+.page__content a.pub-card__label:visited {
+  position: absolute;
+  left: 1px;   /* inside the 1px frame ring */
+  bottom: 1px;
+  display: inline-flex;
+  height: auto; /* not the full-frame height .pub-card__thumb a gives the image link */
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 0 8px 0 10px; /* square top-left, rounded to match the frame at bottom-left */
+  background: #fff;
+  color: #024589;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: #0077b6;
+  }
+}
+
+@media (max-width: 600px) {
+  .page__content a.pub-card__label {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* links_style: text - small plain links right after the journal name ("LAB ON A CHIP · PDF") */
+.pub-links--text {
+  gap: 0.9rem;
+  flex: 0 0 auto;
+
+  &::before {
+    content: "·"; /* middle dot separator */
+    margin-right: -0.4rem; /* dot sits closer to the link than the flex gap */
+    color: rgba(2, 69, 137, 0.45);
+    font-weight: 700;
+  }
+}
+
+.pub-card__head.pub-card__head--inline { /* two classes: beats the space-between on .pub-card__head below */
+  justify-content: flex-start;
+  gap: 0.25rem 0.6rem;
+}
+
+.pub-links__text,
+.pub-links__text:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #024589 !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: #0077b6 !important;
   }
 }
 
@@ -1565,3 +1641,635 @@ a.recent-work__title-text:focus-visible,
 }
 
 
+
+/* links_style: under-image - image with "Link" / "PDF" pills underneath (title and image are plain) */
+.pub-card__media {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem; /* space between image and Link / PDF buttons */
+  min-width: 0;
+
+  .pub-links--buttons {
+    margin-top: 0;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  /* narrow image strip: stack the two pills full-width under it */
+  .pub-card__media .pub-links--buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.3rem;
+
+    .pub-links__btn {
+      justify-content: center;
+      padding: 0.3rem 0.4rem;
+    }
+  }
+}
+
+/* "Cover Feature" label after the journal name (front matter: cover) */
+.pub-card__badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  vertical-align: 0.05em;
+  color: #024589;
+  background: rgba(0, 119, 182, 0.1);
+  border-radius: 999px;
+}
+
+/* ==========================================================================
+   Publication detail page (_layouts/publication.html)
+   ========================================================================== */
+
+.pub-detail__back,
+.pub-detail__back:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(2, 69, 137, 0.75);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: #0077b6;
+  }
+}
+
+.pub-detail__eyebrow {
+  margin: 0 0 0.4rem !important;
+}
+
+.page__inner-wrap > header .pub-detail__title {
+  font-size: clamp(1.35rem, calc(1.1rem + 1vw), 1.9rem);
+  line-height: 1.25;
+  color: #03045e;
+}
+
+.pub-detail__authors {
+  margin: 0.2rem 0 0.9rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(3, 4, 94, 0.75);
+
+  strong {
+    color: #03045e;
+  }
+}
+
+/* figure + "At a glance" side by side */
+.pub-detail__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(220px, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+  margin: 1.75rem 0 0.5rem;
+}
+
+.pub-detail__grid--no-figure {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 420px;
+}
+
+.pub-detail__figure {
+  margin: 0;
+  display: block; /* theme makes figures flex */
+  padding: 1px; /* same hairline gradient ring as the list thumbnails */
+  border-radius: 13px;
+  background: linear-gradient(135deg, rgba(2, 69, 137, 0.45) 0%, rgba(0, 119, 182, 0.35) 50%, rgba(0, 180, 216, 0.4) 100%);
+
+  img {
+    display: block;
+    width: 100%;
+    max-height: 460px;
+    object-fit: contain; /* whole figure, never cropped */
+    border-radius: 12px;
+    margin: 0; /* theme adds margin-bottom to figure images */
+    background: #fff;
+  }
+}
+
+.pub-detail__facts {
+  padding: 1.1rem 1.25rem;
+  border-radius: 12px;
+  /* plain white with the same 1px gradient hairline as the figure */
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(135deg, rgba(2, 69, 137, 0.45) 0%, rgba(0, 119, 182, 0.35) 50%, rgba(0, 180, 216, 0.4) 100%) border-box;
+
+  dl {
+    margin: 0;
+  }
+
+  dl > div {
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(2, 69, 137, 0.1);
+
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+  }
+
+  dt {
+    margin: 0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #0077b6;
+  }
+
+  dd {
+    margin: 0.1rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.4;
+    color: #03045e;
+    overflow-wrap: anywhere;
+  }
+
+  dd a,
+  dd a:visited {
+    font-weight: 500;
+    color: #0077b6;
+    text-decoration: none;
+
+    &:hover {
+      color: #024589;
+    }
+  }
+}
+
+.pub-detail__facts-title {
+  margin: 0 0 0.35rem !important;
+  font-size: 0.95rem;
+  color: #03045e;
+}
+
+.pub-detail__section {
+  margin-top: 2rem;
+
+  h2 {
+    margin: 0 0 0.6rem;
+    font-size: 1.15rem;
+    color: #03045e;
+  }
+
+  p {
+    line-height: 1.65;
+  }
+}
+
+.pub-detail__cite {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: 12px;
+  background: rgba(0, 119, 182, 0.05);
+  border: 1px solid rgba(2, 69, 137, 0.1);
+
+  p {
+    flex: 1 1 auto;
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #03045e;
+    overflow-wrap: anywhere;
+  }
+}
+
+.pub-detail__copy {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #024589;
+  border: none;
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow:
+    0 3px 9px rgba(2, 69, 137, 0.12),
+    0 1px 4px rgba(0, 119, 182, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-1px);
+    box-shadow:
+      0 7px 14px rgba(2, 69, 137, 0.16),
+      0 3px 7px rgba(0, 119, 182, 0.12);
+  }
+}
+
+@media (max-width: 768px) {
+  .pub-detail__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pub-detail__cite {
+    flex-direction: column;
+  }
+}
+
+/* Desktop: the figure box takes the height of the "At a glance" card (whole figure shown, scaled to fit) */
+@media (min-width: 769px) {
+  .pub-detail__grid {
+    align-items: stretch;
+  }
+
+  .pub-detail__figure {
+    position: relative;
+    min-height: 260px;
+    background-color: #fff;
+
+    img {
+      position: absolute;
+      inset: 1px; /* inside the 1px gradient ring */
+      width: calc(100% - 2px);
+      height: calc(100% - 2px);
+      max-height: none;
+      object-fit: contain;
+    }
+  }
+}
+
+/* ==========================================================================
+   In brief, placeholders, topic tags (detail pages + /topics/)
+   ========================================================================== */
+
+.pub-detail__brief {
+  margin: 1.5rem 0 0;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  /* dashed outline + italic text in the placeholder's colour - same look as the empty placeholder */
+  border: 1.5px dashed rgba(2, 69, 137, 0.25);
+  background: #fff;
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.65;
+    color: rgba(3, 4, 94, 0.5);
+  }
+}
+
+/* Abstract (filled): white box with the figure's gradient hairline, normal text */
+.pub-detail__box {
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(135deg, rgba(2, 69, 137, 0.45) 0%, rgba(0, 119, 182, 0.35) 50%, rgba(0, 180, 216, 0.4) 100%) border-box;
+
+  p {
+    margin: 0 0 0.75em;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #03045e;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.pub-detail__brief-label {
+  margin: 0 0 0.3rem !important;
+  font-style: normal !important;
+  font-size: 0.7rem !important;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0077b6 !important;
+}
+
+/* "fill me in" boxes - only rendered by jekyll serve, never on the live site */
+.pub-detail__placeholder,
+.pub-detail__brief.pub-detail__placeholder {
+  padding: 0.9rem 1.2rem;
+  border: 1.5px dashed rgba(2, 69, 137, 0.25);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.pub-detail__placeholder p:not(.pub-detail__brief-label),
+p.pub-detail__placeholder {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: rgba(3, 4, 94, 0.5);
+}
+
+/* topic chips */
+.pub-detail__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.55rem !important;
+}
+
+.page__content a.pub-tag,
+a.pub-tag,
+a.pub-tag:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #024589;
+  background: rgba(0, 119, 182, 0.1);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: #fff;
+    background: #0077b6;
+  }
+}
+
+.pub-tag__count {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+/* /topics/ page: filter buttons + one list (each item once) */
+.topics__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.25rem 0 1.25rem;
+}
+
+.topics__filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #024589;
+  border: 1px solid rgba(2, 69, 137, 0.15);
+  border-radius: 999px;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 119, 182, 0.08);
+  }
+
+  &.is-active {
+    color: #fff;
+    border-color: transparent;
+    background: linear-gradient(90deg, #024589 0%, #0077b6 100%);
+  }
+}
+
+.topics__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.topics__item {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  margin: 0;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(2, 69, 137, 0.12);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.topics__item[hidden] {
+  display: none; /* display: grid above would otherwise override the hidden attribute */
+}
+
+.topics__item--no-thumb {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.topics__thumb {
+  display: block;
+  aspect-ratio: 4 / 3;
+  padding: 1px;
+  border-radius: 9px;
+  border: none;
+  background: linear-gradient(135deg, rgba(2, 69, 137, 0.45) 0%, rgba(0, 119, 182, 0.35) 50%, rgba(0, 180, 216, 0.4) 100%);
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #fff;
+  }
+}
+
+.topics__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+
+  p {
+    margin: 0;
+  }
+}
+
+.page__content a.topics__title,
+a.topics__title:visited {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #03045e;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: #0077b6;
+  }
+}
+
+.topics__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.2rem !important;
+}
+
+@media (max-width: 600px) {
+  .topics__item {
+    grid-template-columns: 84px minmax(0, 1fr);
+    gap: 0.8rem;
+  }
+}
+
+/* Abstract "Show / Hide abstract" toggle (<details>) - pill like the Article / PDF buttons */
+.pub-detail__toggle {
+  padding-top: 0.7rem; /* breathing room under the Abstract heading (padding: margins would collapse into the h2 margin) */
+  summary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #024589;
+    border-radius: 2rem;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow:
+      0 3px 9px rgba(2, 69, 137, 0.12),
+      0 1px 4px rgba(0, 119, 182, 0.08);
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:hover,
+    &:focus-visible {
+      transform: translateY(-1px);
+      box-shadow:
+        0 7px 14px rgba(2, 69, 137, 0.16),
+        0 3px 7px rgba(0, 119, 182, 0.12);
+    }
+
+    i {
+      margin-right: 0.35rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  .pub-detail__toggle-hide {
+    display: none;
+  }
+
+  &[open] {
+    .pub-detail__toggle-show {
+      display: none;
+    }
+
+    .pub-detail__toggle-hide {
+      display: inline;
+    }
+
+    .pub-detail__box {
+      margin-top: 0.8rem;
+    }
+  }
+}
+
+/* Cover feature block on the paper's page (front matter: cover, cover_image, cover_url) */
+.pub-detail__cover {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+  margin-top: 1.75rem;
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(135deg, rgba(2, 69, 137, 0.45) 0%, rgba(0, 119, 182, 0.35) 50%, rgba(0, 180, 216, 0.4) 100%) border-box;
+  scroll-margin-top: 5rem;
+
+  &.pub-detail__placeholder {
+    display: block;
+    border: 1.5px dashed rgba(2, 69, 137, 0.25);
+    background: #fff;
+  }
+}
+
+.pub-detail__cover-art {
+  display: block;
+  border: none;
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 4px; /* like a printed cover */
+    box-shadow:
+      0 10px 24px rgba(2, 69, 137, 0.22),
+      0 3px 8px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.pub-detail__cover-text {
+  p {
+    margin: 0;
+  }
+
+  .pub-links--buttons {
+    margin-top: 0.9rem;
+  }
+}
+
+.pub-detail__cover-lead {
+  font-size: 0.95rem;
+  color: rgba(3, 4, 94, 0.7);
+}
+
+.pub-detail__cover-journal {
+  margin-top: 0.1rem !important;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.3;
+  color: #03045e;
+}
+
+.pub-detail__cover-issue {
+  margin-top: 0.3rem !important;
+  font-size: 0.9rem;
+  color: rgba(3, 4, 94, 0.6);
+}
+
+@media (max-width: 600px) {
+  .pub-detail__cover {
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .pub-detail__cover-journal {
+    font-size: 1.05rem;
+  }
+}

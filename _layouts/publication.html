@@ -1,0 +1,185 @@
+---
+layout: default
+---
+{% comment %}
+  Detail page for one publication (_publications/*.md).
+  Header (journal, title, authors, Article / PDF) -> figure + "At a glance" -> abstract -> copyable citation.
+  Optional front matter used here: thumbnail (shown in full), summary ("In brief"), abstract (or write it as the
+  file's body text), tags (-> /topics/), volume / issue / pages, status, cover,
+  cover_image (portrait cover art -> "Cover feature" block), cover_url (issue page, optional).
+  Empty summary / abstract show a dashed placeholder on the local preview only (jekyll serve); the live site hides them. Google Scholar tags come from _includes/head/scholar-meta.html.
+{% endcomment %}
+{% include base_path %}
+
+{% assign pub = page %}
+{% assign pub_venue = pub.venue | default: pub.short %}
+{% assign pub_figure = pub.thumbnail | default: pub.header.teaser | default: "" %}
+{% assign pub_author_format = pub.author_format | default: site.publications_page.author_format | default: site.author_name_format %}
+{% assign pub_category = site.publication_category | where: "key", pub.category | first %}
+{% capture pub_numbers %}{% include components/pub-volume.html item=pub %}{% endcapture %}
+{% assign pub_doi = "" %}
+{% if pub.paperurl contains "doi.org/" %}{% assign pub_doi = pub.paperurl | split: "doi.org/" | last %}{% endif %}
+{% assign pub_abstract = content | strip %}
+{% if pub_abstract == "" and pub.abstract and pub.abstract != "" %}{% assign pub_abstract = pub.abstract | markdownify %}{% endif %}
+{% assign pub_summary = pub.summary | default: "" | strip %}
+{% assign show_placeholders = false %}
+{% if jekyll.environment != "production" %}{% assign show_placeholders = true %}{% endif %}
+{% if pub.cover %}{% if pub.cover == true %}{% assign cover_label = "Cover Feature" %}{% else %}{% assign cover_label = pub.cover %}{% endif %}{% endif %}
+
+{% comment %} Plain APA-style citation (no bold / daggers) for the Cite box {% endcomment %}
+{% capture cite_authors %}{% include components/author-list.html item=pub format="last_initial" cofirst="no" corresponding="no" %}{% endcapture %}
+{% capture pub_citation %}{{ cite_authors | strip_html | strip }} ({{ pub.date | date: "%Y" }}). {{ pub.title | strip_html }}. {{ pub_venue }}{% if pub_numbers != "" %}, {{ pub_numbers }}{% endif %}.{% if pub.paperurl %} {{ pub.paperurl }}{% endif %}{% endcapture %}
+
+<div id="main" role="main">
+  <article class="page pub-detail" itemscope itemtype="http://schema.org/ScholarlyArticle">
+    <div class="page__inner-wrap">
+      <a class="pub-detail__back" href="{{ '/publications/' | relative_url }}">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i> All publications
+      </a>
+
+      <header>
+        <p class="pub-card__venue pub-card__venue--top pub-detail__eyebrow">
+          <span class="pub-card__journal">{{ pub_venue }}</span><span class="pub-card__details"> &middot; {{ pub.date | date: "%Y" }}</span>
+          {% if cover_label %}<span class="pub-card__badge">{{ cover_label }}</span>{% endif %}
+        </p>
+        <h1 class="page__title pub-detail__title" itemprop="headline">{{ pub.title }}</h1>
+      </header>
+
+      {% if pub.authors %}
+        {% capture formatted_authors %}{% include components/author-list.html item=pub format=pub_author_format %}{% endcapture %}
+        <p class="pub-detail__authors" itemprop="author">{{ formatted_authors | strip }}</p>
+      {% endif %}
+
+      {% include components/publication-links.html item=pub %}
+
+      {% if pub_summary != "" %}
+        <section class="pub-detail__brief">
+          <p class="pub-detail__brief-label">In brief</p>
+          {{ pub_summary | markdownify }}
+        </section>
+      {% elsif show_placeholders %}
+        <section class="pub-detail__brief pub-detail__placeholder">
+          <p class="pub-detail__brief-label">In brief</p>
+          <p>Add a short plain-language summary here (the <em>summary</em> line in this paper's file). Only visible on your local preview.</p>
+        </section>
+      {% endif %}
+
+      <div class="pub-detail__grid{% if pub_figure == '' %} pub-detail__grid--no-figure{% endif %}">
+        {% if pub_figure != '' %}
+          <figure class="pub-detail__figure">
+            <img src="{{ pub_figure | relative_url }}" alt="Figure from: {{ pub.title | strip_html | escape }}" itemprop="image">
+          </figure>
+        {% endif %}
+
+        <aside class="pub-detail__facts" aria-label="Publication details">
+          <h2 class="pub-detail__facts-title">At a glance</h2>
+          <dl>
+            {% if pub_venue %}<div><dt>Journal</dt><dd><em>{{ pub.venue | default: pub.short }}</em></dd></div>{% endif %}
+            <div><dt>Year</dt><dd>{{ pub.date | date: "%Y" }}</dd></div>
+            {% if pub_numbers != "" %}<div><dt>Volume</dt><dd>{{ pub_numbers }}</dd></div>{% endif %}
+            {% case pub.category %}
+              {% when "journals" %}{% assign pub_type = "Journal article" %}
+              {% when "reviews" %}{% assign pub_type = "Review article" %}
+              {% else %}{% assign pub_type = pub_category.title %}
+            {% endcase %}
+            {% if pub_type %}<div><dt>Type</dt><dd>{{ pub_type }}</dd></div>{% endif %}
+            {% if pub.status %}<div><dt>Status</dt><dd>{{ pub.status }}</dd></div>{% endif %}
+            {% if pub_doi != "" %}<div><dt>DOI</dt><dd><a href="{{ pub.paperurl }}" target="_blank" rel="noopener">{{ pub_doi }}</a></dd></div>{% endif %}
+            {% if pub.tags and pub.tags.size > 0 %}
+              <div><dt>Topics</dt><dd class="pub-detail__tags">
+                {% for tag in pub.tags %}<a class="pub-tag" href="{{ '/topics/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>{% endfor %}
+              </dd></div>
+            {% endif %}
+          </dl>
+        </aside>
+      </div>
+
+      {% comment %} Cover feature block: shown when cover_image points to an existing file {% endcomment %}
+      {% if pub.cover %}
+        {% assign cover_file = "" %}
+        {% if pub.cover_image %}{% assign cover_file = site.static_files | where: "path", pub.cover_image | first %}{% endif %}
+        {% if cover_file and cover_file != "" %}
+          <section class="pub-detail__cover" id="cover">
+            <a class="pub-detail__cover-art"{% if pub.cover_url %} href="{{ pub.cover_url }}" target="_blank" rel="noopener"{% endif %}>
+              <img src="{{ pub.cover_image | relative_url }}" alt="Cover of {{ pub.venue | escape }}{% if pub.volume %}, volume {{ pub.volume }}{% endif %}{% if pub.issue %}, issue {{ pub.issue }}{% endif %}" loading="lazy">
+            </a>
+            <div class="pub-detail__cover-text">
+              <p class="pub-detail__brief-label">{{ cover_label }}</p>
+              <p class="pub-detail__cover-lead">Featured on the cover of</p>
+              <p class="pub-detail__cover-journal">{{ pub.venue | default: pub.short }}</p>
+              {% if pub.volume or pub.issue %}
+                <p class="pub-detail__cover-issue">{% if pub.volume %}Volume {{ pub.volume }}{% endif %}{% if pub.volume and pub.issue %} &middot; {% endif %}{% if pub.issue %}Issue {{ pub.issue }}{% endif %}</p>
+              {% endif %}
+              {% if pub.cover_url %}
+                <span class="pub-links pub-links--buttons">
+                  <a class="pub-links__btn" href="{{ pub.cover_url }}" target="_blank" rel="noopener"><i class="fas fa-book-open" aria-hidden="true"></i> View issue</a>
+                </span>
+              {% endif %}
+            </div>
+          </section>
+        {% elsif show_placeholders %}
+          <section class="pub-detail__cover pub-detail__placeholder" id="cover">
+            <div class="pub-detail__cover-text">
+              <p class="pub-detail__brief-label">{{ cover_label }}</p>
+              <p>Add the cover artwork here: put the portrait image in <em>files/papers/</em> and point <em>cover_image</em> in this paper's file to it{% if pub.cover_image %} (currently <em>{{ pub.cover_image }}</em>, not found){% endif %}. Only visible on your local preview.</p>
+            </div>
+          </section>
+        {% endif %}
+      {% endif %}
+
+      {% if pub_abstract != "" %}
+        <section class="pub-detail__section" itemprop="abstract">
+          <h2>Abstract</h2>
+          {% comment %} Collapsed by default; the text stays in the page so Google / Scholar still read it {% endcomment %}
+          <details class="pub-detail__toggle">
+            <summary>
+              <span class="pub-detail__toggle-show"><i class="fas fa-chevron-down" aria-hidden="true"></i> Show abstract</span>
+              <span class="pub-detail__toggle-hide"><i class="fas fa-chevron-up" aria-hidden="true"></i> Hide abstract</span>
+            </summary>
+            <div class="pub-detail__box pub-detail__abstract">{{ pub_abstract }}</div>
+          </details>
+        </section>
+      {% elsif show_placeholders %}
+        <section class="pub-detail__section">
+          <h2>Abstract</h2>
+          <p class="pub-detail__placeholder">Paste the official abstract here (the <em>abstract</em> line in this paper's file). Only visible on your local preview.</p>
+        </section>
+      {% endif %}
+
+      <section class="pub-detail__section">
+        <h2>Cite</h2>
+        <div class="pub-detail__cite">
+          <p id="pub-citation">{{ pub_citation | strip }}</p>
+          <button type="button" class="pub-detail__copy" data-copy-target="pub-citation">
+            <i class="far fa-copy" aria-hidden="true"></i> <span>Copy</span>
+          </button>
+        </div>
+      </section>
+    </div>
+  </article>
+</div>
+
+<script>
+  // "All publications": when we came from the list, go back in history so the browser restores the
+  // scroll position (no jump to an anchor); otherwise the plain link opens the list at the top.
+  document.querySelectorAll('.pub-detail__back').forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      var ref = document.referrer ? new URL(document.referrer) : null;
+      if (ref && ref.origin === location.origin && ref.pathname === link.pathname && history.length > 1) {
+        event.preventDefault();
+        history.back();
+      }
+    });
+  });
+
+  document.querySelectorAll('.pub-detail__copy').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var text = document.getElementById(button.dataset.copyTarget).innerText;
+      var label = button.querySelector('span');
+      navigator.clipboard.writeText(text).then(function () {
+        label.textContent = 'Copied';
+        setTimeout(function () { label.textContent = 'Copy'; }, 1800);
+      });
+    });
+  });
+</script>

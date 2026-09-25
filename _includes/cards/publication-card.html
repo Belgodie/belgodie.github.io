@@ -6,8 +6,14 @@
   Thumbnail comes from `thumbnail:` (falls back to header.teaser). Without one the row drops the image column.
   It fills a fixed frame (220x165 desktop, 100x190 strip on phones), trimmed around the centre; `thumbnail_position:` (e.g. top, left, "30% 50%") picks another anchor.
   Optional `status:` (e.g. "In Press") is printed after the venue.
-  Link/PDF placement: `links_style:` per paper, else _config.yml publications_page.links_style (icons | top | bottom).
-    icons  -> icon-only, pinned right of the title (like the homepage Recent work list)
+  Optional `cover:` adds a small label after the journal name - `cover: true` shows "Cover Feature",
+  or give your own text (e.g. `cover: "Inside Back Cover"`).
+  Link/PDF placement: `links_style:` per paper, else _config.yml publications_page.links_style (text | icons | top | bottom).
+    under-image -> title and image open the paper's detail page (_layouts/publication.html);
+                   "Article" + "PDF" pill buttons sit under the image (under the text when there is no thumbnail)
+    label  -> flat "PDF" label in the bottom-left corner of the thumbnail (falls back to "text" without a thumbnail)
+    text   -> small "PDF" link right after the journal name (same spot on every row, whatever the title/author length)
+    icons  -> icon-only, pinned right of the title
   Journal placement: `venue_style:` per paper, else _config.yml publications_page.venue_style.
     top   -> journal line above the title (accent blue, small caps), details after it
     below -> journal on its own line under the authors (bold italic), details in grey
@@ -18,34 +24,53 @@
 {% comment %} Title and image both open the publisher page; the icons are the explicit Link / PDF actions {% endcomment %}
 {% assign pub_primary = pub.paperurl | default: "" %}
 {% assign pub_links_style = pub.links_style | default: site.publications_page.links_style | default: "icons" %}
+{% if pub_links_style == "label" and pub_thumb == "" %}{% assign pub_links_style = "text" %}{% endif %}
+{% if pub_links_style == "under-image" %}
+  {% assign pub_primary = pub.url | relative_url %}{% comment %} title + image -> detail page; buttons -> publisher / PDF {% endcomment %}
+  {% if pub_thumb == "" %}{% assign pub_links_style = "bottom" %}{% endif %}
+{% endif %}
 {% assign pub_venue_style = pub.venue_style | default: site.publications_page.venue_style | default: "top" %}
 {% comment %} Volume / issue / pages are left out on purpose - journal name only keeps every row alike (the CV has the full citation) {% endcomment %}
 {% capture pub_details %}{% if pub.status %}, {{ pub.status }}{% endif %}{% if include.show_year %}, {{ pub.date | date: "%Y" }}{% endif %}{% endcapture %}
 {% assign pub_details = pub_details | strip | remove_first: ", " %}
 {% assign pub_author_format = pub.author_format | default: site.publications_page.author_format | default: site.author_name_format %}
 
-<li class="pub-card{% if pub_thumb == '' %} pub-card--no-thumb{% endif %}"{% if pub.publication_id %} id="{{ pub.publication_id }}"{% endif %}>
+<li class="pub-card{% if pub_thumb == '' %} pub-card--no-thumb{% endif %}">
   {% if pub_thumb != '' %}
+    {% if pub_links_style == "under-image" %}<div class="pub-card__media">{% endif %}
     <div class="pub-card__thumb">
-      {% if pub_primary != '' %}<a href="{{ pub_primary }}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">{% endif %}
+      {% if pub_primary != '' %}<a href="{{ pub_primary }}"{% if pub_links_style != "under-image" %} target="_blank" rel="noopener"{% endif %} tabindex="-1" aria-hidden="true">{% endif %}
         <img src="{{ pub_thumb | relative_url }}" alt="" loading="lazy" decoding="async"{% if pub.thumbnail_position %} style="object-position: {{ pub.thumbnail_position }};"{% endif %}>
       {% if pub_primary != '' %}</a>{% endif %}
+      {% if pub_links_style == "label" and pub.pdf %}
+        <a class="pub-card__label" href="{{ pub.pdf | relative_url }}" target="_blank" rel="noopener" aria-label="PDF: {{ pub.title | escape }}"><i class="fas fa-file-pdf" aria-hidden="true"></i> PDF</a>
+      {% endif %}
     </div>
+    {% if pub_links_style == "under-image" %}
+      {% include components/publication-links.html item=pub %}
+    </div>
+    {% endif %}
   {% endif %}
   <div class="pub-card__body">
-    {% if pub_links_style == "top" %}<div class="pub-card__head">{% endif %}
+    {% if pub_links_style == "top" or pub_links_style == "text" %}<div class="pub-card__head{% if pub_links_style == "text" %} pub-card__head--inline{% endif %}">{% endif %}
     {% if pub_venue_style == "top" and pub_venue %}
       <p class="pub-card__venue pub-card__venue--top">
         <span class="pub-card__journal">{{ pub_venue }}</span>{% if pub_details != "" %}<span class="pub-card__details"> &middot; {{ pub_details }}</span>{% endif %}
+        {% if pub.cover %}{% if pub.cover == true %}{% assign cover_label = "Cover Feature" %}{% else %}{% assign cover_label = pub.cover %}{% endif %}<span class="pub-card__badge">{{ cover_label }}</span>{% endif %}
       </p>
     {% endif %}
     {% if pub_links_style == "top" %}
       {% include components/publication-links.html item=pub %}
     </div>
+    {% elsif pub_links_style == "text" %}
+      {% include components/publication-links.html item=pub style="text" %}
+    </div>
     {% endif %}
     <div class="pub-card__title-row">
       <p class="pub-card__title">
-        {% if pub.paperurl %}
+        {% if pub_links_style == "under-image" %}
+          <a href="{{ pub.url | relative_url }}">{{ pub.title }}</a>
+        {% elsif pub.paperurl %}
           <a href="{{ pub.paperurl }}" target="_blank" rel="noopener">{{ pub.title }}</a>
         {% else %}
           {{ pub.title }}

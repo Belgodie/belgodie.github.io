@@ -1,0 +1,83 @@
+---
+layout: single
+title: "Topics"
+permalink: /topics/
+author_profile: true
+---
+{% comment %}
+  All tagged work in one list, each item once, with topic filter buttons on top.
+  Built automatically from the `tags:` in _publications (and _portfolio / _conferences if those get tags).
+  Links elsewhere use /topics/#<tag-slug> to open the list already filtered to that topic.
+{% endcomment %}
+{% assign topic_collections = "publications,portfolio,conferences" | split: "," %}
+
+{% comment %} Every tag once, and every tagged item newest first {% endcomment %}
+{% assign all_tags = "" %}
+{% assign tagged_items = "" | split: "" %}
+{% for name in topic_collections %}
+  {% for doc in site[name] %}
+    {% if doc.tags and doc.tags.size > 0 %}
+      {% assign tagged_items = tagged_items | push: doc %}
+      {% for tag in doc.tags %}{% assign all_tags = all_tags | append: tag | append: "|" %}{% endfor %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+{% assign all_tags = all_tags | split: "|" | uniq | sort_natural %}
+{% assign tagged_items = tagged_items | sort: "date" | reverse %}
+
+<div class="topics__filters" role="group" aria-label="Filter by topic">
+  <button type="button" class="topics__filter is-active" data-topic="all">All <span class="pub-tag__count">{{ tagged_items.size }}</span></button>
+  {% for tag in all_tags %}
+    {% assign tag_items = tagged_items | where_exp: "doc", "doc.tags contains tag" %}
+    <button type="button" class="topics__filter" data-topic="{{ tag | slugify }}">{{ tag }} <span class="pub-tag__count">{{ tag_items.size }}</span></button>
+  {% endfor %}
+</div>
+
+<ol class="topics__list">
+  {% for doc in tagged_items %}
+    {% assign doc_venue = doc.venue | default: doc.short %}
+    {% assign doc_thumb = doc.thumbnail | default: doc.header.teaser | default: "" %}
+    {% capture doc_topics %}{% for tag in doc.tags %}{{ tag | slugify }} {% endfor %}{% endcapture %}
+    <li class="topics__item{% if doc_thumb == '' %} topics__item--no-thumb{% endif %}" data-topics="{{ doc_topics | strip }}">
+      {% if doc_thumb != '' %}
+        <a class="topics__thumb" href="{{ doc.url | relative_url }}" tabindex="-1" aria-hidden="true">
+          <img src="{{ doc_thumb | relative_url }}" alt="" loading="lazy">
+        </a>
+      {% endif %}
+      <div class="topics__body">
+        <p class="pub-card__venue pub-card__venue--top">
+          <span class="pub-card__journal">{{ doc_venue | default: doc.collection }}</span><span class="pub-card__details"> &middot; {{ doc.date | date: "%Y" }}</span>
+        </p>
+        <a class="topics__title" href="{{ doc.url | relative_url }}">{{ doc.title }}</a>
+        <p class="topics__tags">
+          {% for tag in doc.tags %}<a class="pub-tag" href="#{{ tag | slugify }}">{{ tag }}</a>{% endfor %}
+        </p>
+      </div>
+    </li>
+  {% endfor %}
+</ol>
+
+<script>
+  (function () {
+    var buttons = document.querySelectorAll('.topics__filter');
+    var items = document.querySelectorAll('.topics__item');
+
+    function show(topic) {
+      if (!document.querySelector('.topics__filter[data-topic="' + topic + '"]')) { topic = 'all'; }
+      buttons.forEach(function (b) { b.classList.toggle('is-active', b.dataset.topic === topic); });
+      items.forEach(function (item) {
+        item.hidden = topic !== 'all' && item.dataset.topics.split(' ').indexOf(topic) === -1;
+      });
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () {
+        history.replaceState(null, '', b.dataset.topic === 'all' ? location.pathname : '#' + b.dataset.topic);
+        show(b.dataset.topic);
+      });
+    });
+    // tag chips on the items (and /topics/#tag links from paper pages) filter via the URL hash
+    window.addEventListener('hashchange', function () { show(location.hash.slice(1) || 'all'); });
+    show(location.hash.slice(1) || 'all');
+  })();
+</script>

@@ -15,3 +15,6 @@ package-lock.json
 
 # Ignore folders related to IDEs
 .vscode/
+
+# Private index of files/papers/ (scripts/obscure_papers.py) - stays on this computer
+files/papers/INDEX.local.txt

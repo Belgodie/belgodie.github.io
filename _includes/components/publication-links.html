@@ -2,10 +2,11 @@
   Link / download buttons for a publication (or any record with the same fields).
   Params:
     - item:  the document (publication, conference, ...) - required
-    - style: "buttons" (default, labelled pills) or "icons" (compact icon-only links;
-             no publisher link icon - in lists the title itself opens the publisher page)
+    - style: "buttons" (default, labelled pills), "icons" (compact icon-only links) or
+             "text" (small plain icon + label links). "icons" and "text" leave out the publisher
+             link - in lists the title itself opens the publisher page
   Front-matter fields read (all optional; a button only renders when its field is set):
-    paperurl       -> "Link" (publisher / DOI page)
+    paperurl       -> "Article" (publisher / DOI page)
     pdf            -> "PDF". Local path (/files/papers/x.pdf) or external URL; opens in the browser (new tab)
     supplementary  -> "SI" button (supporting information)
     codeurl        -> "Code" button
@@ -16,30 +17,33 @@
 {% assign link_style = include.style | default: "buttons" %}
 {% assign link_class = "pub-links__btn" %}
 {% if link_style == "icons" %}{% assign link_class = "pub-links__icon" %}{% endif %}
+{% if link_style == "text" %}{% assign link_class = "pub-links__text" %}{% endif %}
+{% assign show_label = false %}
+{% if link_style == "buttons" or link_style == "text" %}{% assign show_label = true %}{% endif %}
 
 {% assign show_paper = rec.paperurl %}
-{% if link_style == "icons" %}{% assign show_paper = false %}{% endif %}
+{% if link_style == "icons" or link_style == "text" %}{% assign show_paper = false %}{% endif %}
 
 {% if show_paper or rec.pdf or rec.supplementary or rec.codeurl or rec.slidesurl or rec.bibtexurl %}
 <span class="pub-links pub-links--{{ link_style }}">
   {% if show_paper %}
-    {% assign paper_label = "Link" %}
-    <a class="{{ link_class }}" href="{{ rec.paperurl }}" target="_blank" rel="noopener" aria-label="{{ paper_label }}: {{ rec.title | escape }}" title="Open at publisher"><i class="fas fa-link" aria-hidden="true"></i>{% if link_style == "buttons" %} {{ paper_label }}{% endif %}</a>
+    {% assign paper_label = "Article" %}
+    <a class="{{ link_class }}" href="{{ rec.paperurl }}" target="_blank" rel="noopener" aria-label="{{ paper_label }}: {{ rec.title | escape }}" title="Open at publisher"><i class="fas fa-link" aria-hidden="true"></i>{% if show_label %} {{ paper_label }}{% endif %}</a>
   {% endif %}
   {% if rec.pdf %}
-    <a class="{{ link_class }} {{ link_class }}--pdf" href="{{ rec.pdf | relative_url }}" target="_blank" rel="noopener" aria-label="PDF: {{ rec.title | escape }}" title="Open PDF"><i class="fas fa-file-pdf" aria-hidden="true"></i>{% if link_style == "buttons" %} PDF{% endif %}</a>
+    <a class="{{ link_class }} {{ link_class }}--pdf" href="{{ rec.pdf | relative_url }}" target="_blank" rel="noopener" aria-label="PDF: {{ rec.title | escape }}" title="Open PDF"><i class="fas fa-file-pdf" aria-hidden="true"></i>{% if show_label %} PDF{% endif %}</a>
   {% endif %}
   {% if rec.supplementary %}
-    <a class="{{ link_class }}" href="{{ rec.supplementary | relative_url }}" target="_blank" rel="noopener" aria-label="Supporting information: {{ rec.title | escape }}" title="Supporting information"><i class="fas fa-paperclip" aria-hidden="true"></i>{% if link_style == "buttons" %} SI{% endif %}</a>
+    <a class="{{ link_class }}" href="{{ rec.supplementary | relative_url }}" target="_blank" rel="noopener" aria-label="Supporting information: {{ rec.title | escape }}" title="Supporting information"><i class="fas fa-paperclip" aria-hidden="true"></i>{% if show_label %} SI{% endif %}</a>
   {% endif %}
   {% if rec.codeurl %}
-    <a class="{{ link_class }}" href="{{ rec.codeurl }}" target="_blank" rel="noopener" aria-label="Code: {{ rec.title | escape }}" title="Code"><i class="fas fa-code" aria-hidden="true"></i>{% if link_style == "buttons" %} Code{% endif %}</a>
+    <a class="{{ link_class }}" href="{{ rec.codeurl }}" target="_blank" rel="noopener" aria-label="Code: {{ rec.title | escape }}" title="Code"><i class="fas fa-code" aria-hidden="true"></i>{% if show_label %} Code{% endif %}</a>
   {% endif %}
   {% if rec.slidesurl %}
-    <a class="{{ link_class }}" href="{{ rec.slidesurl | relative_url }}" target="_blank" rel="noopener" aria-label="Slides: {{ rec.title | escape }}" title="Slides"><i class="fas fa-chalkboard" aria-hidden="true"></i>{% if link_style == "buttons" %} Slides{% endif %}</a>
+    <a class="{{ link_class }}" href="{{ rec.slidesurl | relative_url }}" target="_blank" rel="noopener" aria-label="Slides: {{ rec.title | escape }}" title="Slides"><i class="fas fa-chalkboard" aria-hidden="true"></i>{% if show_label %} Slides{% endif %}</a>
   {% endif %}
   {% if rec.bibtexurl %}
-    <a class="{{ link_class }}" href="{{ rec.bibtexurl | relative_url }}" download aria-label="BibTeX: {{ rec.title | escape }}" title="Download BibTeX"><i class="fas fa-quote-right" aria-hidden="true"></i>{% if link_style == "buttons" %} BibTeX{% endif %}</a>
+    <a class="{{ link_class }}" href="{{ rec.bibtexurl | relative_url }}" download aria-label="BibTeX: {{ rec.title | escape }}" title="Download BibTeX"><i class="fas fa-quote-right" aria-hidden="true"></i>{% if show_label %} BibTeX{% endif %}</a>
   {% endif %}
 </span>
 {% endif %}

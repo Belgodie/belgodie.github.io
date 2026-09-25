@@ -1,0 +1,43 @@
+{% comment %}
+  Google Scholar / Highwire citation tags for publication detail pages (hidden; read by Scholar and Zotero).
+  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing
+  Authors come from _data/authors.yml (same keys and per-paper overrides as components/author-list.html).
+{% endcomment %}
+{% if page.collection == "publications" %}
+  {% assign registry = site.data.authors %}
+  <meta name="citation_title" content="{{ page.title | strip_html | escape }}">
+  {% for author in page.authors %}
+    {% assign base = registry[author["key"]] %}
+    {% comment %} bracket access: author.first on a hash returns its first key/value pair {% endcomment %}
+    {% assign a_first = author["first"] | default: base.first | default: "" %}
+    {% assign a_middle = author["middle"] | default: base.middle | default: "" %}
+    {% assign a_last1 = author["last1"] | default: author["last"] | default: base.last1 | default: base.last | default: "" %}
+    {% assign a_last2 = author["last2"] | default: base.last2 | default: "" %}
+    {% assign a_variant = author["variant"] | default: base.variant | default: "" %}
+    {% assign a_last = a_last1 %}
+    {% if a_variant == "hyphenated" and a_last2 != "" %}{% assign a_last = a_last1 | append: "-" | append: a_last2 %}{% endif %}
+    {% if a_variant == "compound" and a_last2 != "" %}{% assign a_last = a_last1 | append: " " | append: a_last2 %}{% endif %}
+    {% assign a_given = author["display_first"] | default: base.display_first | default: "" %}
+    {% if a_given == "" %}{% assign a_given = a_first | append: " " | append: a_middle | strip %}{% endif %}
+    {% if a_last != "" %}<meta name="citation_author" content="{{ a_last | escape }}, {{ a_given | escape }}">{% endif %}
+  {% endfor %}
+  <meta name="citation_publication_date" content="{{ page.date | date: '%Y/%m/%d' }}">
+  {% if page.venue %}<meta name="citation_journal_title" content="{{ page.venue | escape }}">{% endif %}
+  {% if page.short %}<meta name="citation_journal_abbrev" content="{{ page.short | escape }}">{% endif %}
+  {% if page.volume %}<meta name="citation_volume" content="{{ page.volume }}">{% endif %}
+  {% if page.issue %}<meta name="citation_issue" content="{{ page.issue }}">{% endif %}
+  {% if page.pages %}<meta name="citation_firstpage" content="{{ page.pages }}">{% endif %}
+  {% if page.paperurl contains "doi.org/" %}
+    {% assign scholar_doi = page.paperurl | split: "doi.org/" | last %}
+    <meta name="citation_doi" content="{{ scholar_doi }}">
+  {% endif %}
+  {% if page.pdf %}
+    {% assign scholar_pdf_first = page.pdf | slice: 0, 1 %}
+    {% if scholar_pdf_first == "/" %}
+      <meta name="citation_pdf_url" content="{{ page.pdf | absolute_url }}">
+    {% else %}
+      <meta name="citation_pdf_url" content="{{ page.pdf }}">
+    {% endif %}
+  {% endif %}
+  {% if page.abstract %}<meta name="citation_abstract" content="{{ page.abstract | strip_html | strip_newlines | escape }}">{% endif %}
+{% endif %}
