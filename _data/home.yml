@@ -5,7 +5,7 @@ carousel:
       text: "Organoid Platform for Organoid Electrophysiology (2026)"
       bgopacity: 0.25
       textcolor: "#ffffff"
-    - image: "/images/pubsfigures/Review1_Fig1_2.svg"
+    - image: "/images/pubsfigures/Review1_Fig1_2.jpg"
       text: "Sensor Technologies for Organoids Roadmap (2024)"
       bgopacity: 0.25
       textcolor: "#ffffffff"
