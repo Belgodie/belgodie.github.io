@@ -76,7 +76,8 @@ author_profile: true
         show(b.dataset.topic);
       });
     });
-    // tag chips on the items (and /topics/#tag links from paper pages) filter via the URL hash
+    /* tag chips on the items (and /topics/#tag links from paper pages) filter via the URL hash.
+       Block comments only: the live site's compress layout puts each script on one line. */
     window.addEventListener('hashchange', function () { show(location.hash.slice(1) || 'all'); });
     show(location.hash.slice(1) || 'all');
   })();

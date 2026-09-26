@@ -160,8 +160,9 @@ layout: default
 </div>
 
 <script>
-  // "All publications": when we came from the list, go back in history so the browser restores the
-  // scroll position (no jump to an anchor); otherwise the plain link opens the list at the top.
+  /* "All publications": when we came from the list, go back in history so the browser restores the
+     scroll position (no jump to an anchor); otherwise the plain link opens the list at the top.
+     Block comments only: the live site's compress layout puts each script on one line. */
   document.querySelectorAll('.pub-detail__back').forEach(function (link) {
     link.addEventListener('click', function (event) {
       var ref = document.referrer ? new URL(document.referrer) : null;
