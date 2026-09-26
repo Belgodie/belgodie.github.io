@@ -12,3 +12,21 @@
 </script>
 
 {% include analytics.html %}
+
+<script>
+  /* Hero pattern: share the hero / menu-bar heights with the stylesheet so the two pattern copies line up.
+     Block comments only: the compress layout puts this script on one line in production. */
+  (function () {
+    var frame = document.querySelector('.hero-frame');
+    var bar = document.querySelector('.hero-nav-bar');
+    if (!frame || !bar) { return; }
+    function update() {
+      var root = document.documentElement.style;
+      root.setProperty('--hero-frame-h', frame.offsetHeight + 'px');
+      root.setProperty('--hero-pattern-h', (frame.offsetHeight + bar.offsetHeight) + 'px');
+    }
+    update();
+    window.addEventListener('resize', update);
+    if (window.ResizeObserver) { new ResizeObserver(update).observe(frame); }
+  })();
+</script>
