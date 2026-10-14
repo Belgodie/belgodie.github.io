@@ -14,7 +14,7 @@ date: 2024-12-04
 venue: 'Micro and Nano Systems Letters'
 short: Micro Nano Syst Lett
 paperurl: https://doi.org/10.1186/s40486-024-00216-y
-pdf: https://link.springer.com/content/pdf/10.1186/s40486-024-00216-y.pdf # open access (CC BY)
+pdf: /files/papers/3822.pdf # open access (CC BY), copy of the Springer PDF
 file_id: 3822   # random number used to name this paper's files (scripts/obscure_papers.py)
 thumbnail: /files/papers/3822-fig.jpg
 volume: '12'
